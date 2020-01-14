@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */; };
+		46712AFD23CE3A1800D3CFBC /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFC23CE3A1800D3CFBC /* SearchVM.swift */; };
+		46712AFF23CE3A5A00D3CFBC /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFE23CE3A5A00D3CFBC /* BindableType.swift */; };
 		4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76C23CE1F550041C983 /* AppDelegate.swift */; };
 		4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76E23CE1F550041C983 /* SceneDelegate.swift */; };
 		4692C77123CE1F550041C983 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C77023CE1F550041C983 /* SearchVC.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyEngApiService.swift; sourceTree = "<group>"; };
+		46712AFC23CE3A1800D3CFBC /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
+		46712AFE23CE3A5A00D3CFBC /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		4692C76923CE1F550041C983 /* SkyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4692C76C23CE1F550041C983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4692C76E23CE1F550041C983 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				46712AF823CE2C5600D3CFBC /* search */,
+				46712AFE23CE3A5A00D3CFBC /* BindableType.swift */,
 			);
 			path = groups;
 			sourceTree = "<group>";
@@ -102,8 +109,17 @@
 			isa = PBXGroup;
 			children = (
 				4692C77023CE1F550041C983 /* SearchVC.swift */,
+				46712AFC23CE3A1800D3CFBC /* SearchVM.swift */,
 			);
 			path = search;
+			sourceTree = "<group>";
+		};
+		46712AF923CE35FE00D3CFBC /* services */ = {
+			isa = PBXGroup;
+			children = (
+				46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */,
+			);
+			path = services;
 			sourceTree = "<group>";
 		};
 		4692C76023CE1F550041C983 = {
@@ -135,6 +151,7 @@
 				4692C76E23CE1F550041C983 /* SceneDelegate.swift */,
 				46712AF723CE2BD300D3CFBC /* groups */,
 				4692C79C23CE28BE0041C983 /* resources */,
+				46712AF923CE35FE00D3CFBC /* services */,
 			);
 			path = SkyDictionary;
 			sourceTree = "<group>";
@@ -360,7 +377,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4692C77123CE1F550041C983 /* SearchVC.swift in Sources */,
+				46712AFD23CE3A1800D3CFBC /* SearchVM.swift in Sources */,
+				46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */,
 				4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */,
+				46712AFF23CE3A5A00D3CFBC /* BindableType.swift in Sources */,
 				4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
