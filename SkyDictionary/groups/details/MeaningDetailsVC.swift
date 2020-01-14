@@ -1,5 +1,5 @@
 //
-//  SearchVC.swift
+//  MeaningDetailsVC.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 14/01/2020.
@@ -10,17 +10,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchVC: UIViewController {
+class MeaningDetailsVC: UIViewController {
     
     // MARK: - Public properties
-    var viewModel: SearchVM!
+    var viewModel: MeaningDetailsVM!
     
     // MARK: - Private properties
     
-    
     // MARK: - Create
-    public static func Create(viewModel: SearchVM) -> SearchVC {
-        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! SearchVC
+    public static func Create(viewModel: MeaningDetailsVM) -> MeaningDetailsVC {
+        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
         vc.bindViewModel(to: viewModel)
         return vc
     }
@@ -47,11 +46,10 @@ class SearchVC: UIViewController {
     
 }
 
-extension SearchVC: BindableType {
+extension MeaningDetailsVC: BindableType {
     
     func bindViewModel() {
         
     }
     
 }
-
