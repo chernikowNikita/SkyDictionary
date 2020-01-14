@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76C23CE1F550041C983 /* AppDelegate.swift */; };
 		4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76E23CE1F550041C983 /* SceneDelegate.swift */; };
-		4692C77123CE1F550041C983 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C77023CE1F550041C983 /* ViewController.swift */; };
+		4692C77123CE1F550041C983 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C77023CE1F550041C983 /* SearchVC.swift */; };
 		4692C77423CE1F550041C983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77223CE1F550041C983 /* Main.storyboard */; };
 		4692C77623CE1F5B0041C983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77523CE1F5B0041C983 /* Assets.xcassets */; };
 		4692C77923CE1F5B0041C983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */; };
@@ -39,7 +39,7 @@
 		4692C76923CE1F550041C983 /* SkyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4692C76C23CE1F550041C983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4692C76E23CE1F550041C983 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4692C77023CE1F550041C983 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4692C77023CE1F550041C983 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		4692C77323CE1F550041C983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4692C77523CE1F5B0041C983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4692C77823CE1F5B0041C983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46712AF623CE29C900D3CFBC /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4692C77223CE1F550041C983 /* Main.storyboard */,
+				4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
+		46712AF723CE2BD300D3CFBC /* groups */ = {
+			isa = PBXGroup;
+			children = (
+				46712AF823CE2C5600D3CFBC /* search */,
+			);
+			path = groups;
+			sourceTree = "<group>";
+		};
+		46712AF823CE2C5600D3CFBC /* search */ = {
+			isa = PBXGroup;
+			children = (
+				4692C77023CE1F550041C983 /* SearchVC.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
 		4692C76023CE1F550041C983 = {
 			isa = PBXGroup;
 			children = (
@@ -108,11 +133,8 @@
 			children = (
 				4692C76C23CE1F550041C983 /* AppDelegate.swift */,
 				4692C76E23CE1F550041C983 /* SceneDelegate.swift */,
-				4692C77023CE1F550041C983 /* ViewController.swift */,
-				4692C77223CE1F550041C983 /* Main.storyboard */,
-				4692C77523CE1F5B0041C983 /* Assets.xcassets */,
-				4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */,
-				4692C77A23CE1F5B0041C983 /* Info.plist */,
+				46712AF723CE2BD300D3CFBC /* groups */,
+				4692C79C23CE28BE0041C983 /* resources */,
 			);
 			path = SkyDictionary;
 			sourceTree = "<group>";
@@ -135,6 +157,16 @@
 			path = SkyDictionaryUITests;
 			sourceTree = "<group>";
 		};
+		4692C79C23CE28BE0041C983 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				46712AF623CE29C900D3CFBC /* storyboards */,
+				4692C77523CE1F5B0041C983 /* Assets.xcassets */,
+				4692C77A23CE1F5B0041C983 /* Info.plist */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		4D7A171D7E6A2E507B8C6068 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +181,6 @@
 				60AC9B29DF32C5037FA2A720 /* Pods-SkyDictionary.debug.xcconfig */,
 				61A6CE5958FB76A61A4AEEC4 /* Pods-SkyDictionary.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -328,7 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4692C77123CE1F550041C983 /* ViewController.swift in Sources */,
+				4692C77123CE1F550041C983 /* SearchVC.swift in Sources */,
 				4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */,
 				4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */,
 			);
@@ -506,7 +537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VPBPCMGNLT;
-				INFOPLIST_FILE = SkyDictionary/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SkyDictionary/resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,7 +556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VPBPCMGNLT;
-				INFOPLIST_FILE = SkyDictionary/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SkyDictionary/resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
