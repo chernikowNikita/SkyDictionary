@@ -1,0 +1,666 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76C23CE1F550041C983 /* AppDelegate.swift */; };
+		4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76E23CE1F550041C983 /* SceneDelegate.swift */; };
+		4692C77123CE1F550041C983 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C77023CE1F550041C983 /* ViewController.swift */; };
+		4692C77423CE1F550041C983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77223CE1F550041C983 /* Main.storyboard */; };
+		4692C77623CE1F5B0041C983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77523CE1F5B0041C983 /* Assets.xcassets */; };
+		4692C77923CE1F5B0041C983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */; };
+		4692C78423CE1F5B0041C983 /* SkyDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */; };
+		4692C78F23CE1F5B0041C983 /* SkyDictionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C78E23CE1F5B0041C983 /* SkyDictionaryUITests.swift */; };
+		648BB1DD01811F1834A7BB86 /* Pods_SkyDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C723186A10C3C2891A1CD5 /* Pods_SkyDictionary.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4692C78023CE1F5B0041C983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4692C76123CE1F550041C983 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4692C76823CE1F550041C983;
+			remoteInfo = SkyDictionary;
+		};
+		4692C78B23CE1F5B0041C983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4692C76123CE1F550041C983 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4692C76823CE1F550041C983;
+			remoteInfo = SkyDictionary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4692C76923CE1F550041C983 /* SkyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4692C76C23CE1F550041C983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4692C76E23CE1F550041C983 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4692C77023CE1F550041C983 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4692C77323CE1F550041C983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4692C77523CE1F5B0041C983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4692C77823CE1F5B0041C983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4692C77A23CE1F5B0041C983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4692C77F23CE1F5B0041C983 /* SkyDictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyDictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDictionaryTests.swift; sourceTree = "<group>"; };
+		4692C78523CE1F5B0041C983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4692C78A23CE1F5B0041C983 /* SkyDictionaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyDictionaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4692C78E23CE1F5B0041C983 /* SkyDictionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDictionaryUITests.swift; sourceTree = "<group>"; };
+		4692C79023CE1F5B0041C983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60AC9B29DF32C5037FA2A720 /* Pods-SkyDictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionary.debug.xcconfig"; path = "Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary.debug.xcconfig"; sourceTree = "<group>"; };
+		61A6CE5958FB76A61A4AEEC4 /* Pods-SkyDictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionary.release.xcconfig"; path = "Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary.release.xcconfig"; sourceTree = "<group>"; };
+		E8C723186A10C3C2891A1CD5 /* Pods_SkyDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkyDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4692C76623CE1F550041C983 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				648BB1DD01811F1834A7BB86 /* Pods_SkyDictionary.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C77C23CE1F5B0041C983 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C78723CE1F5B0041C983 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4692C76023CE1F550041C983 = {
+			isa = PBXGroup;
+			children = (
+				4692C76B23CE1F550041C983 /* SkyDictionary */,
+				4692C78223CE1F5B0041C983 /* SkyDictionaryTests */,
+				4692C78D23CE1F5B0041C983 /* SkyDictionaryUITests */,
+				4692C76A23CE1F550041C983 /* Products */,
+				8E6D7CFB52B84CDBEE37D0E2 /* Pods */,
+				4D7A171D7E6A2E507B8C6068 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4692C76A23CE1F550041C983 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4692C76923CE1F550041C983 /* SkyDictionary.app */,
+				4692C77F23CE1F5B0041C983 /* SkyDictionaryTests.xctest */,
+				4692C78A23CE1F5B0041C983 /* SkyDictionaryUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4692C76B23CE1F550041C983 /* SkyDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				4692C76C23CE1F550041C983 /* AppDelegate.swift */,
+				4692C76E23CE1F550041C983 /* SceneDelegate.swift */,
+				4692C77023CE1F550041C983 /* ViewController.swift */,
+				4692C77223CE1F550041C983 /* Main.storyboard */,
+				4692C77523CE1F5B0041C983 /* Assets.xcassets */,
+				4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */,
+				4692C77A23CE1F5B0041C983 /* Info.plist */,
+			);
+			path = SkyDictionary;
+			sourceTree = "<group>";
+		};
+		4692C78223CE1F5B0041C983 /* SkyDictionaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */,
+				4692C78523CE1F5B0041C983 /* Info.plist */,
+			);
+			path = SkyDictionaryTests;
+			sourceTree = "<group>";
+		};
+		4692C78D23CE1F5B0041C983 /* SkyDictionaryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4692C78E23CE1F5B0041C983 /* SkyDictionaryUITests.swift */,
+				4692C79023CE1F5B0041C983 /* Info.plist */,
+			);
+			path = SkyDictionaryUITests;
+			sourceTree = "<group>";
+		};
+		4D7A171D7E6A2E507B8C6068 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E8C723186A10C3C2891A1CD5 /* Pods_SkyDictionary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E6D7CFB52B84CDBEE37D0E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60AC9B29DF32C5037FA2A720 /* Pods-SkyDictionary.debug.xcconfig */,
+				61A6CE5958FB76A61A4AEEC4 /* Pods-SkyDictionary.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4692C76823CE1F550041C983 /* SkyDictionary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4692C79323CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionary" */;
+			buildPhases = (
+				37DB07F49641859E4C8590FF /* [CP] Check Pods Manifest.lock */,
+				4692C76523CE1F550041C983 /* Sources */,
+				4692C76623CE1F550041C983 /* Frameworks */,
+				4692C76723CE1F550041C983 /* Resources */,
+				1A8F9EC8A425B6121941F2E2 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SkyDictionary;
+			productName = SkyDictionary;
+			productReference = 4692C76923CE1F550041C983 /* SkyDictionary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4692C77E23CE1F5B0041C983 /* SkyDictionaryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4692C79623CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionaryTests" */;
+			buildPhases = (
+				4692C77B23CE1F5B0041C983 /* Sources */,
+				4692C77C23CE1F5B0041C983 /* Frameworks */,
+				4692C77D23CE1F5B0041C983 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4692C78123CE1F5B0041C983 /* PBXTargetDependency */,
+			);
+			name = SkyDictionaryTests;
+			productName = SkyDictionaryTests;
+			productReference = 4692C77F23CE1F5B0041C983 /* SkyDictionaryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4692C78923CE1F5B0041C983 /* SkyDictionaryUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4692C79923CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionaryUITests" */;
+			buildPhases = (
+				4692C78623CE1F5B0041C983 /* Sources */,
+				4692C78723CE1F5B0041C983 /* Frameworks */,
+				4692C78823CE1F5B0041C983 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4692C78C23CE1F5B0041C983 /* PBXTargetDependency */,
+			);
+			name = SkyDictionaryUITests;
+			productName = SkyDictionaryUITests;
+			productReference = 4692C78A23CE1F5B0041C983 /* SkyDictionaryUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4692C76123CE1F550041C983 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "Никита Черников";
+				TargetAttributes = {
+					4692C76823CE1F550041C983 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					4692C77E23CE1F5B0041C983 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 4692C76823CE1F550041C983;
+					};
+					4692C78923CE1F5B0041C983 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 4692C76823CE1F550041C983;
+					};
+				};
+			};
+			buildConfigurationList = 4692C76423CE1F550041C983 /* Build configuration list for PBXProject "SkyDictionary" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4692C76023CE1F550041C983;
+			productRefGroup = 4692C76A23CE1F550041C983 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4692C76823CE1F550041C983 /* SkyDictionary */,
+				4692C77E23CE1F5B0041C983 /* SkyDictionaryTests */,
+				4692C78923CE1F5B0041C983 /* SkyDictionaryUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4692C76723CE1F550041C983 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4692C77923CE1F5B0041C983 /* LaunchScreen.storyboard in Resources */,
+				4692C77623CE1F5B0041C983 /* Assets.xcassets in Resources */,
+				4692C77423CE1F550041C983 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C77D23CE1F5B0041C983 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C78823CE1F5B0041C983 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A8F9EC8A425B6121941F2E2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		37DB07F49641859E4C8590FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SkyDictionary-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4692C76523CE1F550041C983 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4692C77123CE1F550041C983 /* ViewController.swift in Sources */,
+				4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */,
+				4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C77B23CE1F5B0041C983 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4692C78423CE1F5B0041C983 /* SkyDictionaryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4692C78623CE1F5B0041C983 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4692C78F23CE1F5B0041C983 /* SkyDictionaryUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4692C78123CE1F5B0041C983 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4692C76823CE1F550041C983 /* SkyDictionary */;
+			targetProxy = 4692C78023CE1F5B0041C983 /* PBXContainerItemProxy */;
+		};
+		4692C78C23CE1F5B0041C983 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4692C76823CE1F550041C983 /* SkyDictionary */;
+			targetProxy = 4692C78B23CE1F5B0041C983 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4692C77223CE1F550041C983 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4692C77323CE1F550041C983 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4692C77823CE1F5B0041C983 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4692C79123CE1F5B0041C983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4692C79223CE1F5B0041C983 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4692C79423CE1F5B0041C983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60AC9B29DF32C5037FA2A720 /* Pods-SkyDictionary.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4692C79523CE1F5B0041C983 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61A6CE5958FB76A61A4AEEC4 /* Pods-SkyDictionary.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4692C79723CE1F5B0041C983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionaryTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkyDictionary.app/SkyDictionary";
+			};
+			name = Debug;
+		};
+		4692C79823CE1F5B0041C983 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionaryTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkyDictionary.app/SkyDictionary";
+			};
+			name = Release;
+		};
+		4692C79A23CE1F5B0041C983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionaryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionaryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SkyDictionary;
+			};
+			name = Debug;
+		};
+		4692C79B23CE1F5B0041C983 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VPBPCMGNLT;
+				INFOPLIST_FILE = SkyDictionaryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.nikita.SkyDictionaryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SkyDictionary;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4692C76423CE1F550041C983 /* Build configuration list for PBXProject "SkyDictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4692C79123CE1F5B0041C983 /* Debug */,
+				4692C79223CE1F5B0041C983 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4692C79323CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4692C79423CE1F5B0041C983 /* Debug */,
+				4692C79523CE1F5B0041C983 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4692C79623CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionaryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4692C79723CE1F5B0041C983 /* Debug */,
+				4692C79823CE1F5B0041C983 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4692C79923CE1F5B0041C983 /* Build configuration list for PBXNativeTarget "SkyDictionaryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4692C79A23CE1F5B0041C983 /* Debug */,
+				4692C79B23CE1F5B0041C983 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4692C76123CE1F550041C983 /* Project object */;
+}
