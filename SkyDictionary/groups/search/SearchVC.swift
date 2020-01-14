@@ -20,7 +20,7 @@ class SearchVC: UIViewController {
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
-        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! SearchVC
+        var vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! SearchVC
         vc.bindViewModel(to: viewModel)
         return vc
     }

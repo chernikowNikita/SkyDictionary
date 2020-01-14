@@ -19,7 +19,7 @@ class MeaningDetailsVC: UIViewController {
     
     // MARK: - Create
     public static func Create(viewModel: MeaningDetailsVM) -> MeaningDetailsVC {
-        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
+        var vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
         vc.bindViewModel(to: viewModel)
         return vc
     }
