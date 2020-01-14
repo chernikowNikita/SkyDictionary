@@ -1,0 +1,2 @@
+# SkyDictionary
+English translation application
