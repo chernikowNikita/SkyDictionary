@@ -12,11 +12,15 @@ import RxCocoa
 
 class SearchVC: UIViewController {
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: - Public properties
     var viewModel: SearchVM!
     
     // MARK: - Private properties
-    
+    let disposeBag = DisposeBag()
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
@@ -50,7 +54,13 @@ class SearchVC: UIViewController {
 extension SearchVC: BindableType {
     
     func bindViewModel() {
-        
+        searchField.rx.text
+            .filter { $0 != nil }
+            .map { $0! }
+            .distinctUntilChanged()
+            .filter { $0.count > 1 }
+            .bind(to: viewModel.query)
+            .disposed(by: disposeBag)
     }
     
 }

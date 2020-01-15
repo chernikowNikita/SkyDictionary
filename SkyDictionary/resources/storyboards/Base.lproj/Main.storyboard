@@ -51,6 +51,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Поиск" id="CJS-yw-99L"/>
+                    <connections>
+                        <outlet property="searchField" destination="ZDs-dn-zMg" id="Tic-do-0FL"/>
+                        <outlet property="tableView" destination="T7Z-Td-TTn" id="z3b-aW-lzI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
