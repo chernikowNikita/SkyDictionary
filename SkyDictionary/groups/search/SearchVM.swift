@@ -41,6 +41,7 @@ class SearchVM {
     // MARK: - Input
     let query: PublishSubject<String> = PublishSubject<String>()
     let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
+    let nextPage: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
@@ -67,14 +68,14 @@ class SearchVM {
     // MARK: - Init
     init() {
         searchAction.elements
-            .map { [weak self] newResultsData -> [SearchResult] in
-                var results: [SearchResult] = []
-//                if !newResultsData.isFirstPage {
-//                    results += (try? self?.searchResults.value()) ?? []
-//                }
-                results += newResultsData.results
-                return results
+            .debug()
+            .scan([]) { array, newData -> [SearchResult] in
+                if newData.isFirstPage {
+                    return newData.results
+                }
+                return array + newData.results
             }
+            .debug()
             .map { results -> [SearchResultSection] in
                 return results.map { result in
                     return SearchResultSection(model: result.text, items: result.meanings)
@@ -88,6 +89,16 @@ class SearchVM {
             }
             .filter { $0.isNeedToSearch }
             .bind(to: searchAction.inputs)
+            .disposed(by: disposeBag)
+        nextPage
+            .withLatestFrom(page)
+            .withLatestFrom(searchResults) { page, results -> Int? in
+                return results.count / pageSize == page ? page : nil
+            }
+            .filter { $0 != nil }
+            .map { $0! }
+            .map { $0 + 1 }
+            .bind(to: page)
             .disposed(by: disposeBag)
         query
             .map { _ in return 1 }
