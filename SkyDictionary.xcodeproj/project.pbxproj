@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610D4D423CFB47200A7CB00 /* MeaningCell.swift */; };
+		4610D4D723CFC37100A7CB00 /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610D4D623CFC37100A7CB00 /* UITableViewCell+Extensions.swift */; };
 		464D257F23CE606000217529 /* Meaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D257E23CE606000217529 /* Meaning.swift */; };
 		464D258123CE610200217529 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D258023CE610200217529 /* Translation.swift */; };
 		46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4610D4D423CFB47200A7CB00 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
+		4610D4D623CFC37100A7CB00 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		464D257E23CE606000217529 /* Meaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meaning.swift; sourceTree = "<group>"; };
 		464D258023CE610200217529 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyEngApiService.swift; sourceTree = "<group>"; };
@@ -107,6 +111,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4610D4D223CFB43500A7CB00 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				4610D4D323CFB44E00A7CB00 /* tableCells */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		4610D4D323CFB44E00A7CB00 /* tableCells */ = {
+			isa = PBXGroup;
+			children = (
+				4610D4D423CFB47200A7CB00 /* MeaningCell.swift */,
+				4610D4D623CFC37100A7CB00 /* UITableViewCell+Extensions.swift */,
+			);
+			path = tableCells;
+			sourceTree = "<group>";
+		};
 		46712AF623CE29C900D3CFBC /* storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +226,7 @@
 				46712AF923CE35FE00D3CFBC /* services */,
 				46712B0023CE3EA100D3CFBC /* router */,
 				46712B1023CE584A00D3CFBC /* model */,
+				4610D4D223CFB43500A7CB00 /* view */,
 			);
 			path = SkyDictionary;
 			sourceTree = "<group>";
@@ -436,7 +458,9 @@
 				46712B0923CE404D00D3CFBC /* SceneTransitionType.swift in Sources */,
 				4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */,
 				464D257F23CE606000217529 /* Meaning.swift in Sources */,
+				4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */,
 				46712B0223CE3EBA00D3CFBC /* Scene.swift in Sources */,
+				4610D4D723CFC37100A7CB00 /* UITableViewCell+Extensions.swift in Sources */,
 				46712AFF23CE3A5A00D3CFBC /* BindableType.swift in Sources */,
 				4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */,
 				46712B1223CE585C00D3CFBC /* SearchResult.swift in Sources */,

@@ -10,12 +10,16 @@ import RxSwift
 import RxCocoa
 import Action
 import Moya
+import RxDataSources
 
 let pageSize = 30
 
 struct QueryData {
     let query: String
     let page: Int
+    var isNeedToSearch: Bool {
+        return query.count > 1
+    }
 }
 
 class SearchResultsData {
@@ -26,58 +30,69 @@ class SearchResultsData {
         self.isFirstPage = isFirstPage
         self.results = results
     }
+
 }
+
+typealias SearchResultSection = AnimatableSectionModel<String, Meaning>
 
 class SearchVM {
     
     // MARK: - Public properties
     // MARK: - Input
-    let query: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
+    let query: PublishSubject<String> = PublishSubject<String>()
     let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
     
     // MARK: - Output
-    let searchResults: BehaviorSubject<[SearchResult]> = BehaviorSubject<[SearchResult]>(value: [])
+    let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
+    let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
     // MARK: - Private properties
-    fileprivate let searchAction: Action<QueryData, SearchResultsData> = {
+    fileprivate lazy var searchAction: Action<QueryData, SearchResultsData> = { this in
         return Action<QueryData, SearchResultsData>() { queryData in
             let query = queryData.query
             let page = queryData.page
-            let provider = MoyaProvider<SkyEngApiService>()
+            
             let isFirstPage = page == 1
-            return provider.rx
+            return this.provider.rx
                 .request(.search(query: query, page: page, pageSize: 30))
                 .map([SearchResult].self)
                 .catchErrorJustReturn([])
+                .debug()
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
                 .asObservable()
         }
-    }()
+    }(self)
     fileprivate let disposeBag = DisposeBag()
     
     // MARK: - Init
     init() {
         searchAction.elements
-            .map { [weak self] newResultsData in
+            .map { [weak self] newResultsData -> [SearchResult] in
                 var results: [SearchResult] = []
-                if !newResultsData.isFirstPage {
-                    results += (try? self?.searchResults.value()) ?? []
-                }
+//                if !newResultsData.isFirstPage {
+//                    results += (try? self?.searchResults.value()) ?? []
+//                }
                 results += newResultsData.results
                 return results
             }
+            .map { results -> [SearchResultSection] in
+                return results.map { result in
+                    return SearchResultSection(model: result.text, items: result.meanings)
+                }
+            }
             .bind(to: searchResults)
-            .disposed(by: disposeBag)
-        query
-            .distinctUntilChanged()
-            .map { _ in return 1 }
-            .bind(to: page)
             .disposed(by: disposeBag)
         page
             .withLatestFrom(query) { page, query in
                 return QueryData(query: query, page: page)
             }
+            .filter { $0.isNeedToSearch }
             .bind(to: searchAction.inputs)
             .disposed(by: disposeBag)
+        query
+            .map { _ in return 1 }
+            .bind(to: page)
+            .disposed(by: disposeBag)
+        
     }
 }

@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
+import Kingfisher
 
 class SearchVC: UIViewController {
     
@@ -20,7 +22,8 @@ class SearchVC: UIViewController {
     var viewModel: SearchVM!
     
     // MARK: - Private properties
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<SearchResultSection>!
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
@@ -37,6 +40,9 @@ class SearchVC: UIViewController {
         
         configureDataSource()
         
+        self.viewModel = SearchVM()
+        bindViewModel()
+        
         setEditing(true, animated: false)
     }
     
@@ -46,7 +52,23 @@ class SearchVC: UIViewController {
     }
     
     private func configureDataSource() {
-        
+        dataSource = RxTableViewSectionedAnimatedDataSource(
+          configureCell: { dataSource, tableView, indexPath, item in
+            let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
+            if let previewLink = item.previewUrl,
+                let previewUrl = URL(string: "https:\(previewLink)") {
+                cell.previewImageView.kf.setImage(with: previewUrl)
+            }
+            cell.translationLabel.text = item.translation?.text
+            return cell
+          },
+          titleForHeaderInSection: { dataSource, index in
+            if index >= dataSource.sectionModels.count {
+                return nil
+            }
+            return dataSource.sectionModels[index].model
+          }
+        )
     }
     
 }
@@ -54,6 +76,9 @@ class SearchVC: UIViewController {
 extension SearchVC: BindableType {
     
     func bindViewModel() {
+        viewModel.searchResults
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         searchField.rx.text
             .filter { $0 != nil }
             .map { $0! }

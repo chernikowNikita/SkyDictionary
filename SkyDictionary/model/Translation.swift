@@ -10,5 +10,10 @@ import Foundation
 
 struct Translation: Codable {
     let text: String
-    let note: String
+    let note: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case text
+        case note
+    }
 }

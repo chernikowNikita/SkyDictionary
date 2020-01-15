@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 enum PartOfSpeech: String {
     case noun = "n"
@@ -28,16 +29,41 @@ enum PartOfSpeech: String {
 }
 
 struct Meaning: Codable {
+    
     let id: Int
-    private let partOfSpeechCode: String
+    let partOfSpeechCode: String
     var partOfSpeech: PartOfSpeech? {
         get {
             return PartOfSpeech(rawValue: partOfSpeechCode)
         }
     }
-    let translation: Translation
-    let previewUrl: String
-    let imageUrl: String
-    let transcription: String
-    let soundUrl: String
+    let translation: Translation?
+    let previewUrl: String?
+    let imageUrl: String?
+    let transcription: String?
+    let soundUrl: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case partOfSpeechCode
+        case translation
+        case previewUrl
+        case imageUrl
+        case transcription
+        case soundUrl
+    }
+}
+
+extension Meaning: IdentifiableType {
+    var identity: Int {
+        get {
+            return id
+        }
+    }
+}
+
+extension Meaning: Equatable {
+    static func == (lhs: Meaning, rhs: Meaning) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

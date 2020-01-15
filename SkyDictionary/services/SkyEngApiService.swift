@@ -52,6 +52,6 @@ extension SkyEngApiService: TargetType {
         return Data()
     }
     var task: Task {
-        return .requestPlain
+        return .requestParameters(parameters: parameters!, encoding: URLEncoding())
     }
 }
