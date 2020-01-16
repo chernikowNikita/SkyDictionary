@@ -71,12 +71,6 @@ class SearchVC: UIViewController {
         )
     }
     
-    static let startLoadingOffset: CGFloat = 20.0
-
-    static func isNearTheBottomEdge(contentOffset: CGPoint, _ tableView: UITableView) -> Bool {
-        return contentOffset.y + tableView.frame.size.height + startLoadingOffset > tableView.contentSize.height
-    }
-    
 }
 
 extension SearchVC: BindableType {
@@ -92,9 +86,10 @@ extension SearchVC: BindableType {
             .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
+        let startLoadingOffset: CGFloat = 100.0
         tableView.rx.contentOffset
             .map { offset in
-                return offset.y + self.tableView.frame.size.height + 20.0 > self.tableView.contentSize.height
+                return offset.y + self.tableView.frame.size.height + startLoadingOffset > self.tableView.contentSize.height
             }
             .distinctUntilChanged()
             .debug()
