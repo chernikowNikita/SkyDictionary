@@ -23,7 +23,7 @@ class SearchVC: UIViewController {
     
     // MARK: - Private properties
     private let disposeBag = DisposeBag()
-    private var dataSource: RxTableViewSectionedAnimatedDataSource<SearchResultSection>!
+    private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
@@ -52,7 +52,7 @@ class SearchVC: UIViewController {
     }
     
     private func configureDataSource() {
-        dataSource = RxTableViewSectionedAnimatedDataSource(
+        dataSource = RxTableViewSectionedReloadDataSource(
           configureCell: { dataSource, tableView, indexPath, item in
             let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
             if let previewLink = item.previewUrl,
@@ -93,10 +93,12 @@ extension SearchVC: BindableType {
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
         tableView.rx.contentOffset
-            .filter { offset in
+            .map { offset in
                 return offset.y + self.tableView.frame.size.height + 20.0 > self.tableView.contentSize.height
             }
-            .map { _ in true }
+            .distinctUntilChanged()
+            .debug()
+            .filter { $0 }
             .bind(to: viewModel.nextPage)
             .disposed(by: disposeBag)
     }

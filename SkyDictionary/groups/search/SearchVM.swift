@@ -33,7 +33,7 @@ class SearchResultsData {
 
 }
 
-typealias SearchResultSection = AnimatableSectionModel<String, Meaning>
+typealias SearchResultSection = SectionModel<String, Meaning>
 
 class SearchVM {
     
@@ -53,12 +53,13 @@ class SearchVM {
             let query = queryData.query
             let page = queryData.page
             
+            print("action initiated")
+            
             let isFirstPage = page == 1
             return this.provider.rx
                 .request(.search(query: query, page: page, pageSize: 30))
                 .map([SearchResult].self)
                 .catchErrorJustReturn([])
-                .debug()
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
                 .asObservable()
         }
@@ -68,14 +69,13 @@ class SearchVM {
     // MARK: - Init
     init() {
         searchAction.elements
-            .debug()
             .scan([]) { array, newData -> [SearchResult] in
                 if newData.isFirstPage {
                     return newData.results
                 }
                 return array + newData.results
             }
-            .debug()
+            
             .map { results -> [SearchResultSection] in
                 return results.map { result in
                     return SearchResultSection(model: result.text, items: result.meanings)
@@ -88,6 +88,7 @@ class SearchVM {
                 return QueryData(query: query, page: page)
             }
             .filter { $0.isNeedToSearch }
+            .debug()
             .bind(to: searchAction.inputs)
             .disposed(by: disposeBag)
         nextPage
@@ -98,6 +99,7 @@ class SearchVM {
             .filter { $0 != nil }
             .map { $0! }
             .map { $0 + 1 }
+            .debug()
             .bind(to: page)
             .disposed(by: disposeBag)
         query

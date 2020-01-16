@@ -53,17 +53,3 @@ struct Meaning: Codable {
         case soundUrl
     }
 }
-
-extension Meaning: IdentifiableType {
-    var identity: Int {
-        get {
-            return id
-        }
-    }
-}
-
-extension Meaning: Equatable {
-    static func == (lhs: Meaning, rhs: Meaning) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
