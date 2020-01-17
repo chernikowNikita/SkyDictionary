@@ -9,6 +9,7 @@ target 'SkyDictionary' do
 
   # Community projects
   pod 'Action', '~> 3.9'
+  pod 'RxSwiftExt/Core'
   
   # API
   pod 'Moya/RxSwift', '~> 13.0'

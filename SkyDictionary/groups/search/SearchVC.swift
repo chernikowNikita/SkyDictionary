@@ -53,6 +53,7 @@ class SearchVC: UIViewController {
         
     }
     
+    // MARK: - Private properties
     private func configureDataSource() {
         dataSource = RxTableViewSectionedReloadDataSource(
           configureCell: { dataSource, tableView, indexPath, item in
@@ -81,13 +82,14 @@ extension SearchVC: BindableType {
         viewModel.searchResults
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
         searchField.rx.text
-            .filter { $0 != nil }
-            .map { $0! }
+            .unwrap()
             .distinctUntilChanged()
             .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
+        
         let startLoadingOffset: CGFloat = 200.0
         tableView.rx.contentOffset
             .map { offset in
@@ -98,6 +100,7 @@ extension SearchVC: BindableType {
             .filter { $0 }
             .bind(to: viewModel.nextPage)
             .disposed(by: disposeBag)
+        
         viewModel.loadingState
             .map { state in
                 switch state {
@@ -109,6 +112,7 @@ extension SearchVC: BindableType {
             }
             .bind(to: firstPageLoadingView.rx.isAnimating)
             .disposed(by: disposeBag)
+        
         viewModel.loadingState
             .map { state in
                 switch state {

@@ -21,7 +21,7 @@ extension Scene {
         }
     }
     
-    fileprivate func wrapInNcIfNeeded(_ vc: UIViewController, for type: SceneTransitionType) -> UIViewController {
+    private func wrapInNcIfNeeded(_ vc: UIViewController, for type: SceneTransitionType) -> UIViewController {
         switch type {
         case .push:
             return vc
@@ -33,7 +33,7 @@ extension Scene {
         }
     }
     
-    fileprivate func wrapInNC(_ vc: UIViewController) -> UIViewController {
+    private func wrapInNC(_ vc: UIViewController) -> UIViewController {
         let nc = UINavigationController()
         nc.setViewControllers([vc], animated: true)
         return nc

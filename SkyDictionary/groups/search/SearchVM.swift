@@ -11,32 +11,7 @@ import RxCocoa
 import Action
 import Moya
 import RxDataSources
-
-let pageSize = 30
-
-struct QueryData {
-    let query: String
-    let page: Int
-    var isNeedToSearch: Bool {
-        return query.count > 1
-    }
-}
-
-class SearchResultsData {
-    let isFirstPage: Bool
-    let results: [SearchResult]
-    
-    init(isFirstPage: Bool, results: [SearchResult]) {
-        self.isFirstPage = isFirstPage
-        self.results = results
-    }
-
-}
-
-enum LoadingState {
-    case loading(firstPage: Bool)
-    case notLoading
-}
+import RxSwiftExt
 
 typealias SearchResultSection = SectionModel<String, Meaning>
 
@@ -53,7 +28,7 @@ class SearchVM {
     let loadingState: BehaviorSubject<LoadingState> = BehaviorSubject<LoadingState>(value: .notLoading)
     
     // MARK: - Private properties
-    fileprivate lazy var searchAction: Action<QueryData, SearchResultsData> = { this in
+    private lazy var searchAction: Action<QueryData, SearchResultsData> = { this in
         return Action<QueryData, SearchResultsData>() { queryData in
             let query = queryData.query
             let page = queryData.page
@@ -63,7 +38,7 @@ class SearchVM {
             let isFirstPage = page == 1
             this.loadingState.onNext(.loading(firstPage: isFirstPage))
             return this.provider.rx
-                .request(.search(query: query, page: page, pageSize: 30))
+                .request(.search(query: query, page: page, pageSize: PAGE_SIZE))
                 .map([SearchResult].self)
                 .catchErrorJustReturn([])
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
@@ -71,16 +46,18 @@ class SearchVM {
         }
     }(self)
     
-    fileprivate let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
-    fileprivate let disposeBag = DisposeBag()
+    private let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private let disposeBag = DisposeBag()
     
     // MARK: - Init
     init() {
         let sharedResults = searchAction.elements.share(replay: 1)
+        
         sharedResults
             .map { _ in LoadingState.notLoading }
             .bind(to: loadingState)
             .disposed(by: disposeBag)
+        
         sharedResults
             .scan([]) { array, newData -> [SearchResult] in
                 if newData.isFirstPage {
@@ -88,7 +65,6 @@ class SearchVM {
                 }
                 return array + newData.results
             }
-            
             .map { results -> [SearchResultSection] in
                 return results.map { result in
                     return SearchResultSection(model: result.text, items: result.meanings)
@@ -96,25 +72,26 @@ class SearchVM {
             }
             .bind(to: searchResults)
             .disposed(by: disposeBag)
+        
         page
             .withLatestFrom(query) { page, query in
                 return QueryData(query: query, page: page)
             }
             .filter { $0.isNeedToSearch }
-            .debug()
             .bind(to: searchAction.inputs)
             .disposed(by: disposeBag)
+        
         nextPage
             .withLatestFrom(page)
             .withLatestFrom(searchResults) { page, results -> Int? in
-                return results.count / pageSize == page ? page : nil
+                return results.count / PAGE_SIZE == page ? page : nil
             }
-            .filter { $0 != nil }
-            .map { $0! }
+            .unwrap()
             .map { $0 + 1 }
             .debug()
             .bind(to: page)
             .disposed(by: disposeBag)
+        
         query
             .map { _ in return 1 }
             .bind(to: page)
