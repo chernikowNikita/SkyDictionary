@@ -16,7 +16,9 @@ class SearchVC: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var firstPageLoadingView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nextPageLoadingView: UIActivityIndicatorView!
     
     // MARK: - Public properties
     var viewModel: SearchVM!
@@ -86,7 +88,7 @@ extension SearchVC: BindableType {
             .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
-        let startLoadingOffset: CGFloat = 100.0
+        let startLoadingOffset: CGFloat = 200.0
         tableView.rx.contentOffset
             .map { offset in
                 return offset.y + self.tableView.frame.size.height + startLoadingOffset > self.tableView.contentSize.height
@@ -95,6 +97,28 @@ extension SearchVC: BindableType {
             .debug()
             .filter { $0 }
             .bind(to: viewModel.nextPage)
+            .disposed(by: disposeBag)
+        viewModel.loadingState
+            .map { state in
+                switch state {
+                case .loading(firstPage: let isFirst):
+                    return isFirst
+                case .notLoading:
+                    return false
+                }
+            }
+            .bind(to: firstPageLoadingView.rx.isAnimating)
+            .disposed(by: disposeBag)
+        viewModel.loadingState
+            .map { state in
+                switch state {
+                case .loading(firstPage: let isFirst):
+                    return !isFirst
+                case .notLoading:
+                    return false
+                }
+            }
+            .bind(to: nextPageLoadingView.rx.isAnimating)
             .disposed(by: disposeBag)
     }
     

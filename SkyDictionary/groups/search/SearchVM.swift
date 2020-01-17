@@ -33,6 +33,11 @@ class SearchResultsData {
 
 }
 
+enum LoadingState {
+    case loading(firstPage: Bool)
+    case notLoading
+}
+
 typealias SearchResultSection = SectionModel<String, Meaning>
 
 class SearchVM {
@@ -45,7 +50,7 @@ class SearchVM {
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
-    let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    let loadingState: BehaviorSubject<LoadingState> = BehaviorSubject<LoadingState>(value: .notLoading)
     
     // MARK: - Private properties
     fileprivate lazy var searchAction: Action<QueryData, SearchResultsData> = { this in
@@ -56,6 +61,7 @@ class SearchVM {
             print("action initiated")
             
             let isFirstPage = page == 1
+            this.loadingState.onNext(.loading(firstPage: isFirstPage))
             return this.provider.rx
                 .request(.search(query: query, page: page, pageSize: 30))
                 .map([SearchResult].self)
@@ -64,11 +70,18 @@ class SearchVM {
                 .asObservable()
         }
     }(self)
+    
+    fileprivate let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     fileprivate let disposeBag = DisposeBag()
     
     // MARK: - Init
     init() {
-        searchAction.elements
+        let sharedResults = searchAction.elements.share(replay: 1)
+        sharedResults
+            .map { _ in LoadingState.notLoading }
+            .bind(to: loadingState)
+            .disposed(by: disposeBag)
+        sharedResults
             .scan([]) { array, newData -> [SearchResult] in
                 if newData.isFirstPage {
                     return newData.results
