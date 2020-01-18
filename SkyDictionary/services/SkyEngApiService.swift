@@ -11,7 +11,7 @@ import Moya
 
 enum SkyEngApiService {
     case search(query: String, page: Int, pageSize: Int)
-    case meaningDetails(meaningIds: [Int])
+    case meaningDetails(meaningId: Int)
 }
 
 extension SkyEngApiService: TargetType {
@@ -23,7 +23,7 @@ extension SkyEngApiService: TargetType {
         switch self {
         case .search(query: _, page: _, pageSize: _):
             return "words/search"
-        case .meaningDetails(meaningIds: _):
+        case .meaningDetails(meaningId: _):
             return "meanings"
         }
     }
@@ -41,8 +41,8 @@ extension SkyEngApiService: TargetType {
                 "page": page,
                 "pageSize": pageSize
             ]
-        case .meaningDetails(meaningIds: let ids):
-            return ["ids": ids.map { "\($0)" }.joined(separator: ",")]
+        case .meaningDetails(meaningId: let id):
+            return ["ids": id]
         }
     }
     var parameterEncoding: ParameterEncoding {

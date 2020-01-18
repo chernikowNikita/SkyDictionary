@@ -31,7 +31,7 @@ enum PartOfSpeech: String {
 struct Meaning: Codable {
     
     let id: Int
-    let partOfSpeechCode: String
+    private let partOfSpeechCode: String
     var partOfSpeech: PartOfSpeech? {
         get {
             return PartOfSpeech(rawValue: partOfSpeechCode)
@@ -39,17 +39,11 @@ struct Meaning: Codable {
     }
     let translation: Translation?
     let previewUrl: String?
-    let imageUrl: String?
-    let transcription: String?
-    let soundUrl: String?
     
     private enum CodingKeys: String, CodingKey {
         case id
         case partOfSpeechCode
         case translation
         case previewUrl
-        case imageUrl
-        case transcription
-        case soundUrl
     }
 }

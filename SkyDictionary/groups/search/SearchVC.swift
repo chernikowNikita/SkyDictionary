@@ -79,6 +79,17 @@ class SearchVC: UIViewController {
 extension SearchVC: BindableType {
     
     func bindViewModel() {
+        tableView.rx.itemSelected
+            .map { [weak self] indexPath in
+                try? self?.dataSource.model(at: indexPath) as? Meaning
+            }
+            .unwrap()
+            .subscribe(onNext: { [weak self] meaning in
+                let vm = MeaningDetailsVM(meaningId: meaning.id)
+                let vc = Scene.meaningDetails(vm).viewController(for: .push)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
         viewModel.searchResults
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

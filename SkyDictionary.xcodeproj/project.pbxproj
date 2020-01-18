@@ -26,6 +26,10 @@
 		467485BF23D2443B00DCFB77 /* QueryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485BE23D2443B00DCFB77 /* QueryData.swift */; };
 		467485C123D2446700DCFB77 /* SearchResultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C023D2446700DCFB77 /* SearchResultsData.swift */; };
 		467485C323D2450B00DCFB77 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C223D2450B00DCFB77 /* LoadingState.swift */; };
+		467485C523D2513F00DCFB77 /* MeaningDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C423D2513F00DCFB77 /* MeaningDetails.swift */; };
+		467485C723D2532100DCFB77 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C623D2532100DCFB77 /* Image.swift */; };
+		467485C923D2537600DCFB77 /* Definition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C823D2537600DCFB77 /* Definition.swift */; };
+		467485CB23D26B4500DCFB77 /* SkyMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485CA23D26B4500DCFB77 /* SkyMoyaProvider.swift */; };
 		4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76C23CE1F550041C983 /* AppDelegate.swift */; };
 		4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C76E23CE1F550041C983 /* SceneDelegate.swift */; };
 		4692C77123CE1F550041C983 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C77023CE1F550041C983 /* SearchVC.swift */; };
@@ -74,6 +78,10 @@
 		467485BE23D2443B00DCFB77 /* QueryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryData.swift; sourceTree = "<group>"; };
 		467485C023D2446700DCFB77 /* SearchResultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsData.swift; sourceTree = "<group>"; };
 		467485C223D2450B00DCFB77 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		467485C423D2513F00DCFB77 /* MeaningDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetails.swift; sourceTree = "<group>"; };
+		467485C623D2532100DCFB77 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		467485C823D2537600DCFB77 /* Definition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definition.swift; sourceTree = "<group>"; };
+		467485CA23D26B4500DCFB77 /* SkyMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMoyaProvider.swift; sourceTree = "<group>"; };
 		4692C76923CE1F550041C983 /* SkyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4692C76C23CE1F550041C983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4692C76E23CE1F550041C983 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */,
+				467485CA23D26B4500DCFB77 /* SkyMoyaProvider.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -201,6 +210,9 @@
 				467485BE23D2443B00DCFB77 /* QueryData.swift */,
 				467485C023D2446700DCFB77 /* SearchResultsData.swift */,
 				467485C223D2450B00DCFB77 /* LoadingState.swift */,
+				467485C423D2513F00DCFB77 /* MeaningDetails.swift */,
+				467485C623D2532100DCFB77 /* Image.swift */,
+				467485C823D2537600DCFB77 /* Definition.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -465,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4692C77123CE1F550041C983 /* SearchVC.swift in Sources */,
+				467485C723D2532100DCFB77 /* Image.swift in Sources */,
 				467485BD23D243F700DCFB77 /* Const.swift in Sources */,
 				46712AFD23CE3A1800D3CFBC /* SearchVM.swift in Sources */,
 				46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */,
@@ -475,10 +488,13 @@
 				4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */,
 				46712B0223CE3EBA00D3CFBC /* Scene.swift in Sources */,
 				467485C323D2450B00DCFB77 /* LoadingState.swift in Sources */,
+				467485CB23D26B4500DCFB77 /* SkyMoyaProvider.swift in Sources */,
 				4610D4D723CFC37100A7CB00 /* UITableViewCell+Extensions.swift in Sources */,
 				46712AFF23CE3A5A00D3CFBC /* BindableType.swift in Sources */,
+				467485C523D2513F00DCFB77 /* MeaningDetails.swift in Sources */,
 				4692C76F23CE1F550041C983 /* SceneDelegate.swift in Sources */,
 				46712B1223CE585C00D3CFBC /* SearchResult.swift in Sources */,
+				467485C923D2537600DCFB77 /* Definition.swift in Sources */,
 				46712B0523CE3EF900D3CFBC /* MeaningDetailsVC.swift in Sources */,
 				464D258123CE610200217529 /* Translation.swift in Sources */,
 				46712B0D23CE41E300D3CFBC /* Scene+ViewController.swift in Sources */,

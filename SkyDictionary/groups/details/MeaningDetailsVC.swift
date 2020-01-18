@@ -16,6 +16,7 @@ class MeaningDetailsVC: UIViewController {
     var viewModel: MeaningDetailsVM!
     
     // MARK: - Private properties
+    private let disposeBag = DisposeBag()
     
     // MARK: - Create
     public static func Create(viewModel: MeaningDetailsVM) -> MeaningDetailsVC {
@@ -33,11 +34,11 @@ class MeaningDetailsVC: UIViewController {
         configureDataSource()
         
         setEditing(true, animated: false)
+        
     }
     
     // MARK: - Setup View
     private func setupView() {
-        
     }
     
     private func configureDataSource() {
@@ -49,7 +50,12 @@ class MeaningDetailsVC: UIViewController {
 extension MeaningDetailsVC: BindableType {
     
     func bindViewModel() {
-        
+        let sharedMeaning = viewModel.loadMeaningAction.elements.share(replay: 1)
+        sharedMeaning
+            .map { $0.text }
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        viewModel.loadMeaningAction.inputs.onNext(())
     }
     
 }
