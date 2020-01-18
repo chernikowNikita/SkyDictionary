@@ -12,7 +12,7 @@ struct MeaningDetails: Codable {
     let id: String
     let text: String
     let wordId: Int
-    let difficultyLevel: Int
+    let difficultyLevel: Int?
     private let partOfSpeechCode: String
     var partOfSpeech: PartOfSpeech? {
         get {

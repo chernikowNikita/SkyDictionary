@@ -20,9 +20,9 @@ class MeaningDetailsVM {
             return SkyMoyaProvider.shared.rx
                 .request(.meaningDetails(meaningId: this.meaningId))
                 .map([MeaningDetails].self)
+                .debug()
                 .catchErrorJustReturn([MeaningDetails.empty])
                 .map { $0.first ?? .empty }
-                .debug()
                 .catchErrorJustReturn(MeaningDetails.empty)
                 .debug()
                 .asObservable()
