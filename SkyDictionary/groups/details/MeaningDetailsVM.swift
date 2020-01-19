@@ -23,16 +23,14 @@ enum SoundType {
 class MeaningDetailsVM {
     
     // MARK: - Input
-    lazy var loadMeaningAction: Action<Void, MeaningDetails> = { this in
-        return Action<Void, MeaningDetails>() { _ in
+    lazy var loadMeaningAction: Action<Void, MeaningDetails?> = { this in
+        return Action<Void, MeaningDetails?>() { _ in
             return SkyMoyaProvider.shared.rx
                 .request(.meaningDetails(meaningId: this.meaningId))
                 .filterSuccessfulStatusCodes()
                 .map([MeaningDetails].self)
-                .debug()
-                .catchErrorJustReturn([MeaningDetails.empty])
-                .map { $0.first ?? .empty }
-                .catchErrorJustReturn(MeaningDetails.empty)
+                .catchErrorJustReturn([MeaningDetails]())
+                .map { $0.first }
                 .debug()
                 .asObservable()
         }
@@ -49,6 +47,7 @@ class MeaningDetailsVM {
         self.meaningId = meaningId
         
         loadMeaningAction.elements
+            .unwrap()
             .map { meaning in
                 var wordUrl: URL? = nil
                 var meaningUrl: URL? = nil

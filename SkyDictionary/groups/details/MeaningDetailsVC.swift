@@ -31,6 +31,7 @@ class MeaningDetailsVC: UIViewController {
     private var imagesCV: UICollectionView!
     private var imagesCVHeightC: NSLayoutConstraint!
     private var imagesDataSource: RxCollectionViewSectionedReloadDataSource<ImageSection>!
+    private var errorView: ErrorView!
     private let disposeBag = DisposeBag()
     
     // MARK: - Create
@@ -47,14 +48,17 @@ class MeaningDetailsVC: UIViewController {
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
         let imagesCollectionView = prepareImagesCV()
+        let errorView = ErrorView.Create()
         stackView.addArrangedSubview(wordDetailsView)
         stackView.addArrangedSubview(meaningDetailsView)
         stackView.addArrangedSubview(difficultyDetailsView)
         stackView.addArrangedSubview(imagesCollectionView)
+        stackView.addArrangedSubview(errorView)
         self.wordDetailsView = wordDetailsView
         self.meaningDetailsView = meaningDetailsView
         self.difficultyDetailsView = difficultyDetailsView
         self.imagesCV = imagesCollectionView
+        self.errorView = errorView
     }
     
     override func viewDidLoad() {
@@ -77,6 +81,7 @@ class MeaningDetailsVC: UIViewController {
         meaningDetailsView.isHidden = true
         difficultyDetailsView.isHidden = true
         difficultyDetailsView.detailsStackView.isHidden = true
+        errorView.isHidden = true
     }
     
     private func prepareImagesCV() -> UICollectionView {
@@ -122,7 +127,9 @@ extension MeaningDetailsVC: BindableType {
             .map { !$0 }
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
-        let sharedMeaning = viewModel.loadMeaningAction.elements.share(replay: 1)
+        let sharedMeaning = viewModel.loadMeaningAction.elements
+            .unwrap()
+            .share(replay: 1)
         sharedMeaning
             .map { $0.text }
             .bind(to: navigationItem.rx.title)
@@ -139,6 +146,22 @@ extension MeaningDetailsVC: BindableType {
             .map { [ImageSection(model: nil, items: $0)] }
             .debug()
             .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
+            .disposed(by: disposeBag)
+        
+        let sharedError = viewModel.loadMeaningAction.elements
+            .map { $0 == nil }
+            .share(replay: 1)
+        sharedError
+            .filter { $0 }
+            .map { _ in return "Ошибка" }
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        sharedError
+            .map { !$0 }
+            .bind(to: errorView.rx.isHidden)
+            .disposed(by: disposeBag)
+        errorView.retryBtn.rx.tap
+            .bind(to: viewModel.loadMeaningAction.inputs)
             .disposed(by: disposeBag)
         
         imagesCV.rx.observe(CGSize.self, "contentSize")

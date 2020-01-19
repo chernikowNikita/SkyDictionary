@@ -32,5 +32,4 @@ class TextDetailsView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    
 }
