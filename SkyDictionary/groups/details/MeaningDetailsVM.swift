@@ -37,12 +37,10 @@ class MeaningDetailsVM {
                 .asObservable()
         }
     }(self)
-    let play: PublishSubject<SoundType> = PublishSubject<SoundType>()
     
     // MARK: - Private properties
-    private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))
-    private var player: AVAudioPlayer?
     private let meaningId: Int
+    private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))
     private let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private let disposeBag = DisposeBag()
     
@@ -64,9 +62,12 @@ class MeaningDetailsVM {
             }
             .bind(to: soundUrl)
             .disposed(by: disposeBag)
-        
-        play
-            .withLatestFrom(soundUrl) { type, data in
+    }
+    
+    func play(type: SoundType) -> Observable<Void> {
+        return Observable
+            .just(type)
+            .withLatestFrom(soundUrl) { type, data -> URL? in
                 switch type {
                 case .word:
                     return data.word
@@ -75,19 +76,26 @@ class MeaningDetailsVM {
                 }
             }
             .unwrap()
-            .flatMap { url in
-                FileWebProvider.shared.rx
+            .flatMap { url -> Observable<URL?> in
+                // Проверяем есть ли файл в кеше, если есть возвращаем его
+                let localFileUrl = FileWebService.fileUrl(for: url)
+                if FileManager.default.fileExists(atPath: localFileUrl.path) {
+                    return Observable.just(localFileUrl)
+                }
+                // Загружаем с сервера, если в кеше нет файла
+                return FileWebProvider.shared.rx
                     .request(.download(url: url))
                     .filterSuccessfulStatusCodes()
-                    .map { _ in return FileWebService.fileUrl(for: url) }
+                    .map { _ in return localFileUrl }
                     .catchErrorJustReturn(nil)
-                    .debug()
                     .asObservable()
             }
-            .unwrap()
-            .subscribe(onNext: { url in
-                PlayerService.shared.play(url: url)
+            .do(onNext: { localSoundUrl in
+                if let url = localSoundUrl {
+                    PlayerService.shared.play(url: url)
+                }
             })
-            .disposed(by: disposeBag)
+            .map { _ in () }
+        
     }
 }

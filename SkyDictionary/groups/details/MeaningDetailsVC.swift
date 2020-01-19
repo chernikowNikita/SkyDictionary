@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Action
 
 typealias ImageSection = SectionModel<String?, String>
 
@@ -182,14 +183,10 @@ extension MeaningDetailsVC: BindableType {
             }
             .bind(to: wordDetailsView.detailsSound.rx.isHidden)
             .disposed(by: disposeBag)
-        wordDetailsView.detailsSound.rx.tap
-            .map { _ in return SoundType.word }
-            .bind(to: viewModel.play)
-            .disposed(by: disposeBag)
-        meaningDetailsView.detailsSound.rx.tap
-            .map { _ in return SoundType.meaning }
-            .bind(to: viewModel.play)
-            .disposed(by: disposeBag)
+        wordDetailsView.detailsSound.rx.action = CocoaAction() { [weak self] _ in
+            guard let strongSelf = self else { return Observable.just(()) }
+            return strongSelf.viewModel.play(type: .word)
+        }
     }
     
     private func bindMeaningDetails(with sharedMeaning: Observable<MeaningDetails>) {
@@ -217,12 +214,10 @@ extension MeaningDetailsVC: BindableType {
             .map { $0.definition?.text }
             .bind(to: meaningDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        sharedMeaning
-            .map { meaning in
-                return meaning.definition?.soundUrl == nil
-            }
-            .bind(to: meaningDetailsView.detailsSound.rx.isHidden)
-            .disposed(by: disposeBag)
+        meaningDetailsView.detailsSound.rx.action = CocoaAction() { [weak self] _ in
+            guard let strongSelf = self else { return Observable.just(()) }
+            return strongSelf.viewModel.play(type: .meaning)
+        }
     }
     
     private func bindDifficultyDetails(with sharedMeaning: Observable<MeaningDetails>) {
