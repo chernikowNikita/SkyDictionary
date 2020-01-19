@@ -9,6 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
+
+typealias ImageSection = SectionModel<String?, String>
 
 class MeaningDetailsVC: UIViewController {
     
@@ -24,6 +27,9 @@ class MeaningDetailsVC: UIViewController {
     private var wordDetailsView: TextDetailsView!
     private var meaningDetailsView: TextDetailsView!
     private var difficultyDetailsView: TextDetailsView!
+    private var imagesCV: UICollectionView!
+    private var imagesCVHeightC: NSLayoutConstraint!
+    private var imagesDataSource: RxCollectionViewSectionedReloadDataSource<ImageSection>!
     private let disposeBag = DisposeBag()
     
     // MARK: - Create
@@ -39,13 +45,15 @@ class MeaningDetailsVC: UIViewController {
         let wordDetailsView = TextDetailsView.Create()
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
+        let imagesCollectionView = prepareImagesCV()
         stackView.addArrangedSubview(wordDetailsView)
         stackView.addArrangedSubview(meaningDetailsView)
         stackView.addArrangedSubview(difficultyDetailsView)
+        stackView.addArrangedSubview(imagesCollectionView)
         self.wordDetailsView = wordDetailsView
         self.meaningDetailsView = meaningDetailsView
         self.difficultyDetailsView = difficultyDetailsView
-        difficultyDetailsView.detailsStackView.isHidden = true
+        self.imagesCV = imagesCollectionView
     }
     
     override func viewDidLoad() {
@@ -53,7 +61,7 @@ class MeaningDetailsVC: UIViewController {
         
         setupView()
         
-        configureDataSource()
+        configureImagesDataSource()
         
         setEditing(true, animated: false)
         
@@ -64,11 +72,38 @@ class MeaningDetailsVC: UIViewController {
         wordDetailsView.titleLabel.text = "Слово"
         meaningDetailsView.titleLabel.text = "Значение"
         difficultyDetailsView.titleLabel.text = "Сложность"
+        wordDetailsView.isHidden = true
+        meaningDetailsView.isHidden = true
         difficultyDetailsView.isHidden = true
+        difficultyDetailsView.detailsStackView.isHidden = true
     }
     
-    private func configureDataSource() {
-        
+    private func prepareImagesCV() -> UICollectionView {
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: IMAGE_SIZE, height: IMAGE_SIZE)
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        let view = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
+        let constraint = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0)
+        view.addConstraint(constraint)
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.allowsSelection = false
+        view.isScrollEnabled = false
+        view.backgroundColor = .white
+        self.imagesCVHeightC = constraint
+        return view
+    }
+    
+    private func configureImagesDataSource() {
+        ImageCell.register(in: imagesCV)
+        imagesDataSource = RxCollectionViewSectionedReloadDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+            let cell = ImageCell.deque(for: collectionView, indexPath: indexPath)
+            if let url = URL(string: item.httpsPrefixed) {
+                cell.imageView.kf.setImage(with: url)
+            }
+            return cell
+        })
     }
     
     private func animate() {
@@ -92,9 +127,26 @@ extension MeaningDetailsVC: BindableType {
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
         
-        bindTextDetails(with: sharedMeaning)
+        bindWordDetails(with: sharedMeaning)
         bindMeaningDetails(with: sharedMeaning)
         bindDifficultyDetails(with: sharedMeaning)
+        
+        sharedMeaning
+            .map { meaning in
+                return meaning.images.map { $0.url }
+            }
+            .map { [ImageSection(model: nil, items: $0)] }
+            .debug()
+            .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
+            .disposed(by: disposeBag)
+        
+        imagesCV.rx.observe(CGSize.self, "contentSize")
+            .subscribe(onNext: { [weak self] size in
+                guard let strongSelf = self,
+                    let size = size else { return }
+                strongSelf.imagesCVHeightC.constant = size.height
+            })
+            .disposed(by: disposeBag)
         
         sharedMeaning
             .subscribe(onNext: { [weak self] _ in
@@ -105,7 +157,11 @@ extension MeaningDetailsVC: BindableType {
         viewModel.loadMeaningAction.inputs.onNext(())
     }
     
-    private func bindTextDetails(with sharedMeaning: Observable<MeaningDetails>) {
+    private func bindWordDetails(with sharedMeaning: Observable<MeaningDetails>) {
+        sharedMeaning
+            .map { _ in false }
+            .bind(to: wordDetailsView.rx.isHidden)
+            .disposed(by: disposeBag)
         sharedMeaning
             .map { $0.text }
             .bind(to: wordDetailsView.textLabel.rx.text)
@@ -126,9 +182,21 @@ extension MeaningDetailsVC: BindableType {
             }
             .bind(to: wordDetailsView.detailsSound.rx.isHidden)
             .disposed(by: disposeBag)
+        wordDetailsView.detailsSound.rx.tap
+            .map { _ in return SoundType.word }
+            .bind(to: viewModel.play)
+            .disposed(by: disposeBag)
+        meaningDetailsView.detailsSound.rx.tap
+            .map { _ in return SoundType.meaning }
+            .bind(to: viewModel.play)
+            .disposed(by: disposeBag)
     }
     
     private func bindMeaningDetails(with sharedMeaning: Observable<MeaningDetails>) {
+        sharedMeaning
+            .map { _ in false }
+            .bind(to: meaningDetailsView.rx.isHidden)
+            .disposed(by: disposeBag)
         sharedMeaning
             .map { meaning in
                 var translation = meaning.translation?.text ?? ""

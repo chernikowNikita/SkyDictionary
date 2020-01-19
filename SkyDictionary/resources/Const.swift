@@ -7,5 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let PAGE_SIZE = 30
+let IMAGE_SIZE: CGFloat = 100

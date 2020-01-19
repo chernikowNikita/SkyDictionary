@@ -39,6 +39,7 @@ class SearchVM {
             this.loadingState.onNext(.loading(firstPage: isFirstPage))
             return SkyMoyaProvider.shared.rx
                 .request(.search(query: query, page: page, pageSize: PAGE_SIZE))
+                .filterSuccessfulStatusCodes()
                 .map([SearchResult].self)
                 .catchErrorJustReturn([])
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }

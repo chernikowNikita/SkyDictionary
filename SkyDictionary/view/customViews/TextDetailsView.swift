@@ -19,7 +19,7 @@ class TextDetailsView: UIView {
     
     // MARK: - Create
     static func Create() -> TextDetailsView {
-        return UINib(nibName: ClassName, bundle: nil).instantiate(withOwner: nil, options: nil).first as! TextDetailsView
+        return Nib.instantiate(withOwner: nil, options: nil).first as! TextDetailsView
     }
     
     override init(frame: CGRect) {

@@ -59,7 +59,7 @@ class SearchVC: UIViewController {
           configureCell: { dataSource, tableView, indexPath, item in
             let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
             if let previewLink = item.previewUrl,
-                let previewUrl = URL(string: "https:\(previewLink)") {
+                let previewUrl = URL(string: previewLink.httpsPrefixed) {
                 cell.previewImageView.kf.setImage(with: previewUrl)
             }
             cell.translationLabel.text = item.translation?.text
