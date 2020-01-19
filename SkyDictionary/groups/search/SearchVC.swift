@@ -59,7 +59,7 @@ class SearchVC: UIViewController {
           configureCell: { dataSource, tableView, indexPath, item in
             let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
             if let previewLink = item.previewUrl,
-                let previewUrl = URL(string: "https:\(previewLink)") {
+                let previewUrl = URL(string: previewLink.httpsPrefixed) {
                 cell.previewImageView.kf.setImage(with: previewUrl)
             }
             cell.translationLabel.text = item.translation?.text
@@ -79,6 +79,17 @@ class SearchVC: UIViewController {
 extension SearchVC: BindableType {
     
     func bindViewModel() {
+        tableView.rx.itemSelected
+            .map { [weak self] indexPath in
+                try? self?.dataSource.model(at: indexPath) as? Meaning
+            }
+            .unwrap()
+            .subscribe(onNext: { [weak self] meaning in
+                let vm = MeaningDetailsVM(meaningId: meaning.id)
+                let vc = Scene.meaningDetails(vm).viewController(for: .push)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
         viewModel.searchResults
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

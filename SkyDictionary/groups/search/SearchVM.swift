@@ -37,8 +37,9 @@ class SearchVM {
             
             let isFirstPage = page == 1
             this.loadingState.onNext(.loading(firstPage: isFirstPage))
-            return this.provider.rx
+            return SkyMoyaProvider.shared.rx
                 .request(.search(query: query, page: page, pageSize: PAGE_SIZE))
+                .filterSuccessfulStatusCodes()
                 .map([SearchResult].self)
                 .catchErrorJustReturn([])
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
@@ -46,7 +47,6 @@ class SearchVM {
         }
     }(self)
     
-    private let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private let disposeBag = DisposeBag()
     
     // MARK: - Init

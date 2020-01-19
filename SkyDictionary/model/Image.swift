@@ -1,5 +1,5 @@
 //
-//  Const.swift
+//  Image.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 17/01/2020.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
 
-let PAGE_SIZE = 30
-let IMAGE_SIZE: CGFloat = 150
+struct Image: Codable {
+    let url: String
+}
