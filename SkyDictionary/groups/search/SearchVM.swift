@@ -22,27 +22,26 @@ class SearchVM {
     let query: PublishSubject<String> = PublishSubject<String>()
     let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
     let nextPage: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+    let retry: PublishSubject<Void> = PublishSubject<Void>()
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
     let loadingState: BehaviorSubject<LoadingState> = BehaviorSubject<LoadingState>(value: .notLoading)
+    let error: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     
     // MARK: - Private properties
-    private lazy var searchAction: Action<QueryData, SearchResultsData> = { this in
-        return Action<QueryData, SearchResultsData>() { queryData in
+    private lazy var searchAction: Action<QueryData, SearchResultsData?> = { this in
+        return Action<QueryData, SearchResultsData?>() { queryData in
             let query = queryData.query
             let page = queryData.page
-            
-            print("action initiated")
             
             let isFirstPage = page == 1
             this.loadingState.onNext(.loading(firstPage: isFirstPage))
             return SkyMoyaProvider.shared.rx
                 .request(.search(query: query, page: page, pageSize: PAGE_SIZE))
-                .filterSuccessfulStatusCodes()
                 .map([SearchResult].self)
-                .catchErrorJustReturn([])
                 .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
+                .catchErrorJustReturn(nil)
                 .asObservable()
         }
     }(self)
@@ -59,6 +58,7 @@ class SearchVM {
             .disposed(by: disposeBag)
         
         sharedResults
+            .unwrap()
             .scan([]) { array, newData -> [SearchResult] in
                 if newData.isFirstPage {
                     return newData.results
@@ -71,6 +71,10 @@ class SearchVM {
                 }
             }
             .bind(to: searchResults)
+            .disposed(by: disposeBag)
+        sharedResults
+            .map { results in return results == nil }
+            .bind(to: error)
             .disposed(by: disposeBag)
         
         page
@@ -89,6 +93,11 @@ class SearchVM {
             .unwrap()
             .map { $0 + 1 }
             .debug()
+            .bind(to: page)
+            .disposed(by: disposeBag)
+        
+        retry
+            .withLatestFrom(page)
             .bind(to: page)
             .disposed(by: disposeBag)
         

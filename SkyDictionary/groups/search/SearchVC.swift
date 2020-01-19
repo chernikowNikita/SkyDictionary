@@ -24,6 +24,7 @@ class SearchVC: UIViewController {
     var viewModel: SearchVM!
     
     // MARK: - Private properties
+    private var errorView: ErrorView!
     private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
     
@@ -35,6 +36,18 @@ class SearchVC: UIViewController {
     }
     
     // MARK: - Life cycle
+    override func loadView() {
+        super.loadView()
+        
+        let errorView = ErrorView.Create()
+        self.view.addSubview(errorView)
+        errorView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor).isActive = true
+        errorView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor).isActive = true
+        errorView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor).isActive = true
+        self.errorView = errorView
+        self.errorView.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,6 +147,13 @@ extension SearchVC: BindableType {
                 }
             }
             .bind(to: nextPageLoadingView.rx.isAnimating)
+            .disposed(by: disposeBag)
+        viewModel.error
+            .map { !$0 }
+            .bind(to: errorView.rx.isHidden)
+            .disposed(by: disposeBag)
+        errorView.retryBtn.rx.tap
+            .bind(to: viewModel.retry)
             .disposed(by: disposeBag)
     }
     
