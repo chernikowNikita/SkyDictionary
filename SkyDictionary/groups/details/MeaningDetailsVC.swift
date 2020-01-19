@@ -137,13 +137,13 @@ extension MeaningDetailsVC: BindableType {
         bindImages()
         bindError()
         
-        viewModel.loadMeaningAction.elements
+        viewModel.sharedLoaded
             .subscribe(onNext: { [weak self] _ in
                 self?.animate()
             })
             .disposed(by: disposeBag)
             
-        viewModel.loadMeaningAction.inputs.onNext(())
+        viewModel.load.onNext(())
     }
     
     private func bindWordDetails() {
@@ -242,7 +242,7 @@ extension MeaningDetailsVC: BindableType {
             .bind(to: errorView.rx.isHidden)
             .disposed(by: disposeBag)
         errorView.retryBtn.rx.tap
-            .bind(to: viewModel.loadMeaningAction.inputs)
+            .bind(to: viewModel.load)
             .disposed(by: disposeBag)
     }
     

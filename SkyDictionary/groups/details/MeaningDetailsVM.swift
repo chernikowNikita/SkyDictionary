@@ -23,23 +23,17 @@ enum SoundType {
 class MeaningDetailsVM {
     
     // MARK: - Input
-    lazy var loadMeaningAction: Action<Void, MeaningDetails?> = { this in
-        return Action<Void, MeaningDetails?>() { _ in
-            return SkyMoyaProvider.shared.rx
-                .request(.meaningDetails(meaningId: this.meaningId))
-                .filterSuccessfulStatusCodes()
-                .map([MeaningDetails].self)
-                .catchErrorJustReturn([MeaningDetails]())
-                .map { $0.first }
-                .debug()
-                .asObservable()
-        }
-    }(self)
+    let load: PublishSubject<Void> = PublishSubject<Void>()
     
     // MARK: - Output
     var loading: Observable<Bool> {
         return loadMeaningAction.enabled
             .map { !$0 }
+    }
+    var sharedLoaded: Observable<Void> {
+        return loadMeaningAction.elements
+            .map { _ in () }
+            .share(replay: 1)
     }
     var sharedMeaning: Observable<MeaningDetails> {
         return loadMeaningAction.elements
@@ -88,6 +82,14 @@ class MeaningDetailsVM {
     
     // MARK: - Private properties
     private let meaningId: Int
+    private var loadMeaningAction: Action<Int, MeaningDetails?> = Action<Int, MeaningDetails?>() { meaningId in
+        return SkyMoyaProvider.shared.rx
+            .request(.meaningDetails(meaningId: meaningId))
+            .map([MeaningDetails].self)
+            .catchErrorJustReturn([MeaningDetails]())
+            .map { $0.first }
+            .asObservable()
+    }
     private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))
     private let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private let disposeBag = DisposeBag()
@@ -110,6 +112,12 @@ class MeaningDetailsVM {
                 return SoundUrlData(word: wordUrl, meaning: meaningUrl)
             }
             .bind(to: soundUrl)
+            .disposed(by: disposeBag)
+        
+        load
+            .map { [weak self] _ in return self?.meaningId }
+            .unwrap()
+            .bind(to: loadMeaningAction.inputs)
             .disposed(by: disposeBag)
     }
     

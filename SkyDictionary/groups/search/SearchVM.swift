@@ -30,27 +30,40 @@ class SearchVM {
     let error: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     
     // MARK: - Private properties
-    private lazy var searchAction: Action<QueryData, SearchResultsData?> = { this in
-        return Action<QueryData, SearchResultsData?>() { queryData in
-            let query = queryData.query
-            let page = queryData.page
-            
-            let isFirstPage = page == 1
-            this.loadingState.onNext(.loading(firstPage: isFirstPage))
-            return SkyMoyaProvider.shared.rx
-                .request(.search(query: query, page: page, pageSize: PAGE_SIZE))
-                .map([SearchResult].self)
-                .map { SearchResultsData(isFirstPage: isFirstPage, results: $0) }
-                .catchErrorJustReturn(nil)
-                .asObservable()
-        }
-    }(self)
-    
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
     init() {
-        let sharedResults = searchAction.elements.share(replay: 1)
+        let sharedSearch: Observable<QueryData> = page
+            .withLatestFrom(query) { page, query in
+                return QueryData(query: query, page: page)
+            }
+            .filter { $0.isNeedToSearch }
+            .share(replay: 1)
+        
+        sharedSearch
+            .map { data in
+                return .loading(firstPage: data.isFirstPage )
+            }
+            .bind(to: loadingState)
+            .disposed(by: disposeBag)
+        
+        sharedSearch
+            .filter { $0.isFirstPage }
+            .map { _ -> [SearchResultSection] in return [] }
+            .bind(to: searchResults)
+            .disposed(by: disposeBag)
+        
+        let sharedResults: Observable<SearchResultsData?> = sharedSearch
+            .flatMapLatest { queryData -> Observable<SearchResultsData?> in
+                return SkyMoyaProvider.shared.rx
+                    .request(.search(query: queryData.query, page: queryData.page, pageSize: PAGE_SIZE))
+                    .map([SearchResult].self)
+                    .map { SearchResultsData(isFirstPage: queryData.isFirstPage, results: $0) }
+                    .catchErrorJustReturn(nil)
+                    .asObservable()
+            }
+            .share(replay: 1)
         
         sharedResults
             .map { _ in LoadingState.notLoading }
@@ -75,14 +88,6 @@ class SearchVM {
         sharedResults
             .map { results in return results == nil }
             .bind(to: error)
-            .disposed(by: disposeBag)
-        
-        page
-            .withLatestFrom(query) { page, query in
-                return QueryData(query: query, page: page)
-            }
-            .filter { $0.isNeedToSearch }
-            .bind(to: searchAction.inputs)
             .disposed(by: disposeBag)
         
         nextPage
