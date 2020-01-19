@@ -38,24 +38,52 @@ class MeaningDetailsVM {
     
     // MARK: - Output
     var loading: Observable<Bool> {
-        get {
-            return loadMeaningAction.enabled
-                .map { !$0 }
-        }
+        return loadMeaningAction.enabled
+            .map { !$0 }
     }
     var sharedMeaning: Observable<MeaningDetails> {
-        get {
-            return loadMeaningAction.elements
-                .unwrap()
-                .share(replay: 1)
-        }
+        return loadMeaningAction.elements
+            .unwrap()
+            .share(replay: 1)
     }
     var sharedError: Observable<Bool> {
-        get {
-            return loadMeaningAction.elements
-                .map { $0 == nil }
-                .share(replay: 1)
-        }
+        return loadMeaningAction.elements
+            .map { $0 == nil }
+            .share(replay: 1)
+    }
+    var text: Observable<String> {
+        return sharedMeaning
+            .map { $0.text }
+    }
+    var transcription: Observable<String?> {
+        return sharedMeaning
+            .map { $0.transcription }
+    }
+    var translation: Observable<String> {
+        return sharedMeaning
+            .map { meaning in
+                var translation = meaning.translation?.text ?? ""
+                if let note = meaning.translation?.note {
+                    translation += " (\(note))"
+                }
+                return translation
+            }
+    }
+    var definition: Observable<String?> {
+        return sharedMeaning
+            .map { $0.definition?.text }
+    }
+    var difficultyLevel: Observable<Int?> {
+        return sharedMeaning
+            .map { $0.difficultyLevel }
+    }
+    var images: Observable<[ImageSection]> {
+        return sharedMeaning
+            .map { meaning in
+                return meaning.images.map { $0.url }
+            }
+            .map { ImageSection(model: nil, items: $0) }
+            .map { [$0] }
     }
     
     // MARK: - Private properties

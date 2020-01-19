@@ -127,8 +127,7 @@ extension MeaningDetailsVC: BindableType {
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        viewModel.sharedMeaning
-            .map { $0.text }
+        viewModel.text
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
         
@@ -152,8 +151,7 @@ extension MeaningDetailsVC: BindableType {
             .map { _ in false }
             .bind(to: wordDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { $0.text }
+        viewModel.text
             .bind(to: wordDetailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.sharedMeaning
@@ -162,8 +160,7 @@ extension MeaningDetailsVC: BindableType {
             }
             .bind(to: wordDetailsView.detailsStackView.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { $0.transcription }
+        viewModel.transcription
             .bind(to: wordDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.sharedMeaning
@@ -184,14 +181,7 @@ extension MeaningDetailsVC: BindableType {
             .map { _ in false }
             .bind(to: meaningDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { meaning in
-                var translation = meaning.translation?.text ?? ""
-                if let note = meaning.translation?.note {
-                    translation += " (\(note))"
-                }
-                return translation
-            }
+        viewModel.translation
             .bind(to: meaningDetailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.sharedMeaning
@@ -200,8 +190,7 @@ extension MeaningDetailsVC: BindableType {
             }
             .bind(to: meaningDetailsView.detailsStackView.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { $0.definition?.text }
+        viewModel.definition
             .bind(to: meaningDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.sharedMeaning
@@ -218,14 +207,11 @@ extension MeaningDetailsVC: BindableType {
     }
     
     private func bindDifficultyDetails() {
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.difficultyLevel == nil
-            }
+        viewModel.difficultyLevel
+            .map { $0 == nil }
             .bind(to: difficultyDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { $0.difficultyLevel }
+        viewModel.difficultyLevel
             .unwrap()
             .map { level in
                 return String.init(repeating: "💪", count: level)
@@ -235,12 +221,7 @@ extension MeaningDetailsVC: BindableType {
     }
     
     private func bindImages() {
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.images.map { $0.url }
-            }
-            .map { [ImageSection(model: nil, items: $0)] }
-            .debug()
+        viewModel.images
             .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
             .disposed(by: disposeBag)
         imagesCV.rx.observe(CGSize.self, "contentSize")
