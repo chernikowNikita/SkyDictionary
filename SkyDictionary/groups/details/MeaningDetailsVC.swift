@@ -48,7 +48,7 @@ class MeaningDetailsVC: UIViewController {
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
         let imagesCollectionView = prepareImagesCV()
-        let errorView = ErrorView.Create()
+        let errorView = ErrorView.Create(autoLayout: true)
         stackView.addArrangedSubview(wordDetailsView)
         stackView.addArrangedSubview(meaningDetailsView)
         stackView.addArrangedSubview(difficultyDetailsView)
@@ -98,6 +98,11 @@ class MeaningDetailsVC: UIViewController {
         view.isScrollEnabled = false
         view.backgroundColor = .white
         self.imagesCVHeightC = constraint
+        view.rx.observe(CGSize.self, "contentSize")
+            .unwrap()
+            .map { $0.height }
+            .bind(to: imagesCVHeightC.rx.constant)
+            .disposed(by: disposeBag)
         return view
     }
     
@@ -105,7 +110,7 @@ class MeaningDetailsVC: UIViewController {
         ImageCell.register(in: imagesCV)
         imagesDataSource = RxCollectionViewSectionedReloadDataSource(configureCell: { dataSource, collectionView, indexPath, item in
             let cell = ImageCell.deque(for: collectionView, indexPath: indexPath)
-            if let url = URL(string: item.httpsPrefixed) {
+            if let url = URL(string: item) {
                 cell.imageView.kf.setImage(with: url)
             }
             return cell
@@ -223,11 +228,6 @@ extension MeaningDetailsVC: BindableType {
     private func bindImages() {
         viewModel.images
             .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
-            .disposed(by: disposeBag)
-        imagesCV.rx.observe(CGSize.self, "contentSize")
-            .unwrap()
-            .map { $0.height }
-            .bind(to: imagesCVHeightC.rx.constant)
             .disposed(by: disposeBag)
     }
     

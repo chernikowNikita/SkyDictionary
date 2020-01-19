@@ -86,7 +86,9 @@ class SearchVM {
             .bind(to: searchResults)
             .disposed(by: disposeBag)
         sharedResults
-            .map { results in return results == nil }
+            .map { results in
+                return results == nil
+            }
             .bind(to: error)
             .disposed(by: disposeBag)
         

@@ -18,18 +18,10 @@ class ErrorView: UIView {
     }
     
     // MARK: - Create
-    static func Create() -> ErrorView {
-        return Nib.instantiate(withOwner: nil, options: nil).first as! ErrorView
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.translatesAutoresizingMaskIntoConstraints = false
+    static func Create(autoLayout: Bool) -> ErrorView {
+        let view = Nib.instantiate(withOwner: nil, options: nil).first as! ErrorView
+        view.translatesAutoresizingMaskIntoConstraints = !autoLayout
+        return view
     }
     
 }

@@ -24,7 +24,7 @@ class SearchVC: UIViewController {
     var viewModel: SearchVM!
     
     // MARK: - Private properties
-    private var errorView: ErrorView!
+    private var errorView = ErrorView.Create(autoLayout: false)
     private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
     
@@ -36,18 +36,6 @@ class SearchVC: UIViewController {
     }
     
     // MARK: - Life cycle
-    override func loadView() {
-        super.loadView()
-        
-        let errorView = ErrorView.Create()
-        self.view.addSubview(errorView)
-        errorView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor).isActive = true
-        errorView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor).isActive = true
-        errorView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor).isActive = true
-        self.errorView = errorView
-        self.errorView.isHidden = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +51,7 @@ class SearchVC: UIViewController {
     
     // MARK: - Setup View
     private func setupView() {
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
     }
     
@@ -72,7 +61,7 @@ class SearchVC: UIViewController {
           configureCell: { dataSource, tableView, indexPath, item in
             let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
             if let previewLink = item.previewUrl,
-                let previewUrl = URL(string: previewLink.httpsPrefixed) {
+                let previewUrl = URL(string: previewLink) {
                 cell.previewImageView.kf.setImage(with: previewUrl)
             }
             cell.translationLabel.text = item.translation?.text
@@ -149,12 +138,19 @@ extension SearchVC: BindableType {
             .bind(to: nextPageLoadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         viewModel.error
-            .map { !$0 }
-            .bind(to: errorView.rx.isHidden)
+            .subscribe(onNext: { [weak self] error in
+                guard let strongSelf = self else { return }
+                if error {
+                    strongSelf.tableView.tableFooterView = strongSelf.errorView
+                } else {
+                    strongSelf.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                }
+            })
             .disposed(by: disposeBag)
         errorView.retryBtn.rx.tap
             .bind(to: viewModel.retry)
             .disposed(by: disposeBag)
+       
     }
     
 }

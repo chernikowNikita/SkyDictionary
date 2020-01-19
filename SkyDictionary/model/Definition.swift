@@ -10,5 +10,16 @@ import Foundation
 
 struct Definition: Codable {
     let text: String?
-    let soundUrl: String?
+    private let privateSoundUrl: String?
+    var soundUrl: String? {
+        get {
+            return self.privateSoundUrl?.httpsPrefixed
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case privateSoundUrl = "soundUrl"
+    }
+    
 }

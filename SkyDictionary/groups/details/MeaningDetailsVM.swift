@@ -104,10 +104,10 @@ class MeaningDetailsVM {
                 var wordUrl: URL? = nil
                 var meaningUrl: URL? = nil
                 if let wordUrlString = meaning.soundUrl {
-                    wordUrl = URL(string: wordUrlString.httpsPrefixed)
+                    wordUrl = URL(string: wordUrlString)
                 }
                 if let meaningUrlString = meaning.definition?.soundUrl {
-                    meaningUrl = URL(string: meaningUrlString.httpsPrefixed)
+                    meaningUrl = URL(string: meaningUrlString)
                 }
                 return SoundUrlData(word: wordUrl, meaning: meaningUrl)
             }
