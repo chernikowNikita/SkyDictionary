@@ -127,9 +127,11 @@ extension MeaningDetailsVC: BindableType {
             .map { !$0 }
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
+        
         let sharedMeaning = viewModel.loadMeaningAction.elements
             .unwrap()
             .share(replay: 1)
+        
         sharedMeaning
             .map { $0.text }
             .bind(to: navigationItem.rx.title)
@@ -138,41 +140,14 @@ extension MeaningDetailsVC: BindableType {
         bindWordDetails(with: sharedMeaning)
         bindMeaningDetails(with: sharedMeaning)
         bindDifficultyDetails(with: sharedMeaning)
-        
-        sharedMeaning
-            .map { meaning in
-                return meaning.images.map { $0.url }
-            }
-            .map { [ImageSection(model: nil, items: $0)] }
-            .debug()
-            .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
-            .disposed(by: disposeBag)
+        bindImages(with: sharedMeaning)
         
         let sharedError = viewModel.loadMeaningAction.elements
             .map { $0 == nil }
             .share(replay: 1)
-        sharedError
-            .filter { $0 }
-            .map { _ in return "Ошибка" }
-            .bind(to: navigationItem.rx.title)
-            .disposed(by: disposeBag)
-        sharedError
-            .map { !$0 }
-            .bind(to: errorView.rx.isHidden)
-            .disposed(by: disposeBag)
-        errorView.retryBtn.rx.tap
-            .bind(to: viewModel.loadMeaningAction.inputs)
-            .disposed(by: disposeBag)
+        bindError(with: sharedError)
         
-        imagesCV.rx.observe(CGSize.self, "contentSize")
-            .subscribe(onNext: { [weak self] size in
-                guard let strongSelf = self,
-                    let size = size else { return }
-                strongSelf.imagesCVHeightC.constant = size.height
-            })
-            .disposed(by: disposeBag)
-        
-        sharedMeaning
+        viewModel.loadMeaningAction.elements
             .subscribe(onNext: { [weak self] _ in
                 self?.animate()
             })
@@ -265,6 +240,37 @@ extension MeaningDetailsVC: BindableType {
                 return String.init(repeating: "💪", count: level)
             }
             .bind(to: difficultyDetailsView.textLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindImages(with sharedMeaning: Observable<MeaningDetails>) {
+        sharedMeaning
+            .map { meaning in
+                return meaning.images.map { $0.url }
+            }
+            .map { [ImageSection(model: nil, items: $0)] }
+            .debug()
+            .bind(to: imagesCV.rx.items(dataSource: imagesDataSource))
+            .disposed(by: disposeBag)
+        imagesCV.rx.observe(CGSize.self, "contentSize")
+            .unwrap()
+            .map { $0.height }
+            .bind(to: imagesCVHeightC.rx.constant)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindError(with sharedError: Observable<Bool>) {
+        sharedError
+            .filter { $0 }
+            .map { _ in return "Ошибка" }
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        sharedError
+            .map { !$0 }
+            .bind(to: errorView.rx.isHidden)
+            .disposed(by: disposeBag)
+        errorView.retryBtn.rx.tap
+            .bind(to: viewModel.loadMeaningAction.inputs)
             .disposed(by: disposeBag)
     }
     
