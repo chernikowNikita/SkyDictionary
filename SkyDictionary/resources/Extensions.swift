@@ -27,6 +27,18 @@ extension UIView {
     static var Nib: UINib {
         return UINib(nibName: ClassName, bundle: nil)
     }
+    
+    func fitSuperView() {
+        guard let superView = self.superview else {
+            return
+        }
+        self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
+        self.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
+//        self.leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
+//        self.trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
+//        self.topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
+//        self.bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
+    }
 }
 
 extension UITableViewCell {

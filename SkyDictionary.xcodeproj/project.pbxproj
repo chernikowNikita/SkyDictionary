@@ -45,6 +45,7 @@
 		46E66E4423D3C2DD00BFF7D6 /* FileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4323D3C2DD00BFF7D6 /* FileWebService.swift */; };
 		46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4523D3C54A00BFF7D6 /* FileWebProvider.swift */; };
 		46E66E4823D3D42300BFF7D6 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4723D3D42300BFF7D6 /* PlayerService.swift */; };
+		46E66E4A23D471DC00BFF7D6 /* LoadableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */; };
 		648BB1DD01811F1834A7BB86 /* Pods_SkyDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C723186A10C3C2891A1CD5 /* Pods_SkyDictionary.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		46E66E4323D3C2DD00BFF7D6 /* FileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWebService.swift; sourceTree = "<group>"; };
 		46E66E4523D3C54A00BFF7D6 /* FileWebProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWebProvider.swift; sourceTree = "<group>"; };
 		46E66E4723D3D42300BFF7D6 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
+		46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableButton.swift; sourceTree = "<group>"; };
 		60AC9B29DF32C5037FA2A720 /* Pods-SkyDictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionary.debug.xcconfig"; path = "Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary.debug.xcconfig"; sourceTree = "<group>"; };
 		61A6CE5958FB76A61A4AEEC4 /* Pods-SkyDictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionary.release.xcconfig"; path = "Target Support Files/Pods-SkyDictionary/Pods-SkyDictionary.release.xcconfig"; sourceTree = "<group>"; };
 		E8C723186A10C3C2891A1CD5 /* Pods_SkyDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkyDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +310,7 @@
 			children = (
 				46E66E3823D3809B00BFF7D6 /* TextDetailsView.xib */,
 				46E66E3A23D381B000BFF7D6 /* TextDetailsView.swift */,
+				46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */,
 			);
 			path = customViews;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */,
 				46712B0723CE3F0000D3CFBC /* MeaningDetailsVM.swift in Sources */,
 				46E66E3D23D382A000BFF7D6 /* Extensions.swift in Sources */,
+				46E66E4A23D471DC00BFF7D6 /* LoadableButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

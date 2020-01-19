@@ -181,12 +181,13 @@ extension MeaningDetailsVC: BindableType {
             .map { meaning in
                 return meaning.soundUrl == nil
             }
-            .bind(to: wordDetailsView.detailsSound.rx.isHidden)
+            .bind(to: wordDetailsView.detailsSoundBtn.rx.isHidden)
             .disposed(by: disposeBag)
-        wordDetailsView.detailsSound.rx.action = CocoaAction() { [weak self] _ in
+        wordDetailsView.detailsSoundBtn.rx.action = CocoaAction() { [weak self] _ in
             guard let strongSelf = self else { return Observable.just(()) }
             return strongSelf.viewModel.play(type: .word)
         }
+        wordDetailsView.detailsSoundBtn.setupAction()
     }
     
     private func bindMeaningDetails(with sharedMeaning: Observable<MeaningDetails>) {
@@ -214,10 +215,17 @@ extension MeaningDetailsVC: BindableType {
             .map { $0.definition?.text }
             .bind(to: meaningDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        meaningDetailsView.detailsSound.rx.action = CocoaAction() { [weak self] _ in
+        sharedMeaning
+            .map { meaning in
+                return meaning.definition?.soundUrl == nil
+            }
+            .bind(to: meaningDetailsView.detailsSoundBtn.rx.isHidden)
+            .disposed(by: disposeBag)
+        meaningDetailsView.detailsSoundBtn.rx.action = CocoaAction() { [weak self] _ in
             guard let strongSelf = self else { return Observable.just(()) }
             return strongSelf.viewModel.play(type: .meaning)
         }
+        meaningDetailsView.detailsSoundBtn.setupAction()
     }
     
     private func bindDifficultyDetails(with sharedMeaning: Observable<MeaningDetails>) {

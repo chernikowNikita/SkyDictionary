@@ -35,7 +35,7 @@
                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-ET-Ja9">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-ET-Ja9" customClass="LoadableButton" customModule="SkyDictionary" customModuleProvider="target">
                                     <rect key="frame" x="187" y="0.0" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="b9D-yH-iCV"/>
@@ -62,7 +62,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="detailsLabel" destination="B91-wT-aoV" id="Lfl-Do-eUt"/>
-                <outlet property="detailsSound" destination="1Ns-ET-Ja9" id="Bil-5E-njW"/>
+                <outlet property="detailsSoundBtn" destination="1Ns-ET-Ja9" id="xr0-q5-Gxa"/>
                 <outlet property="detailsStackView" destination="wX4-JU-nmx" id="BHU-yR-oxd"/>
                 <outlet property="textLabel" destination="rdm-ii-qbZ" id="uvt-iV-I69"/>
                 <outlet property="titleLabel" destination="42J-Gx-s6D" id="wa5-ES-SpA"/>
