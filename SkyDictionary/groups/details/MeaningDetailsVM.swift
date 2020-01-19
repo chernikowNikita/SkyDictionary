@@ -36,6 +36,28 @@ class MeaningDetailsVM {
         }
     }(self)
     
+    // MARK: - Output
+    var loading: Observable<Bool> {
+        get {
+            return loadMeaningAction.enabled
+                .map { !$0 }
+        }
+    }
+    var sharedMeaning: Observable<MeaningDetails> {
+        get {
+            return loadMeaningAction.elements
+                .unwrap()
+                .share(replay: 1)
+        }
+    }
+    var sharedError: Observable<Bool> {
+        get {
+            return loadMeaningAction.elements
+                .map { $0 == nil }
+                .share(replay: 1)
+        }
+    }
+    
     // MARK: - Private properties
     private let meaningId: Int
     private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))

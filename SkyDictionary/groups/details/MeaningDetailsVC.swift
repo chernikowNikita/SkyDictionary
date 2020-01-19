@@ -123,29 +123,20 @@ class MeaningDetailsVC: UIViewController {
 extension MeaningDetailsVC: BindableType {
     
     func bindViewModel() {
-        viewModel.loadMeaningAction.enabled
-            .map { !$0 }
+        viewModel.loading
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        let sharedMeaning = viewModel.loadMeaningAction.elements
-            .unwrap()
-            .share(replay: 1)
-        
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { $0.text }
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
         
-        bindWordDetails(with: sharedMeaning)
-        bindMeaningDetails(with: sharedMeaning)
-        bindDifficultyDetails(with: sharedMeaning)
-        bindImages(with: sharedMeaning)
-        
-        let sharedError = viewModel.loadMeaningAction.elements
-            .map { $0 == nil }
-            .share(replay: 1)
-        bindError(with: sharedError)
+        bindWordDetails()
+        bindMeaningDetails()
+        bindDifficultyDetails()
+        bindImages()
+        bindError()
         
         viewModel.loadMeaningAction.elements
             .subscribe(onNext: { [weak self] _ in
@@ -156,26 +147,26 @@ extension MeaningDetailsVC: BindableType {
         viewModel.loadMeaningAction.inputs.onNext(())
     }
     
-    private func bindWordDetails(with sharedMeaning: Observable<MeaningDetails>) {
-        sharedMeaning
+    private func bindWordDetails() {
+        viewModel.sharedMeaning
             .map { _ in false }
             .bind(to: wordDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { $0.text }
             .bind(to: wordDetailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.soundUrl == nil && meaning.transcription == nil
             }
             .bind(to: wordDetailsView.detailsStackView.rx.isHidden)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { $0.transcription }
             .bind(to: wordDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.soundUrl == nil
             }
@@ -188,12 +179,12 @@ extension MeaningDetailsVC: BindableType {
         wordDetailsView.detailsSoundBtn.setupAction()
     }
     
-    private func bindMeaningDetails(with sharedMeaning: Observable<MeaningDetails>) {
-        sharedMeaning
+    private func bindMeaningDetails() {
+        viewModel.sharedMeaning
             .map { _ in false }
             .bind(to: meaningDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { meaning in
                 var translation = meaning.translation?.text ?? ""
                 if let note = meaning.translation?.note {
@@ -203,17 +194,17 @@ extension MeaningDetailsVC: BindableType {
             }
             .bind(to: meaningDetailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.definition?.soundUrl == nil && meaning.definition?.text == nil
             }
             .bind(to: meaningDetailsView.detailsStackView.rx.isHidden)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { $0.definition?.text }
             .bind(to: meaningDetailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.definition?.soundUrl == nil
             }
@@ -226,14 +217,14 @@ extension MeaningDetailsVC: BindableType {
         meaningDetailsView.detailsSoundBtn.setupAction()
     }
     
-    private func bindDifficultyDetails(with sharedMeaning: Observable<MeaningDetails>) {
-        sharedMeaning
+    private func bindDifficultyDetails() {
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.difficultyLevel == nil
             }
             .bind(to: difficultyDetailsView.rx.isHidden)
             .disposed(by: disposeBag)
-        sharedMeaning
+        viewModel.sharedMeaning
             .map { $0.difficultyLevel }
             .unwrap()
             .map { level in
@@ -243,8 +234,8 @@ extension MeaningDetailsVC: BindableType {
             .disposed(by: disposeBag)
     }
     
-    private func bindImages(with sharedMeaning: Observable<MeaningDetails>) {
-        sharedMeaning
+    private func bindImages() {
+        viewModel.sharedMeaning
             .map { meaning in
                 return meaning.images.map { $0.url }
             }
@@ -259,13 +250,13 @@ extension MeaningDetailsVC: BindableType {
             .disposed(by: disposeBag)
     }
     
-    private func bindError(with sharedError: Observable<Bool>) {
-        sharedError
+    private func bindError() {
+        viewModel.sharedError
             .filter { $0 }
             .map { _ in return "Ошибка" }
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
-        sharedError
+        viewModel.sharedError
             .map { !$0 }
             .bind(to: errorView.rx.isHidden)
             .disposed(by: disposeBag)
