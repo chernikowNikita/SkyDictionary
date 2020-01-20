@@ -30,8 +30,8 @@ class SearchVC: UIViewController {
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
-        var vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! SearchVC
-        vc.bindViewModel(to: viewModel)
+        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! SearchVC
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -43,19 +43,14 @@ class SearchVC: UIViewController {
         
         configureDataSource()
         
-        self.viewModel = SearchVM()
         bindViewModel()
-        
-        setEditing(true, animated: false)
     }
     
-    // MARK: - Setup View
+    // MARK: - Private methods
     private func setupView() {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        
     }
-    
-    // MARK: - Private properties
+   
     private func configureDataSource() {
         dataSource = RxTableViewSectionedReloadDataSource(
           configureCell: { dataSource, tableView, indexPath, item in
@@ -86,10 +81,10 @@ extension SearchVC: BindableType {
                 try? self?.dataSource.model(at: indexPath) as? Meaning
             }
             .unwrap()
-            .subscribe(onNext: { [weak self] meaning in
-                let vm = MeaningDetailsVM(meaningId: meaning.id)
-                let vc = Scene.meaningDetails(vm).viewController(for: .push)
-                self?.navigationController?.pushViewController(vc, animated: true)
+            .map { $0.id }
+            .subscribe(onNext: { [weak self] meaningId in
+                let vm = MeaningDetailsVM(meaningId: meaningId)
+                self?.open(scene: .meaningDetails(vm), with: .push)
             })
             .disposed(by: disposeBag)
         viewModel.searchResults

@@ -10,33 +10,15 @@ import UIKit
 
 extension Scene {
     
-    func viewController(for type: SceneTransitionType) -> UIViewController {
+    func viewController() -> UIViewController {
         switch self {
         case .search(let viewModel):
             let vc = SearchVC.Create(viewModel: viewModel)
-            return wrapInNcIfNeeded(vc, for: type)
+            return vc
         case .meaningDetails(let viewModel):
             let vc = MeaningDetailsVC.Create(viewModel: viewModel)
-            return wrapInNcIfNeeded(vc, for: type)
-        }
-    }
-    
-    private func wrapInNcIfNeeded(_ vc: UIViewController, for type: SceneTransitionType) -> UIViewController {
-        switch type {
-        case .push:
-            return vc
-        case .modal(inNavigationController: let needToWrapInNC):
-            if needToWrapInNC {
-                return wrapInNC(vc)
-            }
             return vc
         }
-    }
-    
-    private func wrapInNC(_ vc: UIViewController) -> UIViewController {
-        let nc = UINavigationController()
-        nc.setViewControllers([vc], animated: true)
-        return nc
     }
     
 }

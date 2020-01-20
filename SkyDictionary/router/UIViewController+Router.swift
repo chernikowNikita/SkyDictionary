@@ -11,12 +11,20 @@ import UIKit
 extension UIViewController {
     
     func open(scene: Scene, with transitionType: SceneTransitionType) {
-        let vc = scene.viewController(for: transitionType)
+        let vc = scene.viewController()
         switch transitionType {
+        case .root:
+            setRoot(vc: vc)
         case .push:
             push(vc: vc)
-        case .modal(inNavigationController: _):
+        case .modal:
             self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func setRoot(vc: UIViewController) {
+        if let nc = self as? UINavigationController {
+            nc.viewControllers = [vc]
         }
     }
     

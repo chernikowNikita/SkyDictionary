@@ -9,6 +9,7 @@
 import Foundation
 
 enum SceneTransitionType {
+    case root
     case push
-    case modal(inNavigationController: Bool)
+    case modal
 }
