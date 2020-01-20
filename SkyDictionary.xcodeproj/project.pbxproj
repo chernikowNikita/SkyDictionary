@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610D4D423CFB47200A7CB00 /* MeaningCell.swift */; };
+		46476BAA23D6363500E44921 /* MeaningDetailsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46476BA923D6363500E44921 /* MeaningDetailsVMTests.swift */; };
+		46476BAD23D636B300E44921 /* meaning_details.json in Resources */ = {isa = PBXBuildFile; fileRef = 46476BAC23D636B300E44921 /* meaning_details.json */; };
+		46476BB023D65EDC00E44921 /* meaning_details.json in Resources */ = {isa = PBXBuildFile; fileRef = 46476BAC23D636B300E44921 /* meaning_details.json */; };
 		464D257F23CE606000217529 /* Meaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D257E23CE606000217529 /* Meaning.swift */; };
 		464D258123CE610200217529 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D258023CE610200217529 /* Translation.swift */; };
 		46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */; };
@@ -35,7 +38,6 @@
 		4692C77423CE1F550041C983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77223CE1F550041C983 /* Main.storyboard */; };
 		4692C77623CE1F5B0041C983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77523CE1F5B0041C983 /* Assets.xcassets */; };
 		4692C77923CE1F5B0041C983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4692C77723CE1F5B0041C983 /* LaunchScreen.storyboard */; };
-		4692C78423CE1F5B0041C983 /* SkyDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */; };
 		4692C78F23CE1F5B0041C983 /* SkyDictionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692C78E23CE1F5B0041C983 /* SkyDictionaryUITests.swift */; };
 		46E66E3923D3809B00BFF7D6 /* TextDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E66E3823D3809B00BFF7D6 /* TextDetailsView.xib */; };
 		46E66E3B23D381B000BFF7D6 /* TextDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E3A23D381B000BFF7D6 /* TextDetailsView.swift */; };
@@ -73,6 +75,8 @@
 		09711682E85462FF56461896 /* Pods_SkyDictionaryAbstract_SkyDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkyDictionaryAbstract_SkyDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE24A687E9F6B815EF50B01 /* Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig"; path = "Target Support Files/Pods-SkyDictionaryAbstract-SkyDictionary/Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig"; sourceTree = "<group>"; };
 		4610D4D423CFB47200A7CB00 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
+		46476BA923D6363500E44921 /* MeaningDetailsVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVMTests.swift; sourceTree = "<group>"; };
+		46476BAC23D636B300E44921 /* meaning_details.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = meaning_details.json; sourceTree = "<group>"; };
 		464D257E23CE606000217529 /* Meaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meaning.swift; sourceTree = "<group>"; };
 		464D258023CE610200217529 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyEngApiService.swift; sourceTree = "<group>"; };
@@ -103,7 +107,6 @@
 		4692C77823CE1F5B0041C983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4692C77A23CE1F5B0041C983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4692C77F23CE1F5B0041C983 /* SkyDictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyDictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDictionaryTests.swift; sourceTree = "<group>"; };
 		4692C78523CE1F5B0041C983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4692C78A23CE1F5B0041C983 /* SkyDictionaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyDictionaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4692C78E23CE1F5B0041C983 /* SkyDictionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDictionaryUITests.swift; sourceTree = "<group>"; };
@@ -170,6 +173,14 @@
 				4610D4D423CFB47200A7CB00 /* MeaningCell.swift */,
 			);
 			path = tableCells;
+			sourceTree = "<group>";
+		};
+		46476BAB23D6369F00E44921 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				46476BAC23D636B300E44921 /* meaning_details.json */,
+			);
+			path = mocks;
 			sourceTree = "<group>";
 		};
 		46712AF623CE29C900D3CFBC /* storyboards */ = {
@@ -288,7 +299,8 @@
 		4692C78223CE1F5B0041C983 /* SkyDictionaryTests */ = {
 			isa = PBXGroup;
 			children = (
-				4692C78323CE1F5B0041C983 /* SkyDictionaryTests.swift */,
+				46476BAB23D6369F00E44921 /* mocks */,
+				46476BA923D6363500E44921 /* MeaningDetailsVMTests.swift */,
 				4692C78523CE1F5B0041C983 /* Info.plist */,
 			);
 			path = SkyDictionaryTests;
@@ -467,6 +479,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46476BB023D65EDC00E44921 /* meaning_details.json in Resources */,
 				4692C77923CE1F5B0041C983 /* LaunchScreen.storyboard in Resources */,
 				4692C77623CE1F5B0041C983 /* Assets.xcassets in Resources */,
 				46E66E3923D3809B00BFF7D6 /* TextDetailsView.xib in Resources */,
@@ -480,6 +493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46476BAD23D636B300E44921 /* meaning_details.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,7 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4692C78423CE1F5B0041C983 /* SkyDictionaryTests.swift in Sources */,
+				46476BAA23D6363500E44921 /* MeaningDetailsVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

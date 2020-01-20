@@ -49,9 +49,32 @@ extension SkyEngApiService: TargetType {
         return URLEncoding.default
     }
     var sampleData: Data {
-        return Data()
+        switch self {
+        case .search(_):
+            return Data()
+        case .meaningDetails(_):
+            return stubbedResponse("meaning_details")
+        }
     }
     var task: Task {
         return .requestParameters(parameters: parameters!, encoding: URLEncoding())
     }
+}
+
+// MARK: - Mocks
+extension SkyEngApiService {
+    
+    func stubbedResponse(_ filename: String) -> Data {
+        @objc class TestClass: NSObject { }
+
+        let bundle = Bundle(for: TestClass.self)
+        if let url = Bundle.main.url(forResource: filename, withExtension: "json"),
+            let data = try? Data(contentsOf: url) {
+            print("return data \(data.count)")
+            return data
+        }
+        print("return empty data")
+        return Data()
+    }
+    
 }
