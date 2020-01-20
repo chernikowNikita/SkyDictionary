@@ -66,26 +66,6 @@ class MeaningDetailsVMTests: XCTestCase {
         }
         XCTAssertEqual(result, "test")
     }
-    
-    func testText() {
-        let expect = expectation(description: "text")
-        var result: String!
-        viewModel.text
-            .subscribe(onNext: { text in
-                result = text
-                expect.fulfill()
-            })
-            .disposed(by: disposeBag)
-        viewModel.load.onNext(())
-        
-        waitForExpectations(timeout: 1.0) { error in
-            if let e = error {
-                XCTFail(e.localizedDescription)
-                return
-            }
-        }
-        XCTAssertEqual(result, "test")
-    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
