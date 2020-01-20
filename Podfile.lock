@@ -15,6 +15,9 @@ PODS:
     - RxSwift (~> 4.0)
   - Result (4.1.0)
   - RxAtomic (4.4.2)
+  - RxBlocking (4.4.1):
+    - RxAtomic (~> 4.4)
+    - RxSwift (~> 4.0)
   - RxCocoa (4.4.1):
     - RxSwift (~> 4.0)
   - RxDataSources (3.1.0):
@@ -25,15 +28,20 @@ PODS:
     - RxAtomic (~> 4.4)
   - RxSwiftExt/Core (3.4.0):
     - RxSwift (~> 4.0)
+  - RxTest (4.4.1):
+    - RxAtomic (~> 4.4)
+    - RxSwift (~> 4.0)
 
 DEPENDENCIES:
   - Action (~> 3.9)
   - Kingfisher (~> 5.0)
   - Moya/RxSwift (~> 13.0)
+  - RxBlocking (= 4.4.1)
   - RxCocoa (= 4.4.1)
   - RxDataSources (~> 3.1)
   - RxSwift (= 4.4.1)
   - RxSwiftExt/Core
+  - RxTest (= 4.4.1)
 
 SPEC REPOS:
   trunk:
@@ -44,10 +52,12 @@ SPEC REPOS:
     - Moya
     - Result
     - RxAtomic
+    - RxBlocking
     - RxCocoa
     - RxDataSources
     - RxSwift
     - RxSwiftExt
+    - RxTest
 
 SPEC CHECKSUMS:
   Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
@@ -57,11 +67,13 @@ SPEC CHECKSUMS:
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxBlocking: 5508e90d36ca2304632dc9378ece4e9b5d4bf656
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
   RxSwiftExt: 01f8ecbeeb355698e9c75365ebe908b00dacf45d
+  RxTest: f8e548755ca3c7502dc41c7d3b28802c90115a38
 
-PODFILE CHECKSUM: be0d50bcab75729db372eb249a74bda2c1439919
+PODFILE CHECKSUM: 25d109d1dd0b8fdec8bee180c78b61fe3f74dc7a
 
 COCOAPODS: 1.8.3
