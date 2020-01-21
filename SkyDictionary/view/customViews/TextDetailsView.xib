@@ -18,7 +18,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ueO-e7-11X">
-                    <rect key="frame" x="199" y="8" width="207" height="44"/>
+                    <rect key="frame" x="199" y="8" width="207" height="68"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdm-ii-qbZ">
                             <rect key="frame" x="0.0" y="0.0" width="207" height="16"/>
@@ -27,19 +27,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wX4-JU-nmx">
-                            <rect key="frame" x="0.0" y="24" width="207" height="20"/>
+                            <rect key="frame" x="0.0" y="24" width="207" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B91-wT-aoV">
-                                    <rect key="frame" x="0.0" y="1" width="179" height="18"/>
+                                    <rect key="frame" x="0.0" y="13" width="155" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-ET-Ja9" customClass="LoadableButton" customModule="SkyDictionary" customModuleProvider="target">
-                                    <rect key="frame" x="187" y="0.0" width="20" height="20"/>
+                                    <rect key="frame" x="163" y="0.0" width="44" height="44"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="b9D-yH-iCV"/>
-                                        <constraint firstAttribute="width" constant="20" id="jIR-Td-hop"/>
+                                        <constraint firstAttribute="height" constant="44" id="b9D-yH-iCV"/>
+                                        <constraint firstAttribute="width" constant="44" id="jIR-Td-hop"/>
                                     </constraints>
                                     <state key="normal" image="speaker.2.fill" catalog="system"/>
                                 </button>
