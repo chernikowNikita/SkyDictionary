@@ -10,15 +10,6 @@ import Foundation
 import Moya
 
 class SkyMoyaProvider: MoyaProvider<SkyEngApiService> {
-    private static let sharedProd = SkyMoyaProvider(plugins: [NetworkLoggerPlugin(verbose: true)])
-    private static let sharedTest = SkyMoyaProvider(stubClosure: MoyaProvider.immediatelyStub)
-    static var shared: SkyMoyaProvider {
-        if isTest {
-            return sharedTest
-        }
-        return sharedProd
-    }
-    static var isTest: Bool {
-        return NSClassFromString("XCTest") != nil
-    }
+    static let shared = SkyMoyaProvider(plugins: [NetworkLoggerPlugin(verbose: true)])
+    static let sharedTest = SkyMoyaProvider(stubClosure: MoyaProvider.immediatelyStub)
 }

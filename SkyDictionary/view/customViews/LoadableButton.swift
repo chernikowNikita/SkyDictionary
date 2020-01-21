@@ -18,34 +18,35 @@ class LoadableButton: UIButton {
     private let loadingView = UIActivityIndicatorView(style: .medium)
     private let disposeBag = DisposeBag()
     
+    
+    private var loading: Observable<Bool>? {
+        return self.rx.action?.enabled
+            .map { !$0 }
+    }
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupLoading()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupView()
-    }
-    
-    // MARK: - Public methods
-    func setupAction() {
-        self.rx.action?.enabled
-            .map { !$0 }
-            .bind(to: loadingView.rx.isAnimating)
-            .disposed(by: disposeBag)
+        setupLoading()
     }
     
     // MARK: - Private methods
-    private func setupView() {
+    private func setupLoading() {
         addSubview(loadingView)
         loadingView.hidesWhenStopped = true
-        loadingView.backgroundColor = .white
+        loadingView.backgroundColor = .systemBackground
         loadingView.alpha = 1
-        loadingView.color = self.tintColor
         loadingView.stopAnimating()
         loadingView.fitSuperView()
+        
+        self.loading?
+            .bind(to: loadingView.rx.isAnimating)
+            .disposed(by: disposeBag)
     }
     
     

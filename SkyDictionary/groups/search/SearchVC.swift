@@ -77,6 +77,9 @@ extension SearchVC: BindableType {
     
     func bindViewModel() {
         tableView.rx.itemSelected
+            .do(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
             .map { [weak self] indexPath in
                 try? self?.dataSource.model(at: indexPath) as? Meaning
             }

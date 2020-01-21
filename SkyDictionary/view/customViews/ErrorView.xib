@@ -10,35 +10,35 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ErrorView" customModule="SkyDictionary" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка при загрузке данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZC-5n-JlU">
-                    <rect key="frame" x="8" y="8" width="398" height="36"/>
+                    <rect key="frame" x="8" y="16" width="398" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pe7-jH-xZM">
-                    <rect key="frame" x="161" y="52" width="92" height="40"/>
+                    <rect key="frame" x="153" y="60" width="108" height="44"/>
                     <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="bWl-Qt-HGL"/>
+                        <constraint firstAttribute="height" constant="44" id="bWl-Qt-HGL"/>
                     </constraints>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                     <state key="normal" title="Повторить">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hZC-5n-JlU" secondAttribute="trailing" constant="8" id="4e7-tC-gsg"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pe7-jH-xZM" secondAttribute="bottom" constant="8" id="C7N-Nf-Iho"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pe7-jH-xZM" secondAttribute="bottom" constant="16" id="C7N-Nf-Iho"/>
                 <constraint firstItem="hZC-5n-JlU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="EPv-a6-348"/>
-                <constraint firstItem="pe7-jH-xZM" firstAttribute="top" secondItem="hZC-5n-JlU" secondAttribute="bottom" constant="8" id="MjJ-CP-cJk"/>
+                <constraint firstItem="pe7-jH-xZM" firstAttribute="top" secondItem="hZC-5n-JlU" secondAttribute="bottom" constant="16" id="MjJ-CP-cJk"/>
                 <constraint firstItem="pe7-jH-xZM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NdK-h4-rxJ"/>
-                <constraint firstItem="hZC-5n-JlU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="c4E-7N-j95"/>
+                <constraint firstItem="hZC-5n-JlU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="c4E-7N-j95"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

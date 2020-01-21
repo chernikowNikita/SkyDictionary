@@ -96,7 +96,7 @@ class MeaningDetailsVC: UIViewController {
         view.showsHorizontalScrollIndicator = false
         view.allowsSelection = false
         view.isScrollEnabled = false
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         self.imagesCVHeightC = constraint
         view.rx.observe(CGSize.self, "contentSize")
             .unwrap()
@@ -118,9 +118,11 @@ class MeaningDetailsVC: UIViewController {
     }
     
     private func animate() {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
-        })
+        if !UIAccessibility.isReduceMotionEnabled {
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.view.layoutIfNeeded()
+            })
+        }
     }
     
 }
@@ -178,7 +180,7 @@ extension MeaningDetailsVC: BindableType {
             guard let strongSelf = self else { return Observable.just(()) }
             return strongSelf.viewModel.play(type: .word)
         }
-        wordDetailsView.detailsSoundBtn.setupAction()
+//        wordDetailsView.detailsSoundBtn.setupAction()
     }
     
     private func bindMeaningDetails() {
@@ -208,7 +210,7 @@ extension MeaningDetailsVC: BindableType {
             guard let strongSelf = self else { return Observable.just(()) }
             return strongSelf.viewModel.play(type: .meaning)
         }
-        meaningDetailsView.detailsSoundBtn.setupAction()
+//        meaningDetailsView.detailsSoundBtn.setupAction()
     }
     
     private func bindDifficultyDetails() {

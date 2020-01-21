@@ -91,12 +91,13 @@ class MeaningDetailsVM {
             .asObservable()
     }
     private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))
-    private let provider = MoyaProvider<SkyEngApiService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private let skyApiProvider: MoyaProvider<SkyEngApiService>
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
-    init(meaningId: Int) {
+    init(meaningId: Int, skyApiProvider: SkyMoyaProvider = .shared) {
         self.meaningId = meaningId
+        self.skyApiProvider = skyApiProvider
         
         loadMeaningAction.elements
             .unwrap()
