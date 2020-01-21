@@ -15,7 +15,7 @@ import Kingfisher
 class SearchVC: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var firstPageLoadingView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextPageLoadingView: UIActivityIndicatorView!
@@ -49,6 +49,11 @@ class SearchVC: UIViewController {
     // MARK: - Private methods
     private func setupView() {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).font = UIFont.boldSystemFont(ofSize: 17)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
+        searchBar.backgroundImage = UIImage()
     }
    
     private func configureDataSource() {
@@ -94,7 +99,7 @@ extension SearchVC: BindableType {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        searchField.rx.text
+        searchBar.searchTextField.rx.text
             .unwrap()
             .distinctUntilChanged()
             .filter { $0.count > 1 }
