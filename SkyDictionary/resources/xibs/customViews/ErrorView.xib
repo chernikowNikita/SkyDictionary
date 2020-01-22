@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,8 +12,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка при загрузке данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZC-5n-JlU">
-                    <rect key="frame" x="8" y="16" width="398" height="28"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка при загрузке данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZC-5n-JlU" userLabel="Title">
+                    <rect key="frame" x="16" y="16" width="382" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -23,7 +22,7 @@
                     <rect key="frame" x="145.5" y="60" width="123" height="44"/>
                     <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="bWl-Qt-HGL"/>
+                        <constraint firstAttribute="height" constant="44" id="Dbh-M4-Ygm"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                     <state key="normal" title="ПОВТОРИТЬ">
@@ -33,15 +32,13 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="hZC-5n-JlU" secondAttribute="trailing" constant="8" id="4e7-tC-gsg"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pe7-jH-xZM" secondAttribute="bottom" constant="16" id="C7N-Nf-Iho"/>
-                <constraint firstItem="hZC-5n-JlU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="EPv-a6-348"/>
-                <constraint firstItem="pe7-jH-xZM" firstAttribute="top" secondItem="hZC-5n-JlU" secondAttribute="bottom" constant="16" id="MjJ-CP-cJk"/>
-                <constraint firstItem="pe7-jH-xZM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NdK-h4-rxJ"/>
-                <constraint firstItem="hZC-5n-JlU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="c4E-7N-j95"/>
+                <constraint firstAttribute="bottom" secondItem="pe7-jH-xZM" secondAttribute="bottom" constant="16" id="XUW-EK-Y3W"/>
+                <constraint firstItem="hZC-5n-JlU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="bce-lt-sdL"/>
+                <constraint firstItem="hZC-5n-JlU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="kIm-8S-msA"/>
+                <constraint firstAttribute="trailing" secondItem="hZC-5n-JlU" secondAttribute="trailing" constant="16" id="nK8-sX-Bdf"/>
+                <constraint firstItem="pe7-jH-xZM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uYH-m0-MD0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="retryBtn" destination="pe7-jH-xZM" id="iWo-Fx-qGy"/>
             </connections>

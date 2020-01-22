@@ -19,9 +19,9 @@ class SearchVM {
     
     // MARK: - Public properties
     // MARK: - Input
-    let query: PublishSubject<String> = PublishSubject<String>()
+    let query: PublishSubject<String> = PublishSubject()
     let nextPage: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-    let retry: PublishSubject<Void> = PublishSubject<Void>()
+    let retry: PublishSubject<Void> = PublishSubject()
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
@@ -42,7 +42,7 @@ class SearchVM {
             .share(replay: 1)
         
         sharedSearch
-            .map { _ in true}
+            .map { _ in true }
             .bind(to: loading)
             .disposed(by: disposeBag)
         

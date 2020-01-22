@@ -18,9 +18,8 @@ class ErrorView: UIView {
     }
     
     // MARK: - Create
-    static func Create(autoLayout: Bool) -> ErrorView {
+    static func Create() -> ErrorView {
         let view = Nib.instantiate(withOwner: nil, options: nil).first as! ErrorView
-        view.translatesAutoresizingMaskIntoConstraints = !autoLayout
         return view
     }
     

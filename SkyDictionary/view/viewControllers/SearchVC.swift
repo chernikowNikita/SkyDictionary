@@ -23,7 +23,7 @@ class SearchVC: UIViewController {
     var viewModel: SearchVM!
     
     // MARK: - Private properties
-    private var errorView = ErrorView.Create(autoLayout: false)
+    private var errorView = ErrorView.Create()
     private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
     
@@ -45,13 +45,18 @@ class SearchVC: UIViewController {
         bindViewModel()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("viewWillLayoutSubviews")
+        updateTableFooterSize()
+    }
+    
     // MARK: - Private methods
     private func setupView() {
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).font = UIFont.boldSystemFont(ofSize: 17)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
+        
         searchBar.backgroundImage = UIImage()
     }
    
@@ -73,6 +78,10 @@ class SearchVC: UIViewController {
             return dataSource.sectionModels[index].model
           }
         )
+    }
+    
+    private func updateTableFooterSize() {
+        tableView.tableFooterView?.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120)
     }
     
 }
@@ -122,13 +131,15 @@ extension SearchVC {
                 guard let strongSelf = self else { return }
                 if error {
                     strongSelf.tableView.tableFooterView = strongSelf.errorView
+                    strongSelf.updateTableFooterSize()
                 } else {
-                    strongSelf.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                    strongSelf.tableView.tableFooterView = nil
                 }
             })
             .disposed(by: disposeBag)
         
         errorView.retryBtn.rx.tap
+            .debug("retry")
             .bind(to: viewModel.retry)
             .disposed(by: disposeBag)
        

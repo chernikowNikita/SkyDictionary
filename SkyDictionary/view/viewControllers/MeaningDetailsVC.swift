@@ -45,7 +45,7 @@ class MeaningDetailsVC: UIViewController {
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
         let imagesCV = ImagesCollectionView.Create(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
-        let errorView = ErrorView.Create(autoLayout: true)
+        let errorView = ErrorView.Create()
         
         stackView.addArrangedSubview(wordDetailsView)
         stackView.addArrangedSubview(meaningDetailsView)
