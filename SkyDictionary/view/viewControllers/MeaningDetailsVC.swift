@@ -29,15 +29,14 @@ class MeaningDetailsVC: UIViewController {
     private var meaningDetailsView: TextDetailsView!
     private var difficultyDetailsView: TextDetailsView!
     private var imagesCV: UICollectionView!
-    private var imagesCVHeightC: NSLayoutConstraint!
     private var imagesDataSource: RxCollectionViewSectionedReloadDataSource<ImageSection>!
     private var errorView: ErrorView!
     private let disposeBag = DisposeBag()
     
     // MARK: - Create
     public static func Create(viewModel: MeaningDetailsVM) -> MeaningDetailsVC {
-        var vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
-        vc.bindViewModel(to: viewModel)
+        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -47,17 +46,19 @@ class MeaningDetailsVC: UIViewController {
         let wordDetailsView = TextDetailsView.Create()
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
-        let imagesCollectionView = prepareImagesCV()
+        let imagesCV = SDCollectionView.Create(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
         let errorView = ErrorView.Create(autoLayout: true)
+        
         stackView.addArrangedSubview(wordDetailsView)
         stackView.addArrangedSubview(meaningDetailsView)
         stackView.addArrangedSubview(difficultyDetailsView)
-        stackView.addArrangedSubview(imagesCollectionView)
+        stackView.addArrangedSubview(imagesCV)
         stackView.addArrangedSubview(errorView)
+        
         self.wordDetailsView = wordDetailsView
         self.meaningDetailsView = meaningDetailsView
         self.difficultyDetailsView = difficultyDetailsView
-        self.imagesCV = imagesCollectionView
+        self.imagesCV = imagesCV
         self.errorView = errorView
     }
     
@@ -68,7 +69,7 @@ class MeaningDetailsVC: UIViewController {
         
         configureImagesDataSource()
         
-        setEditing(true, animated: false)
+        bindViewModel()
         
     }
     
@@ -82,32 +83,10 @@ class MeaningDetailsVC: UIViewController {
         difficultyDetailsView.isHidden = true
         difficultyDetailsView.detailsStackView.isHidden = true
         errorView.isHidden = true
-    }
-    
-    private func prepareImagesCV() -> UICollectionView {
-        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0)
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: IMAGE_SIZE, height: IMAGE_SIZE)
-        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        let view = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
-        let constraint = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0)
-        view.addConstraint(constraint)
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.allowsSelection = false
-        view.isScrollEnabled = false
-        view.backgroundColor = .systemBackground
-        self.imagesCVHeightC = constraint
-        view.rx.observe(CGSize.self, "contentSize")
-            .unwrap()
-            .map { $0.height }
-            .bind(to: imagesCVHeightC.rx.constant)
-            .disposed(by: disposeBag)
-        return view
+        ImageCell.registerWithNib(in: imagesCV)
     }
     
     private func configureImagesDataSource() {
-        ImageCell.register(in: imagesCV)
         imagesDataSource = RxCollectionViewSectionedReloadDataSource(configureCell: { dataSource, collectionView, indexPath, item in
             let cell = ImageCell.deque(for: collectionView, indexPath: indexPath)
             if let url = URL(string: item) {
@@ -127,7 +106,7 @@ class MeaningDetailsVC: UIViewController {
     
 }
 
-extension MeaningDetailsVC: BindableType {
+extension MeaningDetailsVC {
     
     func bindViewModel() {
         viewModel.loading

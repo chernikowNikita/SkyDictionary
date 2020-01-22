@@ -78,7 +78,7 @@ class SearchVC: UIViewController {
     
 }
 
-extension SearchVC: BindableType {
+extension SearchVC {
     
     func bindViewModel() {
         tableView.rx.itemSelected

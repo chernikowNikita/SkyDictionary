@@ -65,15 +65,10 @@ extension SkyEngApiService: TargetType {
 extension SkyEngApiService {
     
     func stubbedResponse(_ filename: String) -> Data {
-        @objc class TestClass: NSObject { }
-
-        let bundle = Bundle(for: TestClass.self)
         if let url = Bundle.main.url(forResource: filename, withExtension: "json"),
             let data = try? Data(contentsOf: url) {
-            print("return data \(data.count)")
             return data
         }
-        print("return empty data")
         return Data()
     }
     

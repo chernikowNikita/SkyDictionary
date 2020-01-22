@@ -42,7 +42,7 @@ class LoadableButton: UIButton {
         loadingView.backgroundColor = .systemBackground
         loadingView.alpha = 1
         loadingView.stopAnimating()
-        loadingView.fitSuperView()
+        loadingView.centerInSuperView()
         
         self.loading?
             .bind(to: loadingView.rx.isAnimating)
