@@ -12,8 +12,6 @@ import RxCocoa
 import RxDataSources
 import Action
 
-typealias ImageSection = SectionModel<String?, String>
-
 class MeaningDetailsVC: UIViewController {
     
     // MARK: - IBOutlets
@@ -46,7 +44,7 @@ class MeaningDetailsVC: UIViewController {
         let wordDetailsView = TextDetailsView.Create()
         let meaningDetailsView = TextDetailsView.Create()
         let difficultyDetailsView = TextDetailsView.Create()
-        let imagesCV = SDCollectionView.Create(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
+        let imagesCV = ImagesCollectionView.Create(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
         let errorView = ErrorView.Create(autoLayout: true)
         
         stackView.addArrangedSubview(wordDetailsView)
@@ -71,6 +69,7 @@ class MeaningDetailsVC: UIViewController {
         
         bindViewModel()
         
+        viewModel.load.onNext(())
     }
     
     // MARK: - Setup View
@@ -78,11 +77,15 @@ class MeaningDetailsVC: UIViewController {
         wordDetailsView.titleLabel.text = "Слово"
         meaningDetailsView.titleLabel.text = "Значение"
         difficultyDetailsView.titleLabel.text = "Сложность"
+        
         wordDetailsView.isHidden = true
         meaningDetailsView.isHidden = true
         difficultyDetailsView.isHidden = true
-        difficultyDetailsView.detailsStackView.isHidden = true
         errorView.isHidden = true
+        
+        difficultyDetailsView.detailsLabel.isHidden = true
+        difficultyDetailsView.detailsSoundBtn.isHidden = true
+        
         ImageCell.registerWithNib(in: imagesCV)
     }
     
@@ -113,83 +116,65 @@ extension MeaningDetailsVC {
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        viewModel.text
-            .bind(to: navigationItem.rx.title)
-            .disposed(by: disposeBag)
-        
-        bindWordDetails()
-        bindMeaningDetails()
+        bindWord(wordDetailsView)
+        bindMeaning(meaningDetailsView)
         bindDifficultyDetails()
         bindImages()
         bindError()
         
-        viewModel.sharedLoaded
+        viewModel.loaded
             .subscribe(onNext: { [weak self] _ in
                 self?.animate()
             })
             .disposed(by: disposeBag)
-            
-        viewModel.load.onNext(())
     }
     
-    private func bindWordDetails() {
-        viewModel.sharedMeaning
+    private func bindWord(_ detailsView: TextDetailsView) {
+        viewModel.meaningLoaded
             .map { _ in false }
-            .bind(to: wordDetailsView.rx.isHidden)
+            .bind(to: detailsView.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.text
-            .bind(to: wordDetailsView.textLabel.rx.text)
-            .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.soundUrl == nil && meaning.transcription == nil
-            }
-            .bind(to: wordDetailsView.detailsStackView.rx.isHidden)
+            .bind(to: detailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.transcription
-            .bind(to: wordDetailsView.detailsLabel.rx.text)
+            .map { $0 == nil }
+            .bind(to: detailsView.detailsLabel.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.soundUrl == nil
-            }
-            .bind(to: wordDetailsView.detailsSoundBtn.rx.isHidden)
+        viewModel.transcription
+            .bind(to: detailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        wordDetailsView.detailsSoundBtn.rx.action = CocoaAction() { [weak self] _ in
-            guard let strongSelf = self else { return Observable.just(()) }
-            return strongSelf.viewModel.play(type: .word)
-        }
-//        wordDetailsView.detailsSoundBtn.setupAction()
+        viewModel.wordSoundUrl
+            .map { $0 == nil }
+            .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
+            .disposed(by: disposeBag)
+        detailsView.detailsSoundBtn.rx.tap
+            .bind(to: viewModel.listenWord)
+            .disposed(by: disposeBag)
     }
     
-    private func bindMeaningDetails() {
-        viewModel.sharedMeaning
+    private func bindMeaning(_ detailsView: TextDetailsView) {
+        viewModel.meaningLoaded
             .map { _ in false }
-            .bind(to: meaningDetailsView.rx.isHidden)
+            .bind(to: detailsView.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.translation
-            .bind(to: meaningDetailsView.textLabel.rx.text)
-            .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.definition?.soundUrl == nil && meaning.definition?.text == nil
-            }
-            .bind(to: meaningDetailsView.detailsStackView.rx.isHidden)
+            .bind(to: detailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.definition
-            .bind(to: meaningDetailsView.detailsLabel.rx.text)
+            .map { $0 == nil }
+            .bind(to: detailsView.detailsLabel.rx.isHidden)
             .disposed(by: disposeBag)
-        viewModel.sharedMeaning
-            .map { meaning in
-                return meaning.definition?.soundUrl == nil
-            }
-            .bind(to: meaningDetailsView.detailsSoundBtn.rx.isHidden)
+        viewModel.definition
+            .bind(to: detailsView.detailsLabel.rx.text)
             .disposed(by: disposeBag)
-        meaningDetailsView.detailsSoundBtn.rx.action = CocoaAction() { [weak self] _ in
-            guard let strongSelf = self else { return Observable.just(()) }
-            return strongSelf.viewModel.play(type: .meaning)
-        }
-//        meaningDetailsView.detailsSoundBtn.setupAction()
+        viewModel.definitionSoundUrl
+            .map { $0 == nil }
+            .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
+            .disposed(by: disposeBag)
+        detailsView.detailsSoundBtn.rx.tap
+            .bind(to: viewModel.listenDefinition)
+            .disposed(by: disposeBag)
     }
     
     private func bindDifficultyDetails() {
@@ -199,9 +184,7 @@ extension MeaningDetailsVC {
             .disposed(by: disposeBag)
         viewModel.difficultyLevel
             .unwrap()
-            .map { level in
-                return String.init(repeating: "💪", count: level)
-            }
+            .map { String.init(repeating: "💪", count: $0) }
             .bind(to: difficultyDetailsView.textLabel.rx.text)
             .disposed(by: disposeBag)
     }
@@ -213,12 +196,7 @@ extension MeaningDetailsVC {
     }
     
     private func bindError() {
-        viewModel.sharedError
-            .filter { $0 }
-            .map { _ in return "Ошибка" }
-            .bind(to: navigationItem.rx.title)
-            .disposed(by: disposeBag)
-        viewModel.sharedError
+        viewModel.error
             .map { !$0 }
             .bind(to: errorView.rx.isHidden)
             .disposed(by: disposeBag)

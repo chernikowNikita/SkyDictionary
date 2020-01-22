@@ -16,9 +16,8 @@ class SearchVC: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var firstPageLoadingView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var nextPageLoadingView: UIActivityIndicatorView!
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
     // MARK: - Public properties
     var viewModel: SearchVM!
@@ -95,51 +94,29 @@ extension SearchVC {
                 self?.open(scene: .meaningDetails(vm), with: .push)
             })
             .disposed(by: disposeBag)
+        
         viewModel.searchResults
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         searchBar.searchTextField.rx.text
             .unwrap()
-            .distinctUntilChanged()
-            .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
         
-        let startLoadingOffset: CGFloat = 200.0
         tableView.rx.contentOffset
             .map { offset in
-                return offset.y + self.tableView.frame.size.height + startLoadingOffset > self.tableView.contentSize.height
+                return offset.y + self.tableView.frame.size.height + START_LOADING_OFFSET > self.tableView.contentSize.height
             }
             .distinctUntilChanged()
-            .debug()
             .filter { $0 }
             .bind(to: viewModel.nextPage)
             .disposed(by: disposeBag)
         
-        viewModel.loadingState
-            .map { state in
-                switch state {
-                case .loading(firstPage: let isFirst):
-                    return isFirst
-                case .notLoading:
-                    return false
-                }
-            }
-            .bind(to: firstPageLoadingView.rx.isAnimating)
+        viewModel.loading
+            .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        viewModel.loadingState
-            .map { state in
-                switch state {
-                case .loading(firstPage: let isFirst):
-                    return !isFirst
-                case .notLoading:
-                    return false
-                }
-            }
-            .bind(to: nextPageLoadingView.rx.isAnimating)
-            .disposed(by: disposeBag)
         viewModel.error
             .subscribe(onNext: { [weak self] error in
                 guard let strongSelf = self else { return }
@@ -150,6 +127,7 @@ extension SearchVC {
                 }
             })
             .disposed(by: disposeBag)
+        
         errorView.retryBtn.rx.tap
             .bind(to: viewModel.retry)
             .disposed(by: disposeBag)

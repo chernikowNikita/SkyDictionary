@@ -20,16 +20,16 @@ class SearchVM {
     // MARK: - Public properties
     // MARK: - Input
     let query: PublishSubject<String> = PublishSubject<String>()
-    let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
     let nextPage: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     let retry: PublishSubject<Void> = PublishSubject<Void>()
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
-    let loadingState: BehaviorSubject<LoadingState> = BehaviorSubject<LoadingState>(value: .notLoading)
+    let loading: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     let error: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     
     // MARK: - Private properties
+    private let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
@@ -42,10 +42,8 @@ class SearchVM {
             .share(replay: 1)
         
         sharedSearch
-            .map { data in
-                return .loading(firstPage: data.isFirstPage )
-            }
-            .bind(to: loadingState)
+            .map { _ in true}
+            .bind(to: loading)
             .disposed(by: disposeBag)
         
         sharedSearch
@@ -66,8 +64,8 @@ class SearchVM {
             .share(replay: 1)
         
         sharedResults
-            .map { _ in LoadingState.notLoading }
-            .bind(to: loadingState)
+            .map { _ in false }
+            .bind(to: loading)
             .disposed(by: disposeBag)
         
         sharedResults
@@ -109,6 +107,8 @@ class SearchVM {
             .disposed(by: disposeBag)
         
         query
+            .distinctUntilChanged()
+            .filter { $0.count > 1 }
             .map { _ in return 1 }
             .bind(to: page)
             .disposed(by: disposeBag)

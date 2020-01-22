@@ -13,9 +13,8 @@ class TextDetailsView: UIView {
     // MARK: - IBoutlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var detailsStackView: UIStackView!
     @IBOutlet weak var detailsLabel: UILabel!
-    @IBOutlet weak var detailsSoundBtn: LoadableButton!
+    @IBOutlet weak var detailsSoundBtn: UIButton!
     
     // MARK: - Create
     static func Create() -> TextDetailsView {

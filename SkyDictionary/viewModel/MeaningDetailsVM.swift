@@ -12,49 +12,61 @@ import Action
 import Moya
 import RxSwiftExt
 import AVFoundation
+import RxDataSources
 
-typealias SoundUrlData = (word: URL?, meaning: URL?)
-
-enum SoundType {
-    case word
-    case meaning
-}
+typealias ImageSection = SectionModel<String?, String>
 
 class MeaningDetailsVM {
     
     // MARK: - Input
     let load: PublishSubject<Void> = PublishSubject<Void>()
+    let listenWord: PublishSubject<Void> = PublishSubject<Void>()
+    let listenDefinition: PublishSubject<Void> = PublishSubject<Void>()
     
     // MARK: - Output
     var loading: Observable<Bool> {
         return loadMeaningAction.enabled
             .map { !$0 }
+            .share(replay: 1)
     }
-    var sharedLoaded: Observable<Void> {
+    var loaded: Observable<Void> {
         return loadMeaningAction.elements
             .map { _ in () }
             .share(replay: 1)
     }
-    var sharedMeaning: Observable<MeaningDetails> {
-        return loadMeaningAction.elements
-            .unwrap()
+    var meaningLoaded: Observable<Void> {
+        return meaning
+            .map { _ in () }
             .share(replay: 1)
     }
-    var sharedError: Observable<Bool> {
+    var error: Observable<Bool> {
         return loadMeaningAction.elements
             .map { $0 == nil }
             .share(replay: 1)
     }
     var text: Observable<String> {
-        return sharedMeaning
+        return meaning
             .map { $0.text }
+            .share(replay: 1)
     }
     var transcription: Observable<String?> {
-        return sharedMeaning
+        return meaning
             .map { $0.transcription }
+            .share(replay: 1)
+    }
+    var wordSoundUrl: Observable<URL?> {
+        return meaning
+            .map { $0.soundUrl }
+            .map { link in
+                if let s = link {
+                    return URL(string: s)
+                }
+                return nil
+            }
+            .share(replay: 1)
     }
     var translation: Observable<String> {
-        return sharedMeaning
+        return meaning
             .map { meaning in
                 var translation = meaning.translation?.text ?? ""
                 if let note = meaning.translation?.note {
@@ -62,22 +74,37 @@ class MeaningDetailsVM {
                 }
                 return translation
             }
+            .share(replay: 1)
     }
     var definition: Observable<String?> {
-        return sharedMeaning
+        return meaning
             .map { $0.definition?.text }
+            .share(replay: 1)
+    }
+    var definitionSoundUrl: Observable<URL?> {
+        return meaning
+            .map { $0.definition?.soundUrl }
+            .map { link in
+                if let s = link {
+                    return URL(string: s)
+                }
+                return nil
+            }
+            .share(replay: 1)
     }
     var difficultyLevel: Observable<Int?> {
-        return sharedMeaning
+        return meaning
             .map { $0.difficultyLevel }
+            .share(replay: 1)
     }
     var images: Observable<[ImageSection]> {
-        return sharedMeaning
+        return meaning
             .map { meaning in
                 return meaning.images.map { $0.url }
             }
             .map { ImageSection(model: nil, items: $0) }
             .map { [$0] }
+            .share(replay: 1)
     }
     
     // MARK: - Private properties
@@ -90,7 +117,24 @@ class MeaningDetailsVM {
             .map { $0.first }
             .asObservable()
     }
-    private let soundUrl: BehaviorSubject<SoundUrlData> = BehaviorSubject<SoundUrlData>(value: SoundUrlData(word: nil, meaning: nil))
+    private var meaning: Observable<MeaningDetails> {
+        return loadMeaningAction.elements
+            .unwrap()
+            .share(replay: 1)
+    }
+    private let loadSoundAction: Action<URL, URL?> = Action<URL, URL?> { url in
+        // Проверяем есть ли файл в кеше, если есть возвращаем его
+        let localFileUrl = FileWebService.fileUrl(for: url)
+        if FileManager.default.fileExists(atPath: localFileUrl.path) {
+            return Observable.just(localFileUrl)
+        }
+        // Загружаем с сервера, если в кеше нет файла
+        return FileWebProvider.shared.rx
+            .request(.download(url: url))
+            .map { _ in return localFileUrl }
+            .catchErrorJustReturn(nil)
+            .asObservable()
+    }
     private let skyApiProvider: MoyaProvider<SkyEngApiService>
     private let disposeBag = DisposeBag()
     
@@ -99,20 +143,19 @@ class MeaningDetailsVM {
         self.meaningId = meaningId
         self.skyApiProvider = skyApiProvider
         
-        loadMeaningAction.elements
+        listenWord.withLatestFrom(wordSoundUrl)
             .unwrap()
-            .map { meaning in
-                var wordUrl: URL? = nil
-                var meaningUrl: URL? = nil
-                if let wordUrlString = meaning.soundUrl {
-                    wordUrl = URL(string: wordUrlString)
-                }
-                if let meaningUrlString = meaning.definition?.soundUrl {
-                    meaningUrl = URL(string: meaningUrlString)
-                }
-                return SoundUrlData(word: wordUrl, meaning: meaningUrl)
-            }
-            .bind(to: soundUrl)
+            .bind(to: loadSoundAction.inputs)
+            .disposed(by: disposeBag)
+        
+        listenDefinition.withLatestFrom(definitionSoundUrl)
+            .unwrap()
+            .bind(to: loadSoundAction.inputs)
+            .disposed(by: disposeBag)
+        
+        loadSoundAction.elements
+            .unwrap()
+            .subscribe(onNext: { url in PlayerService.shared.play(url: url) })
             .disposed(by: disposeBag)
         
         load
@@ -122,38 +165,4 @@ class MeaningDetailsVM {
             .disposed(by: disposeBag)
     }
     
-    func play(type: SoundType) -> Observable<Void> {
-        return Observable
-            .just(type)
-            .withLatestFrom(soundUrl) { type, data -> URL? in
-                switch type {
-                case .word:
-                    return data.word
-                case .meaning:
-                    return data.meaning
-                }
-            }
-            .unwrap()
-            .flatMap { url -> Observable<URL?> in
-                // Проверяем есть ли файл в кеше, если есть возвращаем его
-                let localFileUrl = FileWebService.fileUrl(for: url)
-                if FileManager.default.fileExists(atPath: localFileUrl.path) {
-                    return Observable.just(localFileUrl)
-                }
-                // Загружаем с сервера, если в кеше нет файла
-                return FileWebProvider.shared.rx
-                    .request(.download(url: url))
-                    .filterSuccessfulStatusCodes()
-                    .map { _ in return localFileUrl }
-                    .catchErrorJustReturn(nil)
-                    .asObservable()
-            }
-            .do(onNext: { localSoundUrl in
-                if let url = localSoundUrl {
-                    PlayerService.shared.play(url: url)
-                }
-            })
-            .map { _ in () }
-        
-    }
 }

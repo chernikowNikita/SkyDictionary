@@ -42,7 +42,7 @@
 		46A56AD023D8AEF100C7F00D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A56ACF23D8AEF100C7F00D /* UIView+Extension.swift */; };
 		46A56AD223D8AF1000C7F00D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A56AD123D8AF1000C7F00D /* UITableView+Extension.swift */; };
 		46A56AD423D8AF2E00C7F00D /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A56AD323D8AF2E00C7F00D /* UICollectionViewCell+Extension.swift */; };
-		46A56ADB23D8B7C400C7F00D /* SDCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A56ADA23D8B7C400C7F00D /* SDCollectionView.swift */; };
+		46A56ADB23D8B7C400C7F00D /* ImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A56ADA23D8B7C400C7F00D /* ImagesCollectionView.swift */; };
 		46E66E3923D3809B00BFF7D6 /* TextDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E66E3823D3809B00BFF7D6 /* TextDetailsView.xib */; };
 		46E66E3B23D381B000BFF7D6 /* TextDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E3A23D381B000BFF7D6 /* TextDetailsView.swift */; };
 		46E66E4023D3A7AA00BFF7D6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E3F23D3A7AA00BFF7D6 /* ImageCell.swift */; };
@@ -50,7 +50,6 @@
 		46E66E4423D3C2DD00BFF7D6 /* FileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4323D3C2DD00BFF7D6 /* FileWebService.swift */; };
 		46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4523D3C54A00BFF7D6 /* FileWebProvider.swift */; };
 		46E66E4823D3D42300BFF7D6 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4723D3D42300BFF7D6 /* PlayerService.swift */; };
-		46E66E4A23D471DC00BFF7D6 /* LoadableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */; };
 		46E66E4C23D487D900BFF7D6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E66E4B23D487D900BFF7D6 /* ErrorView.swift */; };
 		46E66E4E23D487E500BFF7D6 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E66E4D23D487E500BFF7D6 /* ErrorView.xib */; };
 		5A7C32FA722B1250BA83E2B8 /* Pods_SkyDictionaryAbstract_SkyDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09711682E85462FF56461896 /* Pods_SkyDictionaryAbstract_SkyDictionary.framework */; };
@@ -117,7 +116,7 @@
 		46A56ACF23D8AEF100C7F00D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		46A56AD123D8AF1000C7F00D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		46A56AD323D8AF2E00C7F00D /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
-		46A56ADA23D8B7C400C7F00D /* SDCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDCollectionView.swift; sourceTree = "<group>"; };
+		46A56ADA23D8B7C400C7F00D /* ImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionView.swift; sourceTree = "<group>"; };
 		46E66E3823D3809B00BFF7D6 /* TextDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextDetailsView.xib; sourceTree = "<group>"; };
 		46E66E3A23D381B000BFF7D6 /* TextDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDetailsView.swift; sourceTree = "<group>"; };
 		46E66E3F23D3A7AA00BFF7D6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
@@ -125,7 +124,6 @@
 		46E66E4323D3C2DD00BFF7D6 /* FileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWebService.swift; sourceTree = "<group>"; };
 		46E66E4523D3C54A00BFF7D6 /* FileWebProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWebProvider.swift; sourceTree = "<group>"; };
 		46E66E4723D3D42300BFF7D6 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
-		46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableButton.swift; sourceTree = "<group>"; };
 		46E66E4B23D487D900BFF7D6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		46E66E4D23D487E500BFF7D6 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		50C404882EF178FDC958011B /* Pods_SkyDictionaryAbstract_SkyDictionaryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkyDictionaryAbstract_SkyDictionaryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,7 +397,7 @@
 		46A56AD923D8B77D00C7F00D /* collectionViews */ = {
 			isa = PBXGroup;
 			children = (
-				46A56ADA23D8B7C400C7F00D /* SDCollectionView.swift */,
+				46A56ADA23D8B7C400C7F00D /* ImagesCollectionView.swift */,
 			);
 			path = collectionViews;
 			sourceTree = "<group>";
@@ -408,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				46E66E3A23D381B000BFF7D6 /* TextDetailsView.swift */,
-				46E66E4923D471DC00BFF7D6 /* LoadableButton.swift */,
 				46E66E4B23D487D900BFF7D6 /* ErrorView.swift */,
 			);
 			path = customViews;
@@ -699,8 +696,7 @@
 				467485BF23D2443B00DCFB77 /* QueryData.swift in Sources */,
 				46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */,
 				46712B0723CE3F0000D3CFBC /* MeaningDetailsVM.swift in Sources */,
-				46E66E4A23D471DC00BFF7D6 /* LoadableButton.swift in Sources */,
-				46A56ADB23D8B7C400C7F00D /* SDCollectionView.swift in Sources */,
+				46A56ADB23D8B7C400C7F00D /* ImagesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

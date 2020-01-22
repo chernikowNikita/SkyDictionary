@@ -68,16 +68,11 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yJG-0L-5Zd">
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             </activityIndicatorView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8uD-CU-5AA">
-                                <rect key="frame" x="188.5" y="809" width="37" height="37"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8uD-CU-5AA" secondAttribute="bottom" constant="16" id="0H8-hJ-CJl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T7Z-Td-TTn" secondAttribute="bottom" id="1Lr-0e-o46"/>
                             <constraint firstItem="T7Z-Td-TTn" firstAttribute="top" secondItem="dNu-8u-Jtq" secondAttribute="bottom" id="1hP-LV-a7p"/>
-                            <constraint firstItem="8uD-CU-5AA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="29X-UY-izR"/>
                             <constraint firstItem="yJG-0L-5Zd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GJg-Zi-zFU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dNu-8u-Jtq" secondAttribute="trailing" id="bIP-1w-Xvi"/>
                             <constraint firstItem="dNu-8u-Jtq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bSO-SB-chz"/>
@@ -90,8 +85,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Поиск" id="CJS-yw-99L"/>
                     <connections>
-                        <outlet property="firstPageLoadingView" destination="yJG-0L-5Zd" id="0KL-jp-Rq7"/>
-                        <outlet property="nextPageLoadingView" destination="8uD-CU-5AA" id="OKR-rb-MTn"/>
+                        <outlet property="loadingView" destination="yJG-0L-5Zd" id="kg8-kQ-SLl"/>
                         <outlet property="searchBar" destination="dNu-8u-Jtq" id="bsr-ry-L1g"/>
                         <outlet property="tableView" destination="T7Z-Td-TTn" id="z3b-aW-lzI"/>
                     </connections>
@@ -100,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="76.339285714285708"/>
         </scene>
-        <!--Meaning DetailsVC-->
+        <!--Значение-->
         <scene sceneID="yul-AI-NBy">
             <objects>
                 <viewController storyboardIdentifier="MeaningDetailsVC" id="zsV-cg-LmB" customClass="MeaningDetailsVC" customModule="SkyDictionary" customModuleProvider="target" sceneMemberID="viewController">
@@ -143,6 +137,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="v79-9O-eSa"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Значение" id="bjV-Ab-QEL"/>
                     <connections>
                         <outlet property="loadingView" destination="ReR-98-INt" id="iAT-O0-loF"/>
                         <outlet property="scrollView" destination="HKj-ZK-6SA" id="QIe-P0-Vct"/>

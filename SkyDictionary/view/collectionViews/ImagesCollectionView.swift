@@ -1,5 +1,5 @@
 //
-//  SDCollectionView.swift
+//  ImagesCollectionView.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 22/01/2020.
@@ -10,15 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SDCollectionView: UICollectionView {
+class ImagesCollectionView: UICollectionView {
     private var heightConstraint: NSLayoutConstraint!
     private let disposeBag = DisposeBag()
     
-    static func Create(frame: CGRect) -> SDCollectionView {
+    static func Create(frame: CGRect) -> ImagesCollectionView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: IMAGE_SIZE, height: IMAGE_SIZE)
         flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        return SDCollectionView(frame: frame, collectionViewLayout: flowLayout)
+        return ImagesCollectionView(frame: frame, collectionViewLayout: flowLayout)
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +43,7 @@ class SDCollectionView: UICollectionView {
         
         self.rx.observe(CGSize.self, "contentSize")
             .unwrap()
-            .map { $0.height }
+            .map { $0.height >= IMAGE_SIZE ? $0.height : 0 }
             .bind(to: heightConstraint.rx.constant)
             .disposed(by: disposeBag)
     }
