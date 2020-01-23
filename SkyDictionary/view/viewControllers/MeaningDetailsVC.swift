@@ -153,6 +153,7 @@ extension MeaningDetailsVC {
             .subscribe(onNext: { [weak self] url in
                 guard let strongSelf = self else { return }
                 detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
+                detailsView.detailsSoundBtn.setupAction()
             })
             .disposed(by: disposeBag)
 
@@ -182,6 +183,7 @@ extension MeaningDetailsVC {
             .subscribe(onNext: { [weak self] url in
                 guard let strongSelf = self else { return }
                 detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
+                detailsView.detailsSoundBtn.setupAction()
             })
             .disposed(by: disposeBag)
     }

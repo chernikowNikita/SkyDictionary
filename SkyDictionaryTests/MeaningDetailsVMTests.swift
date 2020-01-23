@@ -18,7 +18,7 @@ class MeaningDetailsVMTests: XCTestCase {
     var disposeBag: DisposeBag!
     
     override func setUp() {
-        viewModel = MeaningDetailsVM(meaningId: 0)
+        viewModel = MeaningDetailsVM(meaningId: 0, apiProvider: SkyMoyaProvider.sharedTest)
         disposeBag = DisposeBag()
     }
 
@@ -30,7 +30,7 @@ class MeaningDetailsVMTests: XCTestCase {
     func testError() {
         let expect = expectation(description: "error")
         var result: Bool!
-        viewModel.sharedError
+        viewModel.error
             .subscribe(onNext: { e in
                 result = e
                 expect.fulfill()
@@ -67,11 +67,6 @@ class MeaningDetailsVMTests: XCTestCase {
         XCTAssertEqual(result, "test")
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
 
 }

@@ -99,7 +99,7 @@ extension SearchVC {
             .unwrap()
             .map { $0.id }
             .subscribe(onNext: { [weak self] meaningId in
-                let vm = MeaningDetailsVM(meaningId: meaningId)
+                let vm = MeaningDetailsVM(meaningId: meaningId, apiProvider: SkyMoyaProvider.shared)
                 self?.open(scene: .meaningDetails(vm), with: .push)
             })
             .disposed(by: disposeBag)

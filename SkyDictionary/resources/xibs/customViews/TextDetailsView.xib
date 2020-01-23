@@ -32,7 +32,7 @@
                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-ET-Ja9">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ns-ET-Ja9" customClass="LoadableButton" customModule="SkyDictionary" customModuleProvider="target">
                             <rect key="frame" x="163" y="53.5" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="b9D-yH-iCV"/>
@@ -57,7 +57,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="detailsLabel" destination="B91-wT-aoV" id="Lfl-Do-eUt"/>
-                <outlet property="detailsSoundBtn" destination="1Ns-ET-Ja9" id="u8a-Ia-UjR"/>
+                <outlet property="detailsSoundBtn" destination="1Ns-ET-Ja9" id="5Xl-XZ-dcx"/>
                 <outlet property="textLabel" destination="rdm-ii-qbZ" id="uvt-iV-I69"/>
                 <outlet property="titleLabel" destination="42J-Gx-s6D" id="wa5-ES-SpA"/>
             </connections>

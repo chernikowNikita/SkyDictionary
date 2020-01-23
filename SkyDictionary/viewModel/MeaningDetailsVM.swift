@@ -107,27 +107,30 @@ class MeaningDetailsVM {
     
     // MARK: - Private properties
     private let meaningId: Int
-    private var loadMeaningAction: Action<Int, MeaningDetails?> = Action<Int, MeaningDetails?>() { meaningId in
-        return SkyMoyaProvider.shared.rx
-            .request(.meaningDetails(meaningId: meaningId))
-            .map([MeaningDetails].self)
-            .catchErrorJustReturn([MeaningDetails]())
-            .map { $0.first }
-            .asObservable()
-    }
+    private lazy var loadMeaningAction: Action<Int, MeaningDetails?> = {
+        return Action<Int, MeaningDetails?>() { [weak self] meaningId in
+            guard let strongSelf = self else { return Observable.just(nil) }
+            return strongSelf.apiProvider.rx
+                .request(.meaningDetails(meaningId: meaningId))
+                .map([MeaningDetails].self)
+                .catchErrorJustReturn([MeaningDetails]())
+                .map { $0.first }
+                .asObservable()
+        }
+    }()
     private var meaning: Observable<MeaningDetails> {
         return loadMeaningAction.elements
             .unwrap()
             .share(replay: 1)
     }
     private let loadedSound: PublishSubject<URL> = PublishSubject()
-    private let skyApiProvider: MoyaProvider<SkyEngApiService>
+    private let apiProvider: MoyaProvider<SkyEngApiService>
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
-    init(meaningId: Int, skyApiProvider: SkyMoyaProvider = .shared) {
+    init(meaningId: Int, apiProvider: MoyaProvider<SkyEngApiService>) {
         self.meaningId = meaningId
-        self.skyApiProvider = skyApiProvider
+        self.apiProvider = apiProvider
         
         loadedSound
             .subscribe(onNext: { url in PlayerService.shared.play(url: url)})
