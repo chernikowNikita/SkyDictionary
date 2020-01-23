@@ -148,9 +148,14 @@ extension MeaningDetailsVC {
             .map { $0 == nil }
             .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
             .disposed(by: disposeBag)
-        detailsView.detailsSoundBtn.rx.tap
-            .bind(to: viewModel.listenWord)
+        viewModel.wordSoundUrl
+            .unwrap()
+            .subscribe(onNext: { [weak self] url in
+                guard let strongSelf = self else { return }
+                detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
+            })
             .disposed(by: disposeBag)
+
     }
     
     private func bindMeaning(_ detailsView: TextDetailsView) {
@@ -172,8 +177,12 @@ extension MeaningDetailsVC {
             .map { $0 == nil }
             .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
             .disposed(by: disposeBag)
-        detailsView.detailsSoundBtn.rx.tap
-            .bind(to: viewModel.listenDefinition)
+        viewModel.definitionSoundUrl
+            .unwrap()
+            .subscribe(onNext: { [weak self] url in
+                guard let strongSelf = self else { return }
+                detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
+            })
             .disposed(by: disposeBag)
     }
     

@@ -20,8 +20,6 @@ class MeaningDetailsVM {
     
     // MARK: - Input
     let load: PublishSubject<Void> = PublishSubject<Void>()
-    let listenWord: PublishSubject<Void> = PublishSubject<Void>()
-    let listenDefinition: PublishSubject<Void> = PublishSubject<Void>()
     
     // MARK: - Output
     var loading: Observable<Bool> {
@@ -122,19 +120,7 @@ class MeaningDetailsVM {
             .unwrap()
             .share(replay: 1)
     }
-    private let loadSoundAction: Action<URL, URL?> = Action<URL, URL?> { url in
-        // Проверяем есть ли файл в кеше, если есть возвращаем его
-        let localFileUrl = FileWebService.fileUrl(for: url)
-        if FileManager.default.fileExists(atPath: localFileUrl.path) {
-            return Observable.just(localFileUrl)
-        }
-        // Загружаем с сервера, если в кеше нет файла
-        return FileWebProvider.shared.rx
-            .request(.download(url: url))
-            .map { _ in return localFileUrl }
-            .catchErrorJustReturn(nil)
-            .asObservable()
-    }
+    private let loadedSound: PublishSubject<URL> = PublishSubject()
     private let skyApiProvider: MoyaProvider<SkyEngApiService>
     private let disposeBag = DisposeBag()
     
@@ -143,19 +129,8 @@ class MeaningDetailsVM {
         self.meaningId = meaningId
         self.skyApiProvider = skyApiProvider
         
-        listenWord.withLatestFrom(wordSoundUrl)
-            .unwrap()
-            .bind(to: loadSoundAction.inputs)
-            .disposed(by: disposeBag)
-        
-        listenDefinition.withLatestFrom(definitionSoundUrl)
-            .unwrap()
-            .bind(to: loadSoundAction.inputs)
-            .disposed(by: disposeBag)
-        
-        loadSoundAction.elements
-            .unwrap()
-            .subscribe(onNext: { url in PlayerService.shared.play(url: url) })
+        loadedSound
+            .subscribe(onNext: { url in PlayerService.shared.play(url: url)})
             .disposed(by: disposeBag)
         
         load
@@ -163,6 +138,12 @@ class MeaningDetailsVM {
             .unwrap()
             .bind(to: loadMeaningAction.inputs)
             .disposed(by: disposeBag)
+    }
+    
+    func preparePlaySoundAction(for optUrl: URL?) -> CocoaAction? {
+        guard let url = optUrl else { return nil }
+        let service = LoadFileService(url: url, loadedFile: loadedSound)
+        return service.action
     }
     
 }
