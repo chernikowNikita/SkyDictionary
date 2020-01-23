@@ -18,8 +18,13 @@ class ErrorView: UIView {
     }
     
     // MARK: - Create
-    static func Create() -> ErrorView {
+    static func Create(autolayout: Bool) -> ErrorView {
         let view = Nib.instantiate(withOwner: nil, options: nil).first as! ErrorView
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 120)
+        if autolayout {
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         return view
     }
     

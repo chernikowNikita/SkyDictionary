@@ -66,6 +66,26 @@ class MeaningDetailsVMTests: XCTestCase {
         }
         XCTAssertEqual(result, "test")
     }
+    
+    func testDifficultyLevel() {
+        let expect = expectation(description: "difficultyLevel")
+        var result: Int?
+        viewModel.difficultyLevel
+            .subscribe(onNext: { level in
+                result = level
+                expect.fulfill()
+            })
+            .disposed(by: disposeBag)
+        viewModel.load.onNext(())
+        
+        waitForExpectations(timeout: 1.0) { error in
+            if let e = error {
+                XCTFail(e.localizedDescription)
+                return
+            }
+        }
+        XCTAssert(result == 4)
+    }
 
     
 

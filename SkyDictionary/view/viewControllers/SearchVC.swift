@@ -23,7 +23,7 @@ class SearchVC: UIViewController {
     var viewModel: SearchVM!
     
     // MARK: - Private properties
-    private var errorView = ErrorView.Create()
+    private var errorView = ErrorView.Create(autolayout: false)
     private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
     
@@ -45,10 +45,13 @@ class SearchVC: UIViewController {
         bindViewModel()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print("viewWillLayoutSubviews")
-        updateTableFooterSize()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let _ = tableView.tableFooterView as? ErrorView {
+            setTVFooterErrorView()
+        } else {
+            setTvFooterEmptyView()
+        }
     }
     
     // MARK: - Private methods
@@ -56,6 +59,8 @@ class SearchVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         searchBar.backgroundImage = UIImage()
     }
@@ -80,10 +85,14 @@ class SearchVC: UIViewController {
         )
     }
     
-    private func updateTableFooterSize() {
-        tableView.tableFooterView?.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120)
+    private func setTVFooterErrorView() {
+        errorView.frame.size.height = 120
+        tableView.tableFooterView = errorView
     }
     
+    private func setTvFooterEmptyView() {
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
 }
 
 extension SearchVC {
@@ -110,6 +119,7 @@ extension SearchVC {
         
         searchBar.searchTextField.rx.text
             .unwrap()
+            .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
         
@@ -130,16 +140,14 @@ extension SearchVC {
             .subscribe(onNext: { [weak self] error in
                 guard let strongSelf = self else { return }
                 if error {
-                    strongSelf.tableView.tableFooterView = strongSelf.errorView
-                    strongSelf.updateTableFooterSize()
+                    strongSelf.setTVFooterErrorView()
                 } else {
-                    strongSelf.tableView.tableFooterView = nil
+                    strongSelf.setTvFooterEmptyView()
                 }
             })
             .disposed(by: disposeBag)
         
         errorView.retryBtn.rx.tap
-            .debug("retry")
             .bind(to: viewModel.retry)
             .disposed(by: disposeBag)
        
