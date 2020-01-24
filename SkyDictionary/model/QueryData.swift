@@ -11,7 +11,11 @@ import Foundation
 struct QueryData {
     let query: String
     let page: Int
+    
     var isNeedToSearch: Bool {
         return query.count > 1
+    }
+    var isFirstPage: Bool {
+        return page == 1
     }
 }

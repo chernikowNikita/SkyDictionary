@@ -13,27 +13,23 @@ struct MeaningDetails: Codable {
     let text: String
     let wordId: Int
     let difficultyLevel: Int?
-    private let partOfSpeechCode: String
-    var partOfSpeech: PartOfSpeech? {
+    private let privateSoundUrl: String?
+    var soundUrl: String? {
         get {
-            return PartOfSpeech(rawValue: partOfSpeechCode)
+            return self.privateSoundUrl?.httpsPrefixed
         }
     }
-    let soundUrl: String?
     let transcription: String?
     let translation: Translation?
     let images: [Image]
     let definition: Definition?
-    
-    static let empty = MeaningDetails(id: "nil", text: "nil", wordId: 0, difficultyLevel: 0, partOfSpeechCode: "nil", soundUrl: nil, transcription: nil, translation: nil, images: [], definition: nil)
     
     private enum CodingKeys: String, CodingKey {
         case id
         case text
         case wordId
         case difficultyLevel
-        case partOfSpeechCode
-        case soundUrl
+        case privateSoundUrl = "soundUrl"
         case transcription
         case translation
         case images

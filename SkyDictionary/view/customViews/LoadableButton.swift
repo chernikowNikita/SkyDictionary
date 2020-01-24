@@ -30,7 +30,7 @@ class LoadableButton: UIButton {
     }
     
     // MARK: - Public methods
-    func setupAction() {
+    func actionConfigured() {
         self.rx.action?.enabled
             .map { !$0 }
             .bind(to: loadingView.rx.isAnimating)
@@ -41,11 +41,11 @@ class LoadableButton: UIButton {
     private func setupView() {
         addSubview(loadingView)
         loadingView.hidesWhenStopped = true
-        loadingView.backgroundColor = .white
-        loadingView.alpha = 1
+        loadingView.backgroundColor = .systemBackground
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.color = self.tintColor
         loadingView.stopAnimating()
-        loadingView.fitSuperView()
+        loadingView.fillSuperView()
     }
     
     
