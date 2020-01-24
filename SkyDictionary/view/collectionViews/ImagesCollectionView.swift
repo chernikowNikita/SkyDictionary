@@ -41,6 +41,7 @@ class ImagesCollectionView: UICollectionView {
         self.isScrollEnabled = false
         self.backgroundColor = .systemBackground
         
+        // Динамическая высота collectionView
         self.rx.observe(CGSize.self, "contentSize")
             .unwrap()
             .map { $0.height >= IMAGE_SIZE ? $0.height : 0 }

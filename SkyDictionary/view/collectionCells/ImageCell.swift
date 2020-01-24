@@ -11,6 +11,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     
     override init(frame: CGRect) {

@@ -19,13 +19,11 @@ class SearchVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
-    // MARK: - Public properties
-    var viewModel: SearchVM!
-    
     // MARK: - Private properties
+    private var viewModel: SearchVM!
     private var errorView = ErrorView.Create(autolayout: false)
-    private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchResultSection>!
+    private let disposeBag = DisposeBag()
     
     // MARK: - Create
     public static func Create(viewModel: SearchVM) -> SearchVC {
@@ -122,7 +120,7 @@ extension SearchVC {
             .filter { $0.count > 1 }
             .bind(to: viewModel.query)
             .disposed(by: disposeBag)
-        
+        // Пагинация, при достижении contentOffset START_LOADING_OFFSET посылаем во viewModel сигнал о необходимости загрузки следующей страницы
         tableView.rx.contentOffset
             .map { offset in
                 return offset.y + self.tableView.frame.size.height + START_LOADING_OFFSET > self.tableView.contentSize.height

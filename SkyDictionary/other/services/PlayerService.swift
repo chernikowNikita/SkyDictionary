@@ -12,7 +12,7 @@ import AVFoundation
 class PlayerService {
     static let shared = PlayerService()
     
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     func play(url: URL) {
         do {
@@ -21,7 +21,6 @@ class PlayerService {
             self.player?.volume = 1.0
             self.player?.play()
         } catch let error as NSError {
-            //self.player = nil
             print(error.localizedDescription)
         } catch {
             print("AVAudioPlayer init failed")

@@ -20,18 +20,19 @@ class LoadFileService {
         action = CocoaAction() { _ in
             return Observable.just(url)
                 .flatMap { remoteUrl -> Observable<URL?> in
-                    // Проверяем есть ли файл в кеше, если есть возвращаем его
+                    // Проверяем есть ли файл в cache, если есть возвращаем его
                     let localUrl = FileWebService.fileUrl(for: remoteUrl)
                     if FileManager.default.fileExists(atPath: localUrl.path) {
                         return Observable.just(localUrl)
                     }
-                    // Загружаем с сервера, если в кеше нет файла
+                    // Загружаем с сервера, если в cache нет файла
                     return FileWebProvider.shared.rx
                         .request(.download(url: remoteUrl))
                         .map { _ in return localUrl }
                         .catchErrorJustReturn(nil)
                         .asObservable()
                 }
+                // Уведомляем об успешной загрузке файла
                 .do(onNext: { localUrl in
                     if let url = localUrl {
                         loadedFile.onNext(url)

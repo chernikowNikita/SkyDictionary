@@ -24,8 +24,6 @@ struct MeaningDetails: Codable {
     let images: [Image]
     let definition: Definition?
     
-//    static let error = MeaningDetails(id: "nil", text: "nil", wordId: 0, difficultyLevel: 0, partOfSpeechCode: "nil", soundUrl: nil, transcription: nil, translation: nil, images: [], definition: nil)
-    
     private enum CodingKeys: String, CodingKey {
         case id
         case text

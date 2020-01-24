@@ -123,6 +123,8 @@ class MeaningDetailsVM {
             .unwrap()
             .share(replay: 1)
     }
+    // Принимает локальные URL загруженных файлов,
+    // позволяет обработать событие загрузки файла для последующего открытия
     private let loadedSound: PublishSubject<URL> = PublishSubject()
     private let apiProvider: MoyaProvider<SkyEngApiService>
     private let disposeBag = DisposeBag()
@@ -143,7 +145,8 @@ class MeaningDetailsVM {
             .disposed(by: disposeBag)
     }
     
-    func preparePlaySoundAction(for optUrl: URL?) -> CocoaAction? {
+    // Создание Action для кнопки прослушивания
+    func prepareListenAction(for optUrl: URL?) -> CocoaAction? {
         guard let url = optUrl else { return nil }
         let service = LoadFileService(url: url, loadedFile: loadedSound)
         return service.action

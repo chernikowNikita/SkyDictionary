@@ -13,7 +13,9 @@ class ErrorView: UIView {
     // MARK: - IBoutlets
     @IBOutlet weak var retryBtn: UIButton! {
         didSet {
-            self.retryBtn.layer.cornerRadius = 5
+            if let button = self.retryBtn {
+                button.layer.cornerRadius = 5
+            }
         }
     }
     

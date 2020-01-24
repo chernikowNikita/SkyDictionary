@@ -19,13 +19,11 @@ class MeaningDetailsVC: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
-    // MARK: - Public properties
-    var viewModel: MeaningDetailsVM!
-    
     // MARK: - Private properties
-    private var wordDetailsView: TextDetailsView!
-    private var meaningDetailsView: TextDetailsView!
-    private var difficultyDetailsView: TextDetailsView!
+    var viewModel: MeaningDetailsVM!
+    private var wordDetailView: DetailView!
+    private var meaningDetailView: DetailView!
+    private var difficultyDetailView: DetailView!
     private var imagesCV: UICollectionView!
     private var imagesDataSource: RxCollectionViewSectionedReloadDataSource<ImageSection>!
     private var errorView: ErrorView!
@@ -41,21 +39,21 @@ class MeaningDetailsVC: UIViewController {
     // MARK: - Life cycle
     override func loadView() {
         super.loadView()
-        let wordDetailsView = TextDetailsView.Create()
-        let meaningDetailsView = TextDetailsView.Create()
-        let difficultyDetailsView = TextDetailsView.Create()
+        let wordDetailView = DetailView.Create()
+        let meaningDetailView = DetailView.Create()
+        let difficultyDetailView = DetailView.Create()
         let imagesCV = ImagesCollectionView.Create(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
         let errorView = ErrorView.Create(autolayout: true)
         
-        stackView.addArrangedSubview(wordDetailsView)
-        stackView.addArrangedSubview(meaningDetailsView)
-        stackView.addArrangedSubview(difficultyDetailsView)
+        stackView.addArrangedSubview(wordDetailView)
+        stackView.addArrangedSubview(meaningDetailView)
+        stackView.addArrangedSubview(difficultyDetailView)
         stackView.addArrangedSubview(imagesCV)
         stackView.addArrangedSubview(errorView)
         
-        self.wordDetailsView = wordDetailsView
-        self.meaningDetailsView = meaningDetailsView
-        self.difficultyDetailsView = difficultyDetailsView
+        self.wordDetailView = wordDetailView
+        self.meaningDetailView = meaningDetailView
+        self.difficultyDetailView = difficultyDetailView
         self.imagesCV = imagesCV
         self.errorView = errorView
     }
@@ -74,17 +72,17 @@ class MeaningDetailsVC: UIViewController {
     
     // MARK: - Setup View
     private func setupView() {
-        wordDetailsView.titleLabel.text = "Слово"
-        meaningDetailsView.titleLabel.text = "Значение"
-        difficultyDetailsView.titleLabel.text = "Сложность"
+        wordDetailView.titleLabel.text = "Слово"
+        meaningDetailView.titleLabel.text = "Значение"
+        difficultyDetailView.titleLabel.text = "Сложность"
         
-        wordDetailsView.isHidden = true
-        meaningDetailsView.isHidden = true
-        difficultyDetailsView.isHidden = true
+        wordDetailView.isHidden = true
+        meaningDetailView.isHidden = true
+        difficultyDetailView.isHidden = true
         errorView.isHidden = true
         
-        difficultyDetailsView.detailsLabel.isHidden = true
-        difficultyDetailsView.detailsSoundBtn.isHidden = true
+        difficultyDetailView.detailLabel.isHidden = true
+        difficultyDetailView.detailListenBtn.isHidden = true
         
         ImageCell.registerWithNib(in: imagesCV)
     }
@@ -100,6 +98,7 @@ class MeaningDetailsVC: UIViewController {
     }
     
     private func animate() {
+        // Проверяем включено ли на устройстве "Уменьшение движения"
         if !UIAccessibility.isReduceMotionEnabled {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 self?.view.layoutIfNeeded()
@@ -116,9 +115,9 @@ extension MeaningDetailsVC {
             .bind(to: loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        bindWord(wordDetailsView)
-        bindMeaning(meaningDetailsView)
-        bindDifficultyDetails()
+        bindWord(wordDetailView)
+        bindMeaning(meaningDetailView)
+        bindDifficultyLevel(difficultyDetailView)
         bindImages()
         bindError()
         
@@ -129,74 +128,75 @@ extension MeaningDetailsVC {
             .disposed(by: disposeBag)
     }
     
-    private func bindWord(_ detailsView: TextDetailsView) {
+    private func bindWord(_ detailView: DetailView) {
         viewModel.meaningLoaded
             .map { _ in false }
-            .bind(to: detailsView.rx.isHidden)
+            .bind(to: detailView.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.text
-            .bind(to: detailsView.textLabel.rx.text)
+            .bind(to: detailView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.transcription
             .map { $0 == nil }
-            .bind(to: detailsView.detailsLabel.rx.isHidden)
+            .bind(to: detailView.detailLabel.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.transcription
-            .bind(to: detailsView.detailsLabel.rx.text)
+            .bind(to: detailView.detailLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.wordSoundUrl
             .map { $0 == nil }
-            .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
+            .bind(to: detailView.detailListenBtn.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.wordSoundUrl
             .unwrap()
             .subscribe(onNext: { [weak self] url in
-                guard let strongSelf = self else { return }
-                detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
-                detailsView.detailsSoundBtn.setupAction()
+                self?.bindDetailListen(url: url, for: detailView)
             })
             .disposed(by: disposeBag)
 
     }
     
-    private func bindMeaning(_ detailsView: TextDetailsView) {
+    private func bindMeaning(_ detailView: DetailView) {
         viewModel.meaningLoaded
             .map { _ in false }
-            .bind(to: detailsView.rx.isHidden)
+            .bind(to: detailView.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.translation
-            .bind(to: detailsView.textLabel.rx.text)
+            .bind(to: detailView.textLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.definition
             .map { $0 == nil }
-            .bind(to: detailsView.detailsLabel.rx.isHidden)
+            .bind(to: detailView.detailLabel.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.definition
-            .bind(to: detailsView.detailsLabel.rx.text)
+            .bind(to: detailView.detailLabel.rx.text)
             .disposed(by: disposeBag)
         viewModel.definitionSoundUrl
             .map { $0 == nil }
-            .bind(to: detailsView.detailsSoundBtn.rx.isHidden)
+            .bind(to: detailView.detailListenBtn.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.definitionSoundUrl
             .unwrap()
             .subscribe(onNext: { [weak self] url in
-                guard let strongSelf = self else { return }
-                detailsView.detailsSoundBtn.rx.action = strongSelf.viewModel.preparePlaySoundAction(for: url)
-                detailsView.detailsSoundBtn.setupAction()
+                self?.bindDetailListen(url: url, for: detailView)
             })
             .disposed(by: disposeBag)
     }
     
-    private func bindDifficultyDetails() {
+    private func bindDetailListen(url: URL, for detailView: DetailView) {
+        detailView.detailListenBtn.rx.action = viewModel.prepareListenAction(for: url)
+        detailView.detailListenBtn.setupAction()
+    }
+    
+    private func bindDifficultyLevel(_ detailView: DetailView) {
         viewModel.difficultyLevel
             .map { $0 == nil }
-            .bind(to: difficultyDetailsView.rx.isHidden)
+            .bind(to: detailView.rx.isHidden)
             .disposed(by: disposeBag)
         viewModel.difficultyLevel
             .unwrap()
             .map { String.init(repeating: "💪", count: $0) }
-            .bind(to: difficultyDetailsView.textLabel.rx.text)
+            .bind(to: detailView.textLabel.rx.text)
             .disposed(by: disposeBag)
     }
     

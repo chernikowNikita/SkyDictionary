@@ -10,14 +10,15 @@ import Moya
 
 enum FileWebService {
     case download(url: URL)
+    
     var localLocation: URL {
         switch self {
         case .download(let url):
             return FileWebService.fileUrl(for: url)
         }
     }
+    
     var downloadDestination: DownloadDestination {
-        // `createIntermediateDirectories` will create directories in file path
         return { _, _ in return (self.localLocation, [.removePreviousFile, .createIntermediateDirectories]) }
     }
     
@@ -34,40 +35,49 @@ extension FileWebService: TargetType {
             return url
         }
     }
+    
     var path: String {
         switch self {
         case .download(_):
             return ""
         }
     }
+    
     var method: Moya.Method {
         switch self {
         case .download(_):
             return .get
         }
     }
+    
     var parameters: [String: Any]? {
         switch self {
         case .download:
             return nil
         }
     }
+    
     var parameterEncoding: ParameterEncoding {
         return URLEncoding.default
     }
+    
     var task: Task {
         switch self {
         case .download(_):
             return .downloadDestination(downloadDestination)
         }
     }
+    
     var sampleData: Data {
         return Data()
     }
+    
     var headers: [String: String]? {
         return nil
     }
+    
 }
+
 class FileSystem {
     static let documentsDirectory: URL = {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

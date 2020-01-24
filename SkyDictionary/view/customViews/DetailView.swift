@@ -1,5 +1,5 @@
 //
-//  TextDetailsView.swift
+//  DetailsView.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 18/01/2020.
@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-class TextDetailsView: UIView {
+class DetailView: UIView {
     // MARK: - IBoutlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var detailsLabel: UILabel!
-    @IBOutlet weak var detailsSoundBtn: LoadableButton!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var detailListenBtn: LoadableButton!
     
     // MARK: - Create
-    static func Create() -> TextDetailsView {
-        return Nib.instantiate(withOwner: nil, options: nil).first as! TextDetailsView
+    static func Create() -> DetailView {
+        return Nib.instantiate(withOwner: nil, options: nil).first as! DetailView
     }
     
     override init(frame: CGRect) {

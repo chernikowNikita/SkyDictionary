@@ -17,11 +17,10 @@ typealias SearchResultSection = SectionModel<String, Meaning>
 
 class SearchVM {
     
-    // MARK: - Public properties
     // MARK: - Input
-    let query: PublishSubject<String> = PublishSubject()
-    let nextPage: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-    let retry: PublishSubject<Void> = PublishSubject()
+    let query: PublishSubject<String> = PublishSubject() // текст поиска
+    let nextPage: PublishSubject<Bool> = PublishSubject() // сигнал о необходимости загрузить следующую страницу
+    let retry: PublishSubject<Void> = PublishSubject() // сигнал о необходимости повторить запрос
     
     // MARK: - Output
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
@@ -46,6 +45,7 @@ class SearchVM {
             .bind(to: loading)
             .disposed(by: disposeBag)
         
+        // При поиске нового слова очищаем результаты старого поиска
         sharedSearch
             .filter { $0.isFirstPage }
             .map { _ -> [SearchResultSection] in return [] }
@@ -70,6 +70,7 @@ class SearchVM {
         
         sharedResults
             .unwrap()
+            // Собираем предыдущие страницы с новой
             .scan([]) { array, newData -> [SearchResult] in
                 if newData.isFirstPage {
                     return newData.results
@@ -83,6 +84,7 @@ class SearchVM {
             }
             .bind(to: searchResults)
             .disposed(by: disposeBag)
+        
         sharedResults
             .map { results in
                 return results == nil
@@ -92,12 +94,12 @@ class SearchVM {
         
         nextPage
             .withLatestFrom(page)
+            // Проверка необходимости загрузки следующей страницы
             .withLatestFrom(searchResults) { page, results -> Int? in
                 return results.count / PAGE_SIZE == page ? page : nil
             }
             .unwrap()
             .map { $0 + 1 }
-            .debug()
             .bind(to: page)
             .disposed(by: disposeBag)
         

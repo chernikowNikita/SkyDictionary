@@ -19,6 +19,7 @@ extension SkyEngApiService: TargetType {
     var baseURL: URL {
         return URL(string: "https://dictionary.skyeng.ru/api/public/v1")!
     }
+    
     var path: String {
         switch self {
         case .search(query: _, page: _, pageSize: _):
@@ -27,12 +28,15 @@ extension SkyEngApiService: TargetType {
             return "meanings"
         }
     }
+    
     var method: Moya.Method {
         return .get
     }
+    
     var headers: [String : String]? {
         return [:]
     }
+    
     var parameters: [String: Any]? {
         switch self {
         case .search(query: let q, page: let page, pageSize: let pageSize):
@@ -45,9 +49,11 @@ extension SkyEngApiService: TargetType {
             return ["ids": id]
         }
     }
+    
     var parameterEncoding: ParameterEncoding {
         return URLEncoding.default
     }
+    
     var sampleData: Data {
         switch self {
         case .search(_):
@@ -56,9 +62,14 @@ extension SkyEngApiService: TargetType {
             return stubbedResponse("meaning_details")
         }
     }
+    
     var task: Task {
-        return .requestParameters(parameters: parameters!, encoding: URLEncoding())
+        if let params = parameters {
+            return .requestParameters(parameters: params, encoding: URLEncoding())
+        }
+        return .requestPlain
     }
+    
 }
 
 // MARK: - Mocks
