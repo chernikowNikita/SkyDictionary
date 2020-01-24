@@ -4,6 +4,9 @@ PODS:
     - RxSwift (~> 4.0)
   - Alamofire (4.9.1)
   - Differentiator (3.1.0)
+  - Kingfisher (5.12.0):
+    - Kingfisher/Core (= 5.12.0)
+  - Kingfisher/Core (5.12.0)
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
@@ -12,6 +15,9 @@ PODS:
     - RxSwift (~> 4.0)
   - Result (4.1.0)
   - RxAtomic (4.4.2)
+  - RxBlocking (4.4.1):
+    - RxAtomic (~> 4.4)
+    - RxSwift (~> 4.0)
   - RxCocoa (4.4.1):
     - RxSwift (~> 4.0)
   - RxDataSources (3.1.0):
@@ -20,37 +26,54 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.1):
     - RxAtomic (~> 4.4)
+  - RxSwiftExt/Core (3.4.0):
+    - RxSwift (~> 4.0)
+  - RxTest (4.4.1):
+    - RxAtomic (~> 4.4)
+    - RxSwift (~> 4.0)
 
 DEPENDENCIES:
   - Action (~> 3.9)
+  - Kingfisher (~> 5.0)
   - Moya/RxSwift (~> 13.0)
+  - RxBlocking (= 4.4.1)
   - RxCocoa (= 4.4.1)
   - RxDataSources (~> 3.1)
   - RxSwift (= 4.4.1)
+  - RxSwiftExt/Core
+  - RxTest (= 4.4.1)
 
 SPEC REPOS:
   trunk:
     - Action
     - Alamofire
     - Differentiator
+    - Kingfisher
     - Moya
     - Result
     - RxAtomic
+    - RxBlocking
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - RxSwiftExt
+    - RxTest
 
 SPEC CHECKSUMS:
   Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxBlocking: 5508e90d36ca2304632dc9378ece4e9b5d4bf656
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
+  RxSwiftExt: 01f8ecbeeb355698e9c75365ebe908b00dacf45d
+  RxTest: f8e548755ca3c7502dc41c7d3b28802c90115a38
 
-PODFILE CHECKSUM: ab0d58cd43553f094a05e0a61e75ed62af3bc41f
+PODFILE CHECKSUM: 25d109d1dd0b8fdec8bee180c78b61fe3f74dc7a
 
 COCOAPODS: 1.8.3
