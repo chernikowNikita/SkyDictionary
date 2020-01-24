@@ -9,5 +9,14 @@
 import Foundation
 
 struct Image: Codable {
-    let url: String
+    private let privateUrl: String
+    var url: String {
+        get {
+            return privateUrl.httpsPrefixed
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case privateUrl = "url"
+    }
 }

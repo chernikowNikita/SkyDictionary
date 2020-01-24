@@ -1,5 +1,5 @@
 //
-//  Translation.swift
+//  SceneTransitionType.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 14/01/2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Translation: Codable {
-    let text: String
-    let note: String?
+enum SceneTransitionType {
+    case root
+    case push
+    case modal
 }
