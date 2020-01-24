@@ -61,6 +61,8 @@ class SearchVC: UIViewController {
         setTVFooterEmptyView()
         
         searchBar.backgroundImage = UIImage()
+        
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
    
     private func configureDataSource() {
@@ -149,6 +151,16 @@ extension SearchVC {
             .bind(to: viewModel.retry)
             .disposed(by: disposeBag)
        
+    }
+    
+}
+
+extension SearchVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        }
     }
     
 }

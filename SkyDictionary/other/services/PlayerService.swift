@@ -21,8 +21,10 @@ class PlayerService {
             self.player?.volume = 1.0
             self.player?.play()
         } catch let error as NSError {
+            self.player = nil
             print(error.localizedDescription)
         } catch {
+            self.player = nil
             print("AVAudioPlayer init failed")
         }
     }
