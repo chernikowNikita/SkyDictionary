@@ -8,8 +8,11 @@
 
 Используемые библиотеки:
 RxSwift, RxCocoa - Проект написан на архитектуре MVVM c использованием RxSwift.
+
 RxDataSources - Для генерации ячеек UITableView и UICollectionView в реактивном контексте.
+
 Action - Паттерн Action в реактивном контексте.
+
 RxSwiftExt/Core - Удобные расширения для RxSwift.
 
 Moya/RxSwift - Для API запросов и загрузки треков.
