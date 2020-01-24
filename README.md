@@ -11,9 +11,9 @@ RxSwift, RxCocoa - Проект написан на архитектуре MVVM 
 
 RxDataSources - Для генерации ячеек UITableView и UICollectionView в реактивном контексте.
 
-Action - Паттерн Action в реактивном контексте.
+Action - Готовый паттерн для выполнения определенной операции с результатом.
 
-RxSwiftExt/Core - Удобные расширения для RxSwift.
+RxSwiftExt/Core - Расширения для RxSwift.
 
 Moya/RxSwift - Для API запросов и загрузки треков.
   
