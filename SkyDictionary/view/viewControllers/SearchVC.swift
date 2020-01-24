@@ -50,7 +50,7 @@ class SearchVC: UIViewController {
         if let _ = tableView.tableFooterView as? ErrorView {
             setTVFooterErrorView()
         } else {
-            setTvFooterEmptyView()
+            setTVFooterEmptyView()
         }
     }
     
@@ -60,7 +60,7 @@ class SearchVC: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
         
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        setTVFooterEmptyView()
         
         searchBar.backgroundImage = UIImage()
     }
@@ -90,7 +90,7 @@ class SearchVC: UIViewController {
         tableView.tableFooterView = errorView
     }
     
-    private func setTvFooterEmptyView() {
+    private func setTVFooterEmptyView() {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 }
@@ -142,7 +142,7 @@ extension SearchVC {
                 if error {
                     strongSelf.setTVFooterErrorView()
                 } else {
-                    strongSelf.setTvFooterEmptyView()
+                    strongSelf.setTVFooterEmptyView()
                 }
             })
             .disposed(by: disposeBag)
