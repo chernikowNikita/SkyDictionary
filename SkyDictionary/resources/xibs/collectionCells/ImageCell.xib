@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="tfN-T9-Thb" customClass="ImageCell" customModule="SkyDictionary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5on-hm-HwJ">
+                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U7h-8h-Gfa">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="U7h-8h-Gfa" secondAttribute="trailing" id="7bO-Zj-2ZX"/>
+                    <constraint firstItem="U7h-8h-Gfa" firstAttribute="leading" secondItem="5on-hm-HwJ" secondAttribute="leading" id="JY6-pd-tXf"/>
+                    <constraint firstAttribute="bottom" secondItem="U7h-8h-Gfa" secondAttribute="bottom" id="NtO-Jr-vsi"/>
+                    <constraint firstItem="U7h-8h-Gfa" firstAttribute="top" secondItem="5on-hm-HwJ" secondAttribute="top" id="lhf-QZ-Nbc"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <connections>
+                <outlet property="imageView" destination="U7h-8h-Gfa" id="8Vc-S6-ENr"/>
+            </connections>
+            <point key="canvasLocation" x="69.565217391304358" y="-253.125"/>
+        </collectionViewCell>
+    </objects>
+</document>
