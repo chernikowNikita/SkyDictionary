@@ -30,7 +30,7 @@ class LoadableButton: UIButton {
     }
     
     // MARK: - Public methods
-    func setupAction() {
+    func actionConfigured() {
         self.rx.action?.enabled
             .map { !$0 }
             .bind(to: loadingView.rx.isAnimating)

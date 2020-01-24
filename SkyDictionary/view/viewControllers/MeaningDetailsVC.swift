@@ -185,7 +185,7 @@ extension MeaningDetailsVC {
     
     private func bindDetailListen(url: URL, for detailView: DetailView) {
         detailView.detailListenBtn.rx.action = viewModel.prepareListenAction(for: url)
-        detailView.detailListenBtn.setupAction()
+        detailView.detailListenBtn.actionConfigured()
     }
     
     private func bindDifficultyLevel(_ detailView: DetailView) {
