@@ -16,12 +16,8 @@
 		465CC08423DA12400053C4B3 /* LoadableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465CC08323DA12400053C4B3 /* LoadableButton.swift */; };
 		46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */; };
 		46712AFD23CE3A1800D3CFBC /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFC23CE3A1800D3CFBC /* SearchVM.swift */; };
-		46712B0223CE3EBA00D3CFBC /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0123CE3EBA00D3CFBC /* Scene.swift */; };
 		46712B0523CE3EF900D3CFBC /* MeaningDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0423CE3EF900D3CFBC /* MeaningDetailsVC.swift */; };
 		46712B0723CE3F0000D3CFBC /* MeaningDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0623CE3F0000D3CFBC /* MeaningDetailsVM.swift */; };
-		46712B0923CE404D00D3CFBC /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0823CE404D00D3CFBC /* SceneTransitionType.swift */; };
-		46712B0B23CE40EF00D3CFBC /* UIViewController+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0A23CE40EF00D3CFBC /* UIViewController+Router.swift */; };
-		46712B0D23CE41E300D3CFBC /* Scene+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0C23CE41E300D3CFBC /* Scene+ViewController.swift */; };
 		46712B0F23CE437000D3CFBC /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0E23CE437000D3CFBC /* R.swift */; };
 		46712B1223CE585C00D3CFBC /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B1123CE585C00D3CFBC /* SearchResult.swift */; };
 		467485BD23D243F700DCFB77 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485BC23D243F700DCFB77 /* Const.swift */; };
@@ -93,12 +89,8 @@
 		465CC08323DA12400053C4B3 /* LoadableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableButton.swift; sourceTree = "<group>"; };
 		46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyEngApiService.swift; sourceTree = "<group>"; };
 		46712AFC23CE3A1800D3CFBC /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
-		46712B0123CE3EBA00D3CFBC /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		46712B0423CE3EF900D3CFBC /* MeaningDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVC.swift; sourceTree = "<group>"; };
 		46712B0623CE3F0000D3CFBC /* MeaningDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVM.swift; sourceTree = "<group>"; };
-		46712B0823CE404D00D3CFBC /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
-		46712B0A23CE40EF00D3CFBC /* UIViewController+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Router.swift"; sourceTree = "<group>"; };
-		46712B0C23CE41E300D3CFBC /* Scene+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scene+ViewController.swift"; sourceTree = "<group>"; };
 		46712B0E23CE437000D3CFBC /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		46712B1123CE585C00D3CFBC /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		467485BC23D243F700DCFB77 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -230,10 +222,6 @@
 		46712B0023CE3EA100D3CFBC /* navigation */ = {
 			isa = PBXGroup;
 			children = (
-				46712B0123CE3EBA00D3CFBC /* Scene.swift */,
-				46712B0C23CE41E300D3CFBC /* Scene+ViewController.swift */,
-				46712B0823CE404D00D3CFBC /* SceneTransitionType.swift */,
-				46712B0A23CE40EF00D3CFBC /* UIViewController+Router.swift */,
 				46E02D0723E70AD200751C75 /* Coordinator.swift */,
 				46E02D0923E70B6B00751C75 /* BaseCoordinator.swift */,
 				46E02D0B23E70DFB00751C75 /* Drawable.swift */,
@@ -691,7 +679,6 @@
 				46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */,
 				46EC360723D95AAE0071C9F9 /* LoadFileService.swift in Sources */,
 				467485C123D2446700DCFB77 /* SearchResultsData.swift in Sources */,
-				46712B0923CE404D00D3CFBC /* SceneTransitionType.swift in Sources */,
 				4692C76D23CE1F550041C983 /* AppDelegate.swift in Sources */,
 				46A56AD023D8AEF100C7F00D /* UIView+Extension.swift in Sources */,
 				46A56ACE23D8AECF00C7F00D /* String+Extension.swift in Sources */,
@@ -704,7 +691,6 @@
 				46E66E4C23D487D900BFF7D6 /* ErrorView.swift in Sources */,
 				46E02D0A23E70B6B00751C75 /* BaseCoordinator.swift in Sources */,
 				46E02D0823E70AD200751C75 /* Coordinator.swift in Sources */,
-				46712B0223CE3EBA00D3CFBC /* Scene.swift in Sources */,
 				46E66E4823D3D42300BFF7D6 /* PlayerService.swift in Sources */,
 				46E02D1623E7177300751C75 /* SearchCoordinator.swift in Sources */,
 				467485CB23D26B4500DCFB77 /* SkyMoyaProvider.swift in Sources */,
@@ -718,8 +704,6 @@
 				467485C923D2537600DCFB77 /* Definition.swift in Sources */,
 				46712B0523CE3EF900D3CFBC /* MeaningDetailsVC.swift in Sources */,
 				464D258123CE610200217529 /* Translation.swift in Sources */,
-				46712B0D23CE41E300D3CFBC /* Scene+ViewController.swift in Sources */,
-				46712B0B23CE40EF00D3CFBC /* UIViewController+Router.swift in Sources */,
 				46712B0F23CE437000D3CFBC /* R.swift in Sources */,
 				467485BF23D2443B00DCFB77 /* QueryData.swift in Sources */,
 				46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */,
