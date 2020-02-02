@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MeaningCell" id="1K3-bD-sRY" customClass="MeaningCell" customModule="SkyDictionary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ShortMeaningCell" id="1K3-bD-sRY" customClass="ShortMeaningCell" customModule="SkyDictionary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="76.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1K3-bD-sRY" id="HZH-iK-Wsd">
@@ -97,7 +97,7 @@
         <!--Значение-->
         <scene sceneID="yul-AI-NBy">
             <objects>
-                <viewController storyboardIdentifier="MeaningDetailsVC" id="zsV-cg-LmB" customClass="MeaningDetailsVC" customModule="SkyDictionary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeaningVC" id="zsV-cg-LmB" customClass="MeaningVC" customModule="SkyDictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fft-Gi-86B">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

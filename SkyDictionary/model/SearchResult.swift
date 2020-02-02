@@ -11,5 +11,5 @@ import Foundation
 struct SearchResult: Codable {
     let id: Int
     let text: String
-    let meanings: [Meaning]
+    let meanings: [ShortMeaning]
 }
