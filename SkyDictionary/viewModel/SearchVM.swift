@@ -13,7 +13,7 @@ import Moya
 import RxDataSources
 import RxSwiftExt
 
-typealias SearchResultSection = SectionModel<String, Meaning>
+typealias SearchResultSection = SectionModel<String, ShortMeaning>
 
 class SearchVM {
     
@@ -26,6 +26,9 @@ class SearchVM {
     let searchResults: BehaviorSubject<[SearchResultSection]> = BehaviorSubject<[SearchResultSection]>(value: [])
     let loading: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     let error: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
+    
+    // MARK: - Input&Output
+    let didSelect: PublishSubject<ShortMeaning> = PublishSubject()
     
     // MARK: - Private properties
     private let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
