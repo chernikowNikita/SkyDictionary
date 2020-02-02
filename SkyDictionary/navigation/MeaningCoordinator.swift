@@ -20,8 +20,8 @@ class MeaningCoordinator: BaseCoordinator {
     }
     
     override func start() -> Observable<Void> {
-        let viewModel = MeaningDetailsVM(meaningId: meaningId, apiProvider: SkyMoyaProvider.shared)
-        let viewController = MeaningDetailsVC.Create(viewModel: viewModel)
+        let viewModel = MeaningVM(meaningId: meaningId, apiProvider: SkyMoyaProvider.shared)
+        let viewController = MeaningVC.Create(viewModel: viewModel)
         
         return router.rx.push(viewController, isAnimated: true)
     }

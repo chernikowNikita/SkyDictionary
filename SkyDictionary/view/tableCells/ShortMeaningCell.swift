@@ -1,5 +1,5 @@
 //
-//  MeaningCell.swift
+//  ShortMeaningCell.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 15/01/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MeaningCell: UITableViewCell {
+class ShortMeaningCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var previewImageView: UIImageView!

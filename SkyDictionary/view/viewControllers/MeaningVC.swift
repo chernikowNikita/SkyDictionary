@@ -1,5 +1,5 @@
 //
-//  MeaningDetailsVC.swift
+//  MeaningVC.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 14/01/2020.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxDataSources
 import Action
 
-class MeaningDetailsVC: UIViewController {
+class MeaningVC: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
@@ -20,7 +20,7 @@ class MeaningDetailsVC: UIViewController {
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
     // MARK: - Private properties
-    var viewModel: MeaningDetailsVM!
+    var viewModel: MeaningVM!
     private var wordDetailView: DetailView!
     private var meaningDetailView: DetailView!
     private var difficultyDetailView: DetailView!
@@ -30,8 +30,8 @@ class MeaningDetailsVC: UIViewController {
     private let disposeBag = DisposeBag()
     
     // MARK: - Create
-    public static func Create(viewModel: MeaningDetailsVM) -> MeaningDetailsVC {
-        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningDetailsVC
+    public static func Create(viewModel: MeaningVM) -> MeaningVC {
+        let vc = R.Storyboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! MeaningVC
         vc.viewModel = viewModel
         return vc
     }
@@ -108,7 +108,7 @@ class MeaningDetailsVC: UIViewController {
     
 }
 
-extension MeaningDetailsVC {
+extension MeaningVC {
     
     func bindViewModel() {
         viewModel.loading

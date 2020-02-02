@@ -68,7 +68,7 @@ class SearchVC: UIViewController {
     private func configureDataSource() {
         dataSource = RxTableViewSectionedReloadDataSource(
           configureCell: { dataSource, tableView, indexPath, item in
-            let cell = MeaningCell.deque(for: tableView, indexPath: indexPath)
+            let cell = ShortMeaningCell.deque(for: tableView, indexPath: indexPath)
             if let previewLink = item.previewUrl,
                 let previewUrl = URL(string: previewLink) {
                 cell.previewImageView.kf.setImage(with: previewUrl)
@@ -103,7 +103,7 @@ extension SearchVC {
                 self?.tableView.deselectRow(at: indexPath, animated: true)
             })
             .map { [weak self] indexPath in
-                try? self?.dataSource.model(at: indexPath) as? Meaning
+                try? self?.dataSource.model(at: indexPath) as? ShortMeaning
             }
             .unwrap()
             .bind(to: viewModel.didSelect)

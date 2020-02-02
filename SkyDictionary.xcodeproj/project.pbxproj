@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610D4D423CFB47200A7CB00 /* MeaningCell.swift */; };
+		4610D4D523CFB47200A7CB00 /* ShortMeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610D4D423CFB47200A7CB00 /* ShortMeaningCell.swift */; };
 		46476BAA23D6363500E44921 /* MeaningDetailsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46476BA923D6363500E44921 /* MeaningDetailsVMTests.swift */; };
 		46476BAD23D636B300E44921 /* meaning_details.json in Resources */ = {isa = PBXBuildFile; fileRef = 46476BAC23D636B300E44921 /* meaning_details.json */; };
 		46476BB023D65EDC00E44921 /* meaning_details.json in Resources */ = {isa = PBXBuildFile; fileRef = 46476BAC23D636B300E44921 /* meaning_details.json */; };
-		464D257F23CE606000217529 /* Meaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D257E23CE606000217529 /* Meaning.swift */; };
+		464D257F23CE606000217529 /* ShortMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D257E23CE606000217529 /* ShortMeaning.swift */; };
 		464D258123CE610200217529 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D258023CE610200217529 /* Translation.swift */; };
 		465CC08423DA12400053C4B3 /* LoadableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465CC08323DA12400053C4B3 /* LoadableButton.swift */; };
 		46712AFB23CE364A00D3CFBC /* SkyEngApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */; };
 		46712AFD23CE3A1800D3CFBC /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712AFC23CE3A1800D3CFBC /* SearchVM.swift */; };
-		46712B0523CE3EF900D3CFBC /* MeaningDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0423CE3EF900D3CFBC /* MeaningDetailsVC.swift */; };
-		46712B0723CE3F0000D3CFBC /* MeaningDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0623CE3F0000D3CFBC /* MeaningDetailsVM.swift */; };
+		46712B0523CE3EF900D3CFBC /* MeaningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0423CE3EF900D3CFBC /* MeaningVC.swift */; };
+		46712B0723CE3F0000D3CFBC /* MeaningVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0623CE3F0000D3CFBC /* MeaningVM.swift */; };
 		46712B0F23CE437000D3CFBC /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B0E23CE437000D3CFBC /* R.swift */; };
 		46712B1223CE585C00D3CFBC /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46712B1123CE585C00D3CFBC /* SearchResult.swift */; };
 		467485BD23D243F700DCFB77 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485BC23D243F700DCFB77 /* Const.swift */; };
 		467485BF23D2443B00DCFB77 /* QueryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485BE23D2443B00DCFB77 /* QueryData.swift */; };
 		467485C123D2446700DCFB77 /* SearchResultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C023D2446700DCFB77 /* SearchResultsData.swift */; };
-		467485C523D2513F00DCFB77 /* MeaningDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C423D2513F00DCFB77 /* MeaningDetails.swift */; };
+		467485C523D2513F00DCFB77 /* Meaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C423D2513F00DCFB77 /* Meaning.swift */; };
 		467485C723D2532100DCFB77 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C623D2532100DCFB77 /* Image.swift */; };
 		467485C923D2537600DCFB77 /* Definition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485C823D2537600DCFB77 /* Definition.swift */; };
 		467485CB23D26B4500DCFB77 /* SkyMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467485CA23D26B4500DCFB77 /* SkyMoyaProvider.swift */; };
@@ -81,22 +81,22 @@
 /* Begin PBXFileReference section */
 		09711682E85462FF56461896 /* Pods_SkyDictionaryAbstract_SkyDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkyDictionaryAbstract_SkyDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE24A687E9F6B815EF50B01 /* Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig"; path = "Target Support Files/Pods-SkyDictionaryAbstract-SkyDictionary/Pods-SkyDictionaryAbstract-SkyDictionary.debug.xcconfig"; sourceTree = "<group>"; };
-		4610D4D423CFB47200A7CB00 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
+		4610D4D423CFB47200A7CB00 /* ShortMeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortMeaningCell.swift; sourceTree = "<group>"; };
 		46476BA923D6363500E44921 /* MeaningDetailsVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVMTests.swift; sourceTree = "<group>"; };
 		46476BAC23D636B300E44921 /* meaning_details.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = meaning_details.json; sourceTree = "<group>"; };
-		464D257E23CE606000217529 /* Meaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meaning.swift; sourceTree = "<group>"; };
+		464D257E23CE606000217529 /* ShortMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortMeaning.swift; sourceTree = "<group>"; };
 		464D258023CE610200217529 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		465CC08323DA12400053C4B3 /* LoadableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableButton.swift; sourceTree = "<group>"; };
 		46712AFA23CE364A00D3CFBC /* SkyEngApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyEngApiService.swift; sourceTree = "<group>"; };
 		46712AFC23CE3A1800D3CFBC /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
-		46712B0423CE3EF900D3CFBC /* MeaningDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVC.swift; sourceTree = "<group>"; };
-		46712B0623CE3F0000D3CFBC /* MeaningDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetailsVM.swift; sourceTree = "<group>"; };
+		46712B0423CE3EF900D3CFBC /* MeaningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningVC.swift; sourceTree = "<group>"; };
+		46712B0623CE3F0000D3CFBC /* MeaningVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningVM.swift; sourceTree = "<group>"; };
 		46712B0E23CE437000D3CFBC /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		46712B1123CE585C00D3CFBC /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		467485BC23D243F700DCFB77 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		467485BE23D2443B00DCFB77 /* QueryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryData.swift; sourceTree = "<group>"; };
 		467485C023D2446700DCFB77 /* SearchResultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsData.swift; sourceTree = "<group>"; };
-		467485C423D2513F00DCFB77 /* MeaningDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetails.swift; sourceTree = "<group>"; };
+		467485C423D2513F00DCFB77 /* Meaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meaning.swift; sourceTree = "<group>"; };
 		467485C623D2532100DCFB77 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		467485C823D2537600DCFB77 /* Definition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definition.swift; sourceTree = "<group>"; };
 		467485CA23D26B4500DCFB77 /* SkyMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMoyaProvider.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		4610D4D323CFB44E00A7CB00 /* tableCells */ = {
 			isa = PBXGroup;
 			children = (
-				4610D4D423CFB47200A7CB00 /* MeaningCell.swift */,
+				4610D4D423CFB47200A7CB00 /* ShortMeaningCell.swift */,
 			);
 			path = tableCells;
 			sourceTree = "<group>";
@@ -239,11 +239,11 @@
 			isa = PBXGroup;
 			children = (
 				46712B1123CE585C00D3CFBC /* SearchResult.swift */,
-				464D257E23CE606000217529 /* Meaning.swift */,
+				464D257E23CE606000217529 /* ShortMeaning.swift */,
 				464D258023CE610200217529 /* Translation.swift */,
 				467485BE23D2443B00DCFB77 /* QueryData.swift */,
 				467485C023D2446700DCFB77 /* SearchResultsData.swift */,
-				467485C423D2513F00DCFB77 /* MeaningDetails.swift */,
+				467485C423D2513F00DCFB77 /* Meaning.swift */,
 				467485C623D2532100DCFB77 /* Image.swift */,
 				467485C823D2537600DCFB77 /* Definition.swift */,
 			);
@@ -253,7 +253,7 @@
 		467A763D23D8A93F00984D04 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
-				46712B0623CE3F0000D3CFBC /* MeaningDetailsVM.swift */,
+				46712B0623CE3F0000D3CFBC /* MeaningVM.swift */,
 				46712AFC23CE3A1800D3CFBC /* SearchVM.swift */,
 				46EC360623D95AAE0071C9F9 /* LoadFileService.swift */,
 			);
@@ -264,7 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				4692C77023CE1F550041C983 /* SearchVC.swift */,
-				46712B0423CE3EF900D3CFBC /* MeaningDetailsVC.swift */,
+				46712B0423CE3EF900D3CFBC /* MeaningVC.swift */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -683,11 +683,11 @@
 				46A56AD023D8AEF100C7F00D /* UIView+Extension.swift in Sources */,
 				46A56ACE23D8AECF00C7F00D /* String+Extension.swift in Sources */,
 				46E02D1823E71B4100751C75 /* MeaningCoordinator.swift in Sources */,
-				464D257F23CE606000217529 /* Meaning.swift in Sources */,
+				464D257F23CE606000217529 /* ShortMeaning.swift in Sources */,
 				46E02D0C23E70DFB00751C75 /* Drawable.swift in Sources */,
 				46A56AD223D8AF1000C7F00D /* UITableView+Extension.swift in Sources */,
 				46E02D1223E7135300751C75 /* Router+Rx.swift in Sources */,
-				4610D4D523CFB47200A7CB00 /* MeaningCell.swift in Sources */,
+				4610D4D523CFB47200A7CB00 /* ShortMeaningCell.swift in Sources */,
 				46E66E4C23D487D900BFF7D6 /* ErrorView.swift in Sources */,
 				46E02D0A23E70B6B00751C75 /* BaseCoordinator.swift in Sources */,
 				46E02D0823E70AD200751C75 /* Coordinator.swift in Sources */,
@@ -698,16 +698,16 @@
 				46E66E4423D3C2DD00BFF7D6 /* FileWebService.swift in Sources */,
 				465CC08423DA12400053C4B3 /* LoadableButton.swift in Sources */,
 				46A56AD423D8AF2E00C7F00D /* UICollectionViewCell+Extension.swift in Sources */,
-				467485C523D2513F00DCFB77 /* MeaningDetails.swift in Sources */,
+				467485C523D2513F00DCFB77 /* Meaning.swift in Sources */,
 				46E66E3B23D381B000BFF7D6 /* DetailView.swift in Sources */,
 				46712B1223CE585C00D3CFBC /* SearchResult.swift in Sources */,
 				467485C923D2537600DCFB77 /* Definition.swift in Sources */,
-				46712B0523CE3EF900D3CFBC /* MeaningDetailsVC.swift in Sources */,
+				46712B0523CE3EF900D3CFBC /* MeaningVC.swift in Sources */,
 				464D258123CE610200217529 /* Translation.swift in Sources */,
 				46712B0F23CE437000D3CFBC /* R.swift in Sources */,
 				467485BF23D2443B00DCFB77 /* QueryData.swift in Sources */,
 				46E66E4623D3C54A00BFF7D6 /* FileWebProvider.swift in Sources */,
-				46712B0723CE3F0000D3CFBC /* MeaningDetailsVM.swift in Sources */,
+				46712B0723CE3F0000D3CFBC /* MeaningVM.swift in Sources */,
 				46A56ADB23D8B7C400C7F00D /* ImagesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

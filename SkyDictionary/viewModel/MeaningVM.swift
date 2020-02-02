@@ -1,5 +1,5 @@
 //
-//  MeaningDetailsVM.swift
+//  MeaningVM.swift
 //  SkyDictionary
 //
 //  Created by Никита Черников on 14/01/2020.
@@ -16,7 +16,7 @@ import RxDataSources
 
 typealias ImageSection = SectionModel<String?, String>
 
-class MeaningDetailsVM {
+class MeaningVM {
     
     // MARK: - Input
     let load: PublishSubject<Void> = PublishSubject<Void>()
@@ -107,18 +107,18 @@ class MeaningDetailsVM {
     
     // MARK: - Private properties
     private let meaningId: Int
-    private lazy var loadMeaningAction: Action<Int, MeaningDetails?> = {
-        return Action<Int, MeaningDetails?>() { [weak self] meaningId in
+    private lazy var loadMeaningAction: Action<Int, Meaning?> = {
+        return Action<Int, Meaning?>() { [weak self] meaningId in
             guard let strongSelf = self else { return Observable.just(nil) }
             return strongSelf.apiProvider.rx
                 .request(.meaningDetails(meaningId: meaningId))
-                .map([MeaningDetails].self)
-                .catchErrorJustReturn([MeaningDetails]())
+                .map([Meaning].self)
+                .catchErrorJustReturn([Meaning]())
                 .map { $0.first }
                 .asObservable()
         }
     }()
-    private var meaning: Observable<MeaningDetails> {
+    private var meaning: Observable<Meaning> {
         return loadMeaningAction.elements
             .unwrap()
             .share(replay: 1)
