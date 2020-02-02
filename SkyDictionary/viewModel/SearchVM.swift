@@ -27,6 +27,9 @@ class SearchVM {
     let loading: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     let error: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     
+    // MARK: - Input&Output
+    let didSelect: PublishSubject<Meaning> = PublishSubject()
+    
     // MARK: - Private properties
     private let page: BehaviorSubject<Int> = BehaviorSubject<Int>(value: 1)
     private let disposeBag = DisposeBag()

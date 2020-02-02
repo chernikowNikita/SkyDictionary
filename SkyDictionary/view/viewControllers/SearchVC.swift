@@ -106,11 +106,7 @@ extension SearchVC {
                 try? self?.dataSource.model(at: indexPath) as? Meaning
             }
             .unwrap()
-            .map { $0.id }
-            .subscribe(onNext: { [weak self] meaningId in
-                let vm = MeaningDetailsVM(meaningId: meaningId, apiProvider: SkyMoyaProvider.shared)
-                self?.open(scene: .meaningDetails(vm), with: .push)
-            })
+            .bind(to: viewModel.didSelect)
             .disposed(by: disposeBag)
         
         viewModel.searchResults
